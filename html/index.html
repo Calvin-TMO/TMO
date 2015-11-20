@@ -1,31 +1,48 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en" ng-app="tmo" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
         <title>Tutoring - Calvin College</title>
-	<link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-	<div id="header">
-		<div class="calvin">
-			<a href="http://www.calvin.edu/" title="Go to Calvin's homepage">
-				<img src="images/calvin-college.svg" alt="Calvin College" width="303" height="84">
-			</a>
-		</div>
-		<div class="navigation">
-			<div class="row">
-				<ul>
-					<li><a href="/">My Tutees</a></li>
-			               	<li><a href="/sections.html">My Sections</a></li>
-        	        	        <li><a href="/reports.html">Report List</a></li>
-                		        <li><a href="/create.html">Create Report</a></li>
-		        	        <li><a href="/account.html">My Account</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<div class="content">
-		This is the content section for the tutee/home page. asdf asdf asdf asdf asdf asdff asdf asdf asdf fasddf asdf fasdf fasdf asd dfasddf asdf fasdf asdfasdd fasdf asdff asdf asdfasd asdfs.
-	</div>
-</body>
+        <meta name="description" content="Tutoring reporting services for Calvin College">
+
+        <!-- add styles -->
+        <link href="css/styles.css" rel="stylesheet" type="text/css" />
+
+        <!-- add javascripts -->
+        <script src="js/jquery-2.0.3.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/controllers.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <div class="login">
+                <div class="row">
+                    <a>Login</a>
+                </div>
+            </div>
+            <div class="calvin">
+                <a href="http://www.calvin.edu/" title="Go to Calvin's homepage">
+                    <img src="images/calvin-college.svg" alt="Calvin College" width="303" height="84">
+                </a>
+            </div>
+            <div class="navigation">
+                <div class="row">
+                    <ul>
+                        <li><a href="#!/" ng-class="{activeSmall:part == 'tutees'}">My Tutees</a></li>
+                        <li><a href="#!/sections" ng-class="{activeSmall:part == 'sections'}">My Sections</a></li>
+                        <li><a href="#!/reports" ng-class="{activeSmall:part == 'reports'}">Report List</a></li>
+                        <li><a href="#!/create" ng-class="{activeSmall:part == 'create'}">Create Report</a></li>
+                        <li><a href="#!/account" ng-class="{activeSmall:part == 'account'}">My Account</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- main content -->
+        <div class="content">
+            <div style="width:100%" ng-view ng-animate="{enter: 'view-enter', leave: 'view-leave'}"></div>
+        </div>
+    </body>
 </html>
 
