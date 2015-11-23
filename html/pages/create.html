@@ -1,58 +1,59 @@
 <form name="createForm">
   <div id="selectStudent">
-    <label for="studentList">Tutee </label>
-    <select class="browser-default" name="studentList" id="studentList">
+    <label for="studentList">Tutee</label>
+    <select class="browser-default" name="studentList" id="studentList" required>
       <option value="">Select a student</option>
     </select>
   </div>
 
   <div id="selectClass">
-    <label for="classList">Class </label>
-    <select class="browser-default" name="classList" id="classList">
+    <label for="classList">Class</label>
+    <select class="browser-default" name="classList" id="classList" required>
       <option value="">Select a class</option>
     </select>
   </div>
 
   <div id="tutorDate">
-    <label for="tutorDate">Date of Tutor Session</label><br>
-    <input type="date" name="sessionDate">
+    <label for="tutorDate">Date of Tutor Session</label>
+    <input type="date" name="sessionDate" required>
   </div>
 
   <div id="tutorTime">
     <div id="startTime">
-      <label for="startInput">Start Time</label>
-      <input type="time" name="startTime">
+      <label for="startInput"><span>Start Time<span></label>
+      <input type="time" name="startTime" required>
     </div>
     <div id="endTime">
-      <label for="endInput">End Time</label>
-      <input type="time" name="endTime">
+      <label for="endInput"><span>End Time<span></label>
+      <input type="time" name="endTime" required>
     </div>
   </div>
 
   <div id="subjectDiv">
     <label for="subjectInput">What did you and your tutee work on this session?</label>
-    <input type="text" name="subjectInput">
+    <textarea type="text" id="subjectInput" name="subjectInput" required></textarea>
   </div>
 
   <div id="responseDiv">
     <label for="responseInput">How is the student responding to the course material?</label>
-    <input type="text" name="responseInput">
+    <textarea type="text" id="responseInput" name="responseInput" required></textarea>
   </div>
 
   <div id="planDiv">
     <label for="planInput">What are your plans for the next session?</label>
-    <input type="text" name="planInput">
+    <textarea type="text" id="planInput" name="planInput" required></textarea>
   </div>
 
   <div id="studPlanDiv">
     <label for="studPlanInput">How will the student prepare for the next session?</label>
-    <input type="text" name="studPlanInput">
+    <textarea type="text" name="studPlanInput" required></textarea>
   </div>
 
   <div id="commentDiv">
     <label for="commentInput">Additional Comments:  (optional)</label>
-    <input type="text" name="commentInput">
+    <textarea type="text" name="commentInput"></textarea>
   </div>
 </form>
 
-<button class="btn waves-effect waves-light" type="submit" name="submit" ng-click="submitForm()">Submit</button>
+<button class="browser-default" type="submit" name="submitForm" ng-click="submitForm()">Submit</button>
+<button class="browser-default" type="reset" name="resetForm">Reset</button>
