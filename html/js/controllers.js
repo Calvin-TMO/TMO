@@ -23,6 +23,11 @@ function ReportCtrl($scope, $http, $timeout) {
 }
 
 function CreateCtrl($scope, $http, $timeout) {
+  $scope.createForm = function() {
+    if($scope.tutorForm.$valid) {
+      alert("Form submitted");
+  } else {
+    alert("Missing information! Please complete the form");
 }
 
 function AccountCtrl($scope, $http, $timeout) {
