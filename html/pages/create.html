@@ -20,11 +20,11 @@
 
   <div id="tutorTime">
     <div id="startTime">
-      <label for="startInput"><span>Start Time<span></label>
+      <label for="startInput"><span>Start Time</label>
       <input type="time" name="startTime" required>
     </div>
     <div id="endTime">
-      <label for="endInput"><span>End Time<span></label>
+      <label for="endInput"><span>End Time</label>
       <input type="time" name="endTime" required>
     </div>
   </div>
@@ -53,7 +53,8 @@
     <label for="commentInput">Additional Comments:  (optional)</label>
     <textarea type="text" name="commentInput"></textarea>
   </div>
+  <div id="formButtons">
+    <button type="submit" value="Submit">Submit</button>
+    <button type="reset" value="Reset">Reset</button>
+  </div>
 </form>
-
-<button class="browser-default" type="submit" name="submitForm" ng-click="submitForm()">Submit</button>
-<button class="browser-default" type="reset" name="resetForm">Reset</button>
