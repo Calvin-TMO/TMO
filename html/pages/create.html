@@ -1,31 +1,31 @@
+<div ng-controller="CreateCtrl">
 <form name="createForm">
-  <div id="selectStudent">
+  <div id="selectStudent" ng-model="list in lists">
     <label for="studentList">Tutee</label>
-    <select class="browser-default" name="studentList" id="studentList" required>
-      <option value="">Select a student</option>
+    <select class="browser-default" name="studentList" id="studentList" ng-model="data.studentList" required>
+    <option ng-repeat="student in data.students" value="{{student.id}}">{{student.name}}</option>
     </select>
   </div>
 
   <div id="selectClass">
     <label for="classList">Class</label>
-    <select class="browser-default" name="classList" id="classList" required>
-      <option value="">Select a class</option>
+    <select class="browser-default" name="classList" id="classList" default="" required>
     </select>
   </div>
 
   <div id="tutorDate">
     <label for="tutorDate">Date of Tutor Session</label>
-    <input type="date" name="sessionDate" required>
+    <input type="date" name="sessionDate" ng-model="date" default={{date}} required>
   </div>
 
   <div id="tutorTime">
     <div id="startTime">
-      <label for="startInput"><span>Start Time</label>
-      <input type="time" name="startTime" required>
+      <label for="startInput">Start Time</label>
+      <input type="time" name="startTime" placeholder="format: 1:00pm" required>
     </div>
     <div id="endTime">
-      <label for="endInput"><span>End Time</label>
-      <input type="time" name="endTime" required>
+      <label for="endInput">End Time</label>
+      <input type="time" name="endTime" placeholder="format: 1:30pm" required>
     </div>
   </div>
 
@@ -54,7 +54,8 @@
     <textarea type="text" name="commentInput"></textarea>
   </div>
   <div id="formButtons">
-    <button type="submit" value="Submit">Submit</button>
+    <button type="submit" value="Submit" ng-click="submitForm()">Submit</button>
     <button type="reset" value="Reset">Reset</button>
   </div>
 </form>
+</div>
