@@ -2,8 +2,7 @@
 <form name="createForm">
   <div id="selectStudent" ng-model="list in lists">
     <label for="studentList">Tutee</label>
-    <select class="browser-default" name="studentList" id="studentList" ng-model="data.studentList" required>
-    <option ng-repeat="student in data.students" value="{{student.id}}">{{student.name}}</option>
+    <select  ng-options="student as student.name for student in students track by student.id" ng-model="selected" required>
     </select>
   </div>
 

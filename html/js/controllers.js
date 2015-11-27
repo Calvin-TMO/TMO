@@ -26,14 +26,13 @@ function ReportCtrl($scope, $http, $timeout) {
 
 function CreateCtrl($scope, $http, $timeout, $filter) {
 
-  $scope.data = {
-    studentList: null,
-    students: [
-      {id: '1', name: 'Benjamin Braker'},
-      {id: '2', name: 'Carson Wiens'},
-      {id: '3', name: 'Mark VanderStel'}
-    ],
-  };
+  $scope.selected = $scope.students[0];
+
+  $scope.students = [
+    {id: 1, name: 'Benjamin Braker'},
+    {id: 2, name: 'Carson Wiens'},
+    {id: 3, name: 'Mark VanderStel'}
+  ];
 
   $scope.date = $filter("date")(Date.now(), 'yyyy-MM-dd');
 
