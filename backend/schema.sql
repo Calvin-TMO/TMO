@@ -1,11 +1,10 @@
 
-DROP TABLE Report;
-DROP TABLE CourseStudent;
-DROP TABLE Section;
-DROP TABLE CourseTutor;
-DROP TABLE Course;
-Drop TABLE Professor;
-DROP TABLE Student;
+DROP TABLE IF EXISTS Report;
+DROP TABLE IF EXISTS CourseStudent;
+DROP TABLE IF EXISTS CourseTutor;
+DROP TABLE IF EXISTS Course;
+Drop TABLE IF EXISTS Professor;
+DROP TABLE IF EXISTS Student;
 
 
 CREATE TABLE Student (
