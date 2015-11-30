@@ -39,27 +39,19 @@ CREATE TABLE CourseTutor (
     FOREIGN KEY (tutorid) REFERENCES Student(id) ON DELETE CASCADE
 );
 
-CREATE TABLE Section (
-    id integer,
-    courseid integer,
-    sectionletter varchar(1) NOT NULL,
-    year varchar(4) NOT NULL,
-    semester varchar(2) NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (courseid) REFERENCES Course(id) ON DELETE CASCADE
-);
-
 CREATE TABLE CourseStudent (
     id integer,
-    sectionid integer,
+    courseid integer,
     studentid integer,
     tutorid integer,
+    professorid integer,
     assigneddate date,
     terminationdate date,
     PRIMARY KEY (id),
-    FOREIGN KEY (sectionid) REFERENCES Section(id) ON DELETE CASCADE,
+    FOREIGN KEY (courseid) REFERENCES Course(id) ON DELETE CASCADE,
     FOREIGN KEY (studentid) REFERENCES Student(id) ON DELETE CASCADE,
-    FOREIGN KEY (tutorid) REFERENCES Student(id) ON DELETE CASCADE
+    FOREIGN KEY (tutorid) REFERENCES Student(id) ON DELETE CASCADE,
+    FOREIGN KEY (professorid) REFERENCES Professor(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Report (
