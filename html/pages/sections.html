@@ -1,1 +1,9 @@
-This is the sections page.
+<h2>Sections</h2>
+<table>
+  <tr data-ng-repeat="x in sections">
+    <td>{{ x.id }}</td>
+    <td>{{ x.department }}</td>
+    <td>{{ x.num }}</td>
+    <td>{{ x.description }}</td>
+  </tr>
+</table>

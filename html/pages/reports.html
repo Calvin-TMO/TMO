@@ -1,1 +1,9 @@
-This is the reports page.
+<h2>Reports</h2>
+<table>
+  <tr data-ng-repeat="x in reports">
+    <td>{{ x.id }}</td>
+    <td>{{ x.coursestudentid }}</td>
+    <td>{{ x.submitdate }}</td>
+    <td>{{ x.details }}</td>
+  </tr>
+</table>
