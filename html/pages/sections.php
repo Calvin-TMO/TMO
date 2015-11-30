@@ -12,7 +12,7 @@
     die("Connection failed: " + $conn->connect_error);
   }
 
-  $sql = "SELECT id, fname, lname FROM Student";
+  $sql = "SELECT id, department, num, description FROM Course";
   $result = $conn->query($sql);
 
   $output = "";
@@ -21,10 +21,12 @@
     while ($row = $result->fetch_assoc()) {
       if ($output != "") {$output .= ",";}
       $output .= '{"id":"' . $row["id"] . '",';
-      $output .= '"Name":"' . $row["fname"] . ' ' . $row["lname"] . '"}';
+      $output .= '"department":"' . $row["department"] . '",';
+      $output .= '"num":"' . $row["num"] . '",';
+      $output .= '"description":"' . $row["description"] . '"}';
     }
   } else {
-    $output .= '{"id":"-1","Name":"empty"}';
+    $output .= '{"id":"-1","department":"empty","num":"empty","description":"empty"}';
   }
   $output = '{"records":[' . $output . ']}';
   $conn->close();

@@ -17,13 +17,17 @@ var myApp = angular.module('tmo');
 // optional controllers
 function HomeCtrl($scope, $http) {
   $http.get("pages/tutees.php")
-  .then(function (response) {$scope.names = response.data.records;});
+  .then(function (response) {$scope.tutees = response.data.records;});
 }
 
 function SectionCtrl($scope, $http) {
+  $http.get("pages/sections.php")
+  .then(function (response) {$scope.sections = response.data.records;});
 }
 
 function ReportCtrl($scope, $http, $timeout) {
+  $http.get("pages/reports.php")
+  .then(function (response) {$scope.reports = response.data.records;});
 }
 
 function CreateCtrl($scope, $http, $timeout, $filter) {
