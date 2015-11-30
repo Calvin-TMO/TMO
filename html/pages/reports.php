@@ -23,10 +23,16 @@
       $output .= '{"id":"' . $row["id"] . '",';
       $output .= '"coursestudentid":"' . $row["coursestudentid"] . '",';
       $output .= '"submitdate":"' . $row["submitdate"] . '",';
-      $output .= '"details":"' . $row["details"] . '"}';
+      $output .= '"starttime":"' . $row["starttime"] . '",';
+      $output .= '"endtime":"' . $row["endtime"] . '",';
+      $output .= '"topic":"' . $row["topic"] . '",';
+      $output .= '"response":"' . $row["response"] . '",';
+      $output .= '"plans":"' . $row["plans"] . '",';
+      $output .= '"studentplans":"' .$row["studentplans"] . '",';
+      $output .= '"comments":"' . $row["comments"] . '"}';
     }
   } else {
-    $output .= '{"id":"-1","coursestudentid":"empty","submitdate":"empty","details":"empty"}';
+    $output .= '{"id":"-1","coursestudentid":"empty","submitdate":"empty","starttime":"empty","endtime":"empty","topic":"empty","response":"empty","plans":"empty","studentplans":"empty","comments":"empty"}';
   }
   $output = '{"records":[' . $output . ']}';
   $conn->close();
