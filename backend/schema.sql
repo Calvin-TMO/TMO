@@ -55,9 +55,15 @@ CREATE TABLE CourseStudent (
 
 CREATE TABLE Report (
     id integer,
-    coursestudentid integer,
-    submitdate date,
-    details varchar(128),
+    coursestudentid integer NOT NULL,
+    submitdate date NOT NULL,
+    startTime time NOT NULL,
+    endTime time NOT NULL,
+    topic varchar(128) NOT NULL,
+    resonse varchar(128) NOT NULL,
+    plans varchar(128) NOT NULL,
+    studentPlans varchar(128) NOT NULL,
+    comments varchar(128) DEFAULT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (coursestudentid) REFERENCES CourseStudent(id) ON DELETE CASCADE
 );
