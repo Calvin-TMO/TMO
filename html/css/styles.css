@@ -155,10 +155,14 @@ h1 {
   height:50px;
   margin:1rem auto;
 }
+.report-item:hover {
+  background-color:#EEE;
+}
 .report-item div {
   display:inline;
   line-height:50px;
   margin:2rem;
+  width:50px;
 }
 
 .section-item {
@@ -171,12 +175,13 @@ h1 {
   display:inline;
   line-height:50px;
   margin:2rem;
+  width:50px;
 }
 
 .tutee-item {
   border:1px solid black;
   border-radius:5px;
-  height:50px;
+  min-height:50px;
   margin:1rem auto;
 }
 .tutee-item div {

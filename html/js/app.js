@@ -32,6 +32,10 @@ var app = angular.module('tmo', []).
           templateUrl: 'pages/create.html',
           controller: CreateCtrl,
           activetab: 'create' }).
+        when('/view/:reportid', {
+          templateUrl: 'pages/view.html',
+          controller: ViewCtrl,
+          activetab: 'reports' }).
         when('/account', {
           templateUrl: 'pages/account.html',
           controller: AccountCtrl,

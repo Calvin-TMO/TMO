@@ -1,9 +1,12 @@
 <h2>Reports</h2>
-<div class="report-item" data-ng-repeat="x in reports">
+<form>
+  <input class="filter" type="text" placeholder="Filter Displayed Results" ng-model="searchFilter">
+</form>
+<div class="report-item" data-ng-repeat="x in reports | filter:searchFilter" onClick='window.location = "#!/view/{{x.reportid}}"'>
   <div style="display:none">{{ x.reportid }}</div>
   <div>{{ x.submitdate }}</div>
-  <div style="display:none">{{ x.studentid }}</div>
-  <div>{{ x.studentname }}</div>
   <div style="display:none">{{ x.courseid }}</div>
   <div>{{ x.coursename }}</div>
+  <div style="display:none">{{ x.studentid }}</div>
+  <div>{{ x.studentname }}</div>
 </div>

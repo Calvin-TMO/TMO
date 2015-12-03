@@ -28,6 +28,8 @@ function SectionCtrl($scope, $http) {
 function ReportCtrl($scope, $http, $timeout) {
   $http.get("pages/reports.php")
   .then(function (response) {$scope.reports = response.data.records;});
+
+  $scope.searchFilter = '';
 }
 
 function CreateCtrl($scope, $http, $timeout, $filter) {
@@ -50,6 +52,12 @@ function CreateCtrl($scope, $http, $timeout, $filter) {
     }
   };
 
+}
+
+function ViewCtrl($scope, $http, $routeParams) {
+  $scope.reportid = $routeParams.reportid;
+  $http.post('pages/getReport.php?reportid=0')
+  .then(function (response) { $scope.report = response.data.record;});
 }
 
 function AccountCtrl($scope, $http, $timeout) {
