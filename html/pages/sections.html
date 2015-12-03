@@ -1,9 +1,7 @@
 <h2>Sections</h2>
-<table>
-  <tr data-ng-repeat="x in sections">
-    <td>{{ x.id }}</td>
-    <td>{{ x.department }}</td>
-    <td>{{ x.num }}</td>
-    <td>{{ x.description }}</td>
-  </tr>
-</table>
+<div class="section-item" data-ng-repeat="x in sections">
+  <div style="display:none">{{ x.id }}</div>
+  <div>{{ x.department }}</div>
+  <div>{{ x.num }}</div>
+  <div>{{ x.description }}</div>
+</div>

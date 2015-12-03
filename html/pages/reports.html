@@ -1,15 +1,9 @@
 <h2>Reports</h2>
-<table>
-  <tr data-ng-repeat="x in reports">
-    <td>{{ x.id }}</td>
-    <td>{{ x.coursestudentid }}</td>
-    <td>{{ x.submitdate }}</td>
-    <td>{{ x.starttime }}</td>
-    <td>{{ x.endtime }}</td>
-    <td>{{ x.topic }}</td>
-    <td>{{ x.response }}</td>
-    <td>{{ x.plan }}</td>
-    <td>{{ x.studentplan }}</td>
-    <td>{{ x.comments }}</td>
-  </tr>
-</table>
+<div class="report-item" data-ng-repeat="x in reports">
+  <div style="display:none">{{ x.reportid }}</div>
+  <div>{{ x.submitdate }}</div>
+  <div style="display:none">{{ x.studentid }}</div>
+  <div>{{ x.studentname }}</div>
+  <div style="display:none">{{ x.courseid }}</div>
+  <div>{{ x.coursename }}</div>
+</div>

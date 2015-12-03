@@ -1,7 +1,6 @@
 <h2>Tutees</h2>
-<table>
-  <tr data-ng-repeat="x in tutees">
-    <td>{{ x.id }}</td>
-    <td>{{ x.Name }}</td>
-  </tr>
-</table>
+<div class="tutee-item"  data-ng-repeat="x in tutees">
+  <div style="display:none">{{ x.id }}</div>
+  <div>{{ x.lname }}</div>
+  <div>{{ x.fname }}</div>
+</div>

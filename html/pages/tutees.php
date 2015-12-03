@@ -21,10 +21,11 @@
     while ($row = $result->fetch_assoc()) {
       if ($output != "") {$output .= ",";}
       $output .= '{"id":"' . $row["id"] . '",';
-      $output .= '"Name":"' . $row["fname"] . ' ' . $row["lname"] . '"}';
+      $output .= '"fname":"' . $row["fname"] . '",';
+      $output .= '"lname":"' . $row["lname"] . '"}';
     }
   } else {
-    $output .= '{"id":"-1","Name":"empty"}';
+    $output .= '{"id":"-1","fname":"empty","lname":"empty"}';
   }
   $output = '{"records":[' . $output . ']}';
   $conn->close();

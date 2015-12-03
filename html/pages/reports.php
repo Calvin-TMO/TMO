@@ -12,7 +12,13 @@
     die("Connection failed: " + $conn->connect_error);
   }
 
-  $sql = "SELECT id, coursestudentid, submitdate, details FROM Report";
+  $sql =
+    "SELECT r.id reportid, r.submitdate, s.id studentid, CONCAT(s.lname, ', ', s.fname) studentname, c.id courseid, CONCAT(c.department, c.num) coursename
+     FROM Report r
+       INNER JOIN CourseStudent cs ON cs.id = r.coursestudentid
+       INNER JOIN Student s ON cs.studentid = s.id
+       INNER JOIN Course c ON c.id = cs.courseid
+     ORDER BY r.submitdate, studentname";
   $result = $conn->query($sql);
 
   $output = "";
@@ -20,19 +26,15 @@
     // output data for each row
     while ($row = $result->fetch_assoc()) {
       if ($output != "") {$output .= ",";}
-      $output .= '{"id":"' . $row["id"] . '",';
-      $output .= '"coursestudentid":"' . $row["coursestudentid"] . '",';
+      $output .= '{"reportid":"' . $row["reportid"] . '",';
       $output .= '"submitdate":"' . $row["submitdate"] . '",';
-      $output .= '"starttime":"' . $row["starttime"] . '",';
-      $output .= '"endtime":"' . $row["endtime"] . '",';
-      $output .= '"topic":"' . $row["topic"] . '",';
-      $output .= '"response":"' . $row["response"] . '",';
-      $output .= '"plans":"' . $row["plans"] . '",';
-      $output .= '"studentplans":"' .$row["studentplans"] . '",';
-      $output .= '"comments":"' . $row["comments"] . '"}';
+      $output .= '"studentid":"' . $row["studentid"] . '",';
+      $output .= '"studentname":"' . $row["studentname"] . '",';
+      $output .= '"courseid":"' . $row["courseid"] . '",';
+      $output .= '"coursename":"' . $row["coursename"] . '"}';
     }
   } else {
-    $output .= '{"id":"-1","coursestudentid":"empty","submitdate":"empty","starttime":"empty","endtime":"empty","topic":"empty","response":"empty","plans":"empty","studentplans":"empty","comments":"empty"}';
+    $output .= '{"reportid":"-1","submitdate":"empty","studentid":"empty","studentname":"empty","courseid":"empty","coursename":"empty"}';
   }
   $output = '{"records":[' . $output . ']}';
   $conn->close();
