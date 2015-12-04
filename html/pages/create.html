@@ -21,37 +21,37 @@
   <div id="tutorTime">
     <div id="startTime">
       <label for="startInput">Start Time</label>
-      <input type="time" name="startTime" placeholder="format: 1:00pm" required>
+      <input type="time" name="startTime" ng-model="startTime" placeholder="format: 1:00pm" required>
     </div>
     <div id="endTime">
       <label for="endInput">End Time</label>
-      <input type="time" name="endTime" placeholder="format: 1:30pm" required>
+      <input type="time" name="endTime" ng-model="endTime" placeholder="format: 1:30pm" required>
     </div>
   </div>
 
   <div id="subjectDiv">
     <label for="subjectInput">What did you and your tutee work on this session?</label>
-    <textarea type="text" id="subjectInput" name="subjectInput" required></textarea>
+    <textarea type="text" id="subjectInput" name="subjectInput" ng-model="topic" required></textarea>
   </div>
 
   <div id="responseDiv">
     <label for="responseInput">How is the student responding to the course material?</label>
-    <textarea type="text" id="responseInput" name="responseInput" required></textarea>
+    <textarea type="text" id="responseInput" name="responseInput" ng-model="response" required></textarea>
   </div>
 
   <div id="planDiv">
     <label for="planInput">What are your plans for the next session?</label>
-    <textarea type="text" id="planInput" name="planInput" required></textarea>
+    <textarea type="text" id="planInput" name="planInput" ng-model="plans" required></textarea>
   </div>
 
   <div id="studPlanDiv">
     <label for="studPlanInput">How will the student prepare for the next session?</label>
-    <textarea type="text" name="studPlanInput" required></textarea>
+    <textarea type="text" name="studPlanInput" ng-model="studentplans" required></textarea>
   </div>
 
   <div id="commentDiv">
     <label for="commentInput">Additional Comments:  (optional)</label>
-    <textarea type="text" name="commentInput"></textarea>
+    <textarea type="text" name="commentInput" ng-model="comments"></textarea>
   </div>
   <div id="formButtons">
     <button type="submit" value="Submit" ng-click="submitForm()">Submit</button>

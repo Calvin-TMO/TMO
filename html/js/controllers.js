@@ -33,7 +33,7 @@ function ReportCtrl($scope, $http, $timeout) {
 }
 
 function CreateCtrl($scope, $http, $timeout, $filter) {
-  
+
   $http.get("pages/tutees.php")
   .then(function (response) {$scope.Students = response.data.records;});
 
@@ -44,6 +44,20 @@ function CreateCtrl($scope, $http, $timeout, $filter) {
 
   $scope.submitForm = function() {
     if($scope.tutorForm.$valid) {
+/*
+      reportData = {
+        'coursestudentid' : $http.get("pages/coursestudentid.php") //find out how to pass course and student into php and query for coursestudentid
+        'submitdate' : $scope.date
+        'starttime' : $scope.startTime
+        'endtime' : $scope.endTime
+        'topic' : $scope.topic
+        'response' : $scope.response
+        'plans' : $scope.plans
+        'studentplans' : $scope.studentplans
+        'comments' : $scope.comments
+      };
+*/
+      //$http.put
       alert("Form submitted");
     } else {
       alert("Missing information! Please complete the form");
