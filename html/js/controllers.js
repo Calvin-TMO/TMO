@@ -33,16 +33,12 @@ function ReportCtrl($scope, $http, $timeout) {
 }
 
 function CreateCtrl($scope, $http, $timeout, $filter) {
+  
+  $http.get("pages/tutees.php")
+  .then(function (response) {$scope.Students = response.data.records;});
 
-  $scope.Students = [
-    {name: 'Benjamin Braker', id: 1},
-    {name: 'Carson Wiens', id: 2},
-    {name: 'Mark Vander Stel', id: 3}
-  ];
-
-  $scope.Classes = [
-    {id: 1, name: 'CS-212'}
-  ];
+  $http.get("pages/sections.php")
+  .then(function (response) {$scope.Classes = response.data.records;});
 
   $scope.date = $filter("date")(Date.now(), 'yyyy-MM-dd');
 
