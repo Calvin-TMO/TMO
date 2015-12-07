@@ -12,12 +12,15 @@
     die("Connection failed: " + $conn->connect_error);
   }
 
+  $data = json_decode(file_get_contents("php://input"));
+
   $sql =
     "SELECT r.id reportid, r.submitdate, s.id studentid, CONCAT(s.lname, ', ', s.fname) studentname, c.id courseid, CONCAT(c.department, c.num) coursename, r.starttime, r.endtime, r.topic, r.response, r.plans, r.studentplans, r.comments
      FROM Report r
        INNER JOIN CourseStudent cs ON cs.id = r.coursestudentid
        INNER JOIN Student s ON cs.studentid = s.id
-       INNER JOIN Course c ON c.id = cs.courseid";
+       INNER JOIN Course c ON c.id = cs.courseid
+     WHERE r.id = " . $data->reportid;
   $result = $conn->query($sql);
 
   $output = "";

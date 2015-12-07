@@ -69,7 +69,7 @@ function CreateCtrl($scope, $http, $timeout, $filter) {
 
 function ViewCtrl($scope, $http, $routeParams) {
   $scope.reportid = $routeParams.reportid;
-  $http.get('pages/getReport.php')
+  $http.post('pages/getReport.php', '{"reportid":"' + $scope.reportid + '"}')
   .then(function (response) { $scope.reports = response.data.records;});
 }
 
