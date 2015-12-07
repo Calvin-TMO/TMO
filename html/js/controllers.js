@@ -43,7 +43,7 @@ function CreateCtrl($scope, $http, $timeout, $filter) {
   $scope.date = $filter("date")(Date.now(), 'yyyy-MM-dd');
 
   $scope.submitForm = function() {
-    if($scope.tutorForm.$valid) {
+    if($scope.tutorForm.valid) {
 
       reportData = {
         'coursestudentid' : 1,
