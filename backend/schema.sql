@@ -54,7 +54,7 @@ CREATE TABLE CourseStudent (
 );
 
 CREATE TABLE Report (
-    id integer,
+    id integer AUTO_INCREMENT,
     coursestudentid integer NOT NULL,
     submitdate date NOT NULL,
     starttime time NOT NULL,

@@ -12,14 +12,22 @@
     die("Connection failed: " + $conn->connect_error);
   }
 
-  $data = json_decode(file_get_contents("php://input"));
-  $data->name
+  //$data = json_decode(file_get_contents("php://input"));
+  $coursestudentid = $_POST("coursestudentid");
+  $submitdate = $_POST("date");
+  $starttime = $_POST("starttime");
+  $endtime = $_POST("endtime");
+  $topic = $_POST("topic");
+  $response = $_POST("response");
+  $plans = $_POST("plans");
+  $studentplans = $_POST("studentplans");
+  $comments = $_POST("comments");
 
   $sql = "INSERT INTO Report
       (coursestudentid, submitdate, starttime, endtime,
       topic, response, plans, studentplans, comments)
     VALUES
-      (1, )";
+      ($coursestudentid, $submitdate, $starttime, $endtime, $topic, $response, $plans, $studentplans, $comments)";
 
   if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";

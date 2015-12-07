@@ -44,9 +44,9 @@ function CreateCtrl($scope, $http, $timeout, $filter) {
 
   $scope.submitForm = function() {
     if($scope.tutorForm.$valid) {
-/*
+
       reportData = {
-        'coursestudentid' : $http.get("pages/coursestudentid.php") //find out how to pass course and student into php and query for coursestudentid
+        'coursestudentid' : 1
         'submitdate' : $scope.date
         'starttime' : $scope.startTime
         'endtime' : $scope.endTime
@@ -56,8 +56,9 @@ function CreateCtrl($scope, $http, $timeout, $filter) {
         'studentplans' : $scope.studentplans
         'comments' : $scope.comments
       };
-*/
-      //$http.put
+
+      $http.post("pages/postReport.php", reportData);
+
       alert("Form submitted");
     } else {
       alert("Missing information! Please complete the form");
