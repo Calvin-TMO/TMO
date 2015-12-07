@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS Student;
 
 
 CREATE TABLE Student (
-    id integer,
+    id integer AUTO_INCREMENT,
     fname varchar(70) NOT NULL,
     lname varchar(70) NOT NULL,
     email varchar(16) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE Student (
 );
 
 CREATE TABLE Professor (
-    id integer,
+    id integer AUTO_INCREMENT,
     fname varchar(70) NOT NULL,
     lname varchar(70) NOT NULL,
     email varchar(16) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE Professor (
 );
 
 CREATE TABLE Course (
-    id integer,
+    id integer AUTO_INCREMENT,
     department varchar(5) NOT NULL,
     num varchar(4) NOT NULL,
     description varchar(128),
@@ -39,7 +39,7 @@ CREATE TABLE CourseTutor (
 );
 
 CREATE TABLE CourseStudent (
-    id integer,
+    id integer AUTO_INCREMENT,
     courseid integer,
     studentid integer,
     tutorid integer,
