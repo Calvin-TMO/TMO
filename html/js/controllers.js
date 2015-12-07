@@ -43,25 +43,26 @@ function CreateCtrl($scope, $http, $timeout, $filter) {
   $scope.date = $filter("date")(Date.now(), 'yyyy-MM-dd');
 
   $scope.submitForm = function() {
-    if($scope.createForm.valid) {
+    if($scope.createForm.$valid) {
 
-      reportData = {
-        'coursestudentid' : 1,
-        'submitdate' : $scope.date,
-        'starttime' : $scope.startTime,
-        'endtime' : $scope.endTime,
-        'topic' : $scope.topic,
-        'response' : $scope.response,
-        'plans' : $scope.plans,
-        'studentplans' : $scope.studentplans,
-        'comments' : $scope.comments
+      $scope.reportData = {
+        "coursestudentid" :"0",
+        "submitdate" : $scope.date,
+        "starttime" : $scope.startTime,
+        "endtime" : $scope.endTime,
+        "topic" : $scope.topic,
+        "response" : $scope.response,
+        "plans" : $scope.plans,
+        "studentplans" : $scope.studentplans,
+        "comments" : ($scope.comments === undefined ? "" : $scope.comments)
       };
 
-      $http.post("pages/postReport.php", reportData);
+      $http.post("pages/postReport.php", $scope.reportData)
+        .then(function (response) {$scope.results = response.data;});
 
-      alert("Form submitted");
+      alert("Form submitted" + $scope.comments);
     } else {
-      alert("Missing information! Please complete the form");
+      alert("Missing information! Please complete the form" + $scope.comments);
     }
   };
 
