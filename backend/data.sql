@@ -12,5 +12,5 @@ INSERT INTO CourseTutor VALUES(0, 1);
 
 INSERT INTO CourseStudent VALUES(0, 0, 0, 1, 0, '2015-09-01', '2015-12-18');
 
-INSERT INTO Report VALUES (0, '2015-11-30', '00:00:00', '00:30:00', "Big-O notation", "aggressively", "Study harder", "Get more sleep", NULL);
+INSERT INTO Report (coursestudentid, submitdate, starttime, endtime, topic, response, plans, studentplans, comments) VALUES (0, '2015-11-30', '00:00:00', '00:30:00', "Big-O notation", "aggressively", "Study harder", "Get more sleep", NULL);
 
