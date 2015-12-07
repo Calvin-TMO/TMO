@@ -1,50 +1,50 @@
-<form name="createForm">
+<form name="createForm" data-ng-repeat="x in reports" style="{{ x.id === reportid ? 'display:none' : '' }}">
   <div id="selectStudent">
-    <h2>{{ report.studentname }}</h2>
+    <h2>{{ x.studentname }}</h2>
   </div>
 
   <div id="selectClass">
-    <h3>{{ report.coursename }}</h3>
+    <h3>{{ x.coursename }}</h3>
   </div>
 
   <div id="tutorDate">
     <h6>Date of Tutor Session</h6>
-    <div class="date">{{ report.submitdate }}</div>
+    <div class="date">{{ x.submitdate }}</div>
   </div>
 
   <div id="tutorTime">
     <div id="startTime">
       <h6>Start Time</h6>
-      <div class="date">{{ report.starttime }}</div>
+      <div class="date">{{ x.starttime }}</div>
     </div>
     <div id="endTime">
       <h6>End Time</h6>
-      <div class="time">{{ report.endtime }}</div>
+      <div class="time">{{ x.endtime }}</div>
     </div>
   </div>
 
   <div id="subjectDiv">
     <h6>What did you and your tutee work on this session?</h6>
-    <p>{{ report.subject }}</p>
+    <p>{{ x.subject }}</p>
   </div>
 
   <div id="responseDiv">
     <h6>How is the student responding to the course material?</h6>
-    <p>{{ report.response }}</p>
+    <p>{{ x.response }}</p>
   </div>
 
   <div id="planDiv">
     <h6>What are your plans for the next session?</h6>
-    <p>{{ report.plan }}</p>
+    <p>{{ x.plans }}</p>
   </div>
 
   <div id="studPlanDiv">
     <h6>How will the student prepare for the next session?</h6>
-    <p>{{ studPlan }}</p>
+    <p>{{ x.studplans }}</p>
   </div>
 
   <div id="commentDiv">
     <h6>Additional Comments:  (optional)</h6>
-    <p>{{ report.comment }}</p>
+    <p>{{ x.comments }}</p>
   </div>
 </form>
