@@ -46,14 +46,14 @@ function CreateCtrl($scope, $http, $timeout, $filter) {
     if($scope.tutorForm.$valid) {
 
       reportData = {
-        'coursestudentid' : 1
-        'submitdate' : $scope.date
-        'starttime' : $scope.startTime
-        'endtime' : $scope.endTime
-        'topic' : $scope.topic
-        'response' : $scope.response
-        'plans' : $scope.plans
-        'studentplans' : $scope.studentplans
+        'coursestudentid' : 1,
+        'submitdate' : $scope.date,
+        'starttime' : $scope.startTime,
+        'endtime' : $scope.endTime,
+        'topic' : $scope.topic,
+        'response' : $scope.response,
+        'plans' : $scope.plans,
+        'studentplans' : $scope.studentplans,
         'comments' : $scope.comments
       };
 
