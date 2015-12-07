@@ -58,13 +58,11 @@ function CreateCtrl($scope, $http, $timeout, $filter) {
         "comments" : ($scope.comments === undefined ? "" : $scope.comments)
       };
 
-      $http.post("pages/postReport.php", $scope.reportData)
-        .then(function (response) {$scope.results = response.data;});
+      $http.post("pages/postReport.php", $scope.reportData);
 
-      alert("Form submitted: " + $scope.studentid + ', ' + $scope.courseid);
-    } else {
-      alert("Missing information! Please complete the form: " + $scope.studentid + ", " + $scope.courseid);
-    }
+      alert("Form submitted");
+      location.href = "#!/reports";
+    } 
   };
 
 }

@@ -27,8 +27,6 @@
 
   $sql = "INSERT INTO Report (coursestudentid, submitdate, starttime, endtime,topic, response, plans, studentplans, comments) VALUES((SELECT id FROM CourseStudent WHERE studentid=".$studentid." AND courseid=".$courseid."), '".$submitdate."', '".$starttime."', '".$endtime."', '".$topic."', '".$response."', '".$plans."', '".$studentplans."', '".$comments."')";
 
-  error_log($sql, 0);
-
   if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
   } else {
