@@ -13,7 +13,8 @@
   }
 
   $data = json_decode(file_get_contents("php://input"));
-  $coursestudentid = $data->coursestudentid;
+  $studentid = $data->studentid;
+  $courseid = $data->courseid;
   $submitdate = $data->submitdate;
   $starttime = $data->starttime;
   $endtime = $data->endtime;
@@ -24,7 +25,7 @@
   $comments = $data->comments;
   
 
-  $sql = "INSERT INTO Report (coursestudentid, submitdate, starttime, endtime,topic, response, plans, studentplans, comments) VALUES($coursestudentid, '".$submitdate."', '".$starttime."', '".$endtime."', '".$topic."', '".$response."', '".$plans."', '".$studentplans."', '".$comments."')";
+  $sql = "INSERT INTO Report (coursestudentid, submitdate, starttime, endtime,topic, response, plans, studentplans, comments) VALUES((SELECT id FROM CourseStudent WHERE studentid=".$studentid." AND courseid=".$courseid."), '".$submitdate."', '".$starttime."', '".$endtime."', '".$topic."', '".$response."', '".$plans."', '".$studentplans."', '".$comments."')";
 
   error_log($sql, 0);
 

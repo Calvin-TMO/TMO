@@ -46,7 +46,8 @@ function CreateCtrl($scope, $http, $timeout, $filter) {
     if($scope.createForm.$valid) {
 
       $scope.reportData = {
-        "coursestudentid" :"0",
+        "studentid" : $scope.studentid,
+        "courseid": $scope.courseid,
         "submitdate" : $scope.date,
         "starttime" : $scope.startTime,
         "endtime" : $scope.endTime,
@@ -60,9 +61,9 @@ function CreateCtrl($scope, $http, $timeout, $filter) {
       $http.post("pages/postReport.php", $scope.reportData)
         .then(function (response) {$scope.results = response.data;});
 
-      alert("Form submitted" + $scope.comments);
+      alert("Form submitted: " + $scope.studentid + ', ' + $scope.courseid);
     } else {
-      alert("Missing information! Please complete the form" + $scope.comments);
+      alert("Missing information! Please complete the form: " + $scope.studentid + ", " + $scope.courseid);
     }
   };
 

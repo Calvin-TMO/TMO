@@ -1,15 +1,15 @@
 <form name="createForm">
   <div id="selectStudent">
     <label for="studentList">Tutee</label>
-    <select required>
+    <select ng-model="studentid" required>
       <option ng-model="Students" ng-repeat="student in Students" value="{{student.id}}">{{student.fname+" "+student.lname}}</option>
     </select>
   </div>
 
   <div id="selectClass">
     <label for="classList">Class</label>
-    <select required>
-      <option ng-model="Classes" ng-repeat="class in Classes" value="{{student.id}">{{class.department+"-"+class.num}}</option>
+    <select ng-model="courseid" required>
+      <option ng-model="Classes" ng-repeat="class in Classes" value="{{class.id}}">{{class.department+"-"+class.num}}</option>
     </select>
   </div>
 
