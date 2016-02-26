@@ -23,12 +23,9 @@ class Admin
             } else {
                 return redirect()->guest('login');
             }
-        } else {
-            if (!Auth::guard($guard)->user()->admin) {
-                return redirect('/home');
-            }
+        } else if (!Auth::guard($guard)->user()->isAdmin()) {
+            return redirect('/home');
         }
-
         return $next($request);
     }
 }

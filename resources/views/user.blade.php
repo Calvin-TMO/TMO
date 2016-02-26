@@ -10,10 +10,7 @@
                 <div class="panel-body">
                     <div>Name: {{ $user->name }}</div>
                     <div>Email: {{ $user->email }}</div>
-                    <div>Role: @if ($user->role == null) N/A @else {{ $user->role }} @endif </div>
-                    <div>Admin: 
-                        <input type="checkbox" name="admin" value="admin" disabled @if ($user->admin) checked @endif >
-                    </div>
+                    <div>Roles: @foreach ($user->roles as $role) {{ $role->name }} @endforeach </div>
                     <button type="button" onclick="location.href = '/user/edit/{{ $user->id }}';">Edit</button>
                     <button type="button" onclick="location.href = '/users';">Back</button>
                 </div>

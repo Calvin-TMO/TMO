@@ -8,7 +8,11 @@
                 <div class="panel-heading">Home</div>
 
                 <div class="panel-body">
-                    If you see this home page, you are logged in.
+                    <p>If you see this home page, you are logged in. Here is your user info.</p>
+                    <p>{{ Auth::user() }}</p>
+                    @foreach (Auth::user()->roles as $role )
+                        <p>{{ $role->name }}</p>
+                    @endforeach
                 </div>
             </div>
         </div>

@@ -9,17 +9,9 @@
 
                 <div class="panel-body">
                     <form method="POST">
-                        <p>Name: <input type="text" name="name"></p>
-                        <p>Email: <input type="email" name="email"></p>
-                        <p>Role:
-                        <select name="role">
-                            <option value="" selected></option>
-                            <option value="tutor">tutor</option>
-                            <option value="professor">professor</option>
-                        </select></p>
-                        <p><div>Admin: 
-                            <input type="checkbox" name="admin" value="yes">
-                        </div></p>
+                        <div>Name: <input type="text" name="name"></div>
+                        <div>Email: <input type="email" name="email"></div>
+                        <div>Role: COMING SOON</div>
                         <input type="submit" value="Save">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button type="button" onclick="location.href='/users'">Cancel</button>
