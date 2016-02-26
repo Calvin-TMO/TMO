@@ -2,21 +2,6 @@
 
 /*
 |--------------------------------------------------------------------------
-| Routes File
-|--------------------------------------------------------------------------
-|
-| Here is where you will register all of the routes in an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-/*
-|--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
 |
@@ -26,6 +11,22 @@ Route::get('/', function () {
 |
 */
 
+// Open pages to guest users.
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::get('/', function () { return view('welcome'); });
+});
+
+// Requires login to view these pages.
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
+
+    // Admin only access. (see controller __constructor)
+    Route::get('/users', 'UserController@index');
+    Route::get('/user/add', 'UserController@create');
+    Route::post('/user/add', 'UserController@store');
+    Route::get('/user/{id}', 'UserController@show');
+    Route::get('/user/edit/{id}', 'UserController@edit');
+    Route::post('/user/edit/{id}', 'UserController@update');
 });
