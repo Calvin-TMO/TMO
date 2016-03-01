@@ -17,6 +17,7 @@ class CreateCoursesTable extends Migration
             $table->string('department');
             $table->string('number');
             $table->string('description');
+            $table->timestamps();
         });
 
         Schema::create('available_tutors', function (Blueprint $table) {

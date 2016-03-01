@@ -23,10 +23,20 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'HomeController@index');
 
     // Admin only access. (see controller __constructor)
+
+    // Users
     Route::get('/users', 'UserController@index');
     Route::get('/user/add', 'UserController@create');
     Route::post('/user/add', 'UserController@store');
     Route::get('/user/{id}', 'UserController@show');
     Route::get('/user/edit/{id}', 'UserController@edit');
     Route::post('/user/edit/{id}', 'UserController@update');
+
+    // Courses
+    Route::get('/courses', 'CourseController@index');
+    Route::get('/course/add', 'CourseController@create');
+    Route::post('/course/add', 'CourseController@store');
+    Route::get('/course/{id}', 'CourseController@show');
+    Route::get('/course/edit/{id}', 'CourseController@edit');
+    Route::post('/course/edit/{id}', 'CourseController@update');
 });
