@@ -8,9 +8,11 @@
                 <div class="panel-heading">Users</div>
 
                 <div class="panel-body">
-                    @foreach ($users as $user)
-		        <p><a href="/user/{{ $user->id }}"><div>{{ $user->name }}</div></a></p>
-                    @endforeach
+                    <ul class="list">
+                        @foreach ($users as $user)
+                            <li><a href="/user/{{ $user->id }}"><div>{{ $user->name }}</div></a></li>
+                        @endforeach
+                    </ul>
                     <button type="button" onclick="location.href='/user/add'">New User</button>
                 </div>
             </div>
