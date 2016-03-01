@@ -28,6 +28,26 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role', 'user_roles', 'user_id', 'role_id');
     }
 
+    public function courses_taught() {
+        return $this->belongsToMany('App\Course', 'current_professors', 'user_id', 'course_id');
+    }
+
+    public function courses_tutored() {
+        return $this->belongsToMany('App\Course', 'available_tutors', 'user_id', 'course_id');
+    }
+
+    public function student_assignments() {
+        return $this->hasMany('App\Assignment', 'student_id');
+    }
+
+    public function tutor_assignments() {
+        return $this->hasMany('App\Assignment', 'tutor_id');
+    }
+
+    public function professor_assignments() {
+        return $this->hasMany('App\Assignment', 'professor_id');
+    }
+
     public function isAdmin() {
         $roles = $this->roles;
         foreach ($roles as $role) {
