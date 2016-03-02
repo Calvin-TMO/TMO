@@ -50,20 +50,14 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $check = User::where('email', '=', '$request->email')->first();
-        if ($check == null) {
+        if ($check != null) {
             die("email already used" . $check);
         }
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->role = $request->role;
-        if ( isset($request->admin) && $request->admin == 'yes' ) {
-            $user->admin = 1;
-        } else {
-            $user->admin = 0;
-        }
         $user->save();
-        return redirect('/user/' . User::where('email', '=', '$request->email')->first()->id);
+        return redirect('/user/' . $user->id);
     }
 
     /**
