@@ -21,8 +21,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
-    Route::get('/assignments', function() { echo 'assignments not configured yet'; });
-    Route::get('/reports', function() { echo 'reports not configured yet'; });
+    Route::get('/assignments', 'AssignmentController@assignment');
+    Route::get('/reports', 'ReportController@report');
 
     // Admin only access. (see controller __constructor)
 
