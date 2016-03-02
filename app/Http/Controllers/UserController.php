@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\User as User;
+use App\Role as Role;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use DB;
 
 class UserController extends Controller
 {
@@ -38,7 +40,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user_add');
+        $data = array(
+            'roles' => Role::all()
+            );
+        return view('user_add', $data);
     }
 
     /**
@@ -57,6 +62,15 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
+        $roles = $request->roles;
+        if ($roles != null) {
+            foreach ($roles as $role_id) {
+                DB::table('user_roles')->insert([
+                    'user_id' => $user->id,
+                    'role_id' => $role_id
+                ]);
+            }
+        }
         return redirect('/user/' . $user->id);
     }
 
@@ -83,7 +97,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $data = array(
-            'user' => User::find($id)
+            'user' => User::find($id),
+            'roles' => Role::all()
             );
         return view('user_edit', $data);
     }
@@ -98,13 +113,18 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        $user->role = $request->role;
-        if ( isset($request->admin) && $request->admin == 'yes' ) {
-            $user->admin = 1;
-        } else {
-            $user->admin = 0;
+        $roles = $request->roles;
+        DB::table('user_roles')->where('user_id', '=', $id)->delete();
+
+        if ($roles != null) {
+            foreach ($roles as $role_id) {
+                DB::table('user_roles')->insert([
+                    'user_id' => $id,
+                    'role_id' => $role_id
+                ]);
+            }
         }
-        $user->save();
+        //$user->save();
         return redirect('/user/' . $id);
     }
 

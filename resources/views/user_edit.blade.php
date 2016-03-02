@@ -11,7 +11,14 @@
                     <form method="POST">
                         <div>Name: {{ $user->name }}</div>
                         <div>Email: {{ $user->email }}</div>
-                        <div>Role: COMING SOON</div> 
+                        <div>Role:<br>
+                            @foreach ($roles as $role)
+                                <input type="checkbox" name="roles[]" value="{{ $role->id }}"
+                                    @if ($user->hasRole($role->name))
+                                        checked
+                                    @endif >{{ $role->name }}</option>
+                            @endforeach
+                        </div> 
                         <input type="submit" value="Save">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button type="button" onclick="location.href='/user/{{ $user->id }}'">Cancel</button>
