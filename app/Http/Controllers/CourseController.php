@@ -49,12 +49,16 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        $check = Course::where('description', '=', '$request->description')->first();
+        if ($check == null) {
+            die("description already used" . $check);
+        }
         $course = new Course;
         $course->department = $request->department;
         $course->number = $request->number;
         $course->description = $request->description;
         $course->save();
-        return redirect('/course/' . Course::where('description', '=', '$request->description')->first()->id);
+        return redirect('/courses/' . Course::where('description', '=', '$request->description')->first()->id);
     }
 
     /**
