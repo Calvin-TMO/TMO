@@ -11,7 +11,7 @@
                     @foreach ($courses as $course)
 		        <p><a href="/course/{{ $course->id }}"><div>{{ $course->department . "-" . $course->number . "    " . $course->description }}</div></a></p>
                     @endforeach
-                    <button type="button" onclick="location.href='/user/course'">New Course</button>
+                    <button type="button" onclick="location.href='/course/add'">New Course</button>
                 </div>
             </div>
         </div>
