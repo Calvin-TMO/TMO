@@ -48,6 +48,8 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/assignments') }}">Assignments</a></li>
+                    <li><a href="{{ url('/reports') }}">Reports</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -65,6 +67,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 @if (Auth::user()->isAdmin())
                                     <li><a href="{{ url('/users') }}"><i class="fa fa-btn"></i>Users</a></li>
+                                    <li><a href="{{ url('/courses') }}"><i class="fa fa-btn"></i>Courses</a></li>
                                 @endif
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
