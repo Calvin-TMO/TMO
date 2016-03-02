@@ -23,7 +23,7 @@ class Admin
             } else {
                 return redirect()->guest('login');
             }
-        } else if (!Auth::guard($guard)->user()->isAdmin()) {
+        } else if (!Auth::guard($guard)->user()->hasRole('admin')) {
             return redirect('/home');
         }
         return $next($request);

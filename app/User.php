@@ -48,10 +48,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Assignment', 'professor_id');
     }
 
-    public function isAdmin() {
+    public function hasRole($role_name) {
         $roles = $this->roles;
         foreach ($roles as $role) {
-            if ($role->name == 'admin') {
+            if ($role->name == $role_name) {
                 return true;
             }
         }

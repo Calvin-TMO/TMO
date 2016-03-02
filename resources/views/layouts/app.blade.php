@@ -65,7 +65,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                @if (Auth::user()->isAdmin())
+                                @if (Auth::user()->hasRole('admin'))
                                     <li><a href="{{ url('/users') }}"><i class="fa fa-btn"></i>Users</a></li>
                                     <li><a href="{{ url('/courses') }}"><i class="fa fa-btn"></i>Courses</a></li>
                                 @endif
