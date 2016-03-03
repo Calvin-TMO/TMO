@@ -8,18 +8,16 @@
                 <div class="panel-heading">Assignments</div>
 
                 <div class="panel-body">
-                    
-                    @foreach ($assignments as $assignment)
-                            <li>
-                                <div> 
-                                    Tutor: <a href="/assignments/{{ $assignment->tutor_id }}">{{ $assignment->tutor_id }}</a>
-                                    Student: <a href="/assignments/{{ $assignment->student_id }}">{{ $assignment->student_id }}</a>
-                                    Course: <a href="/assignments/{{ $assignment->course_id }}">{{ $assignment->course_id }}</a>
-                                    Professor: <a href="/assignments/{{ $assignment->professor_id }}">{{ $assignment->professor_id }}</a>
-                                </div>
-                            </li>
-                    @endforeach
-                    
+                    <ul class="list">
+                        @foreach ($assignments as $assignment)
+                            <li><a href="/assignment/{{ $assignment->id }}"><div>
+                                Tutor: {{ $assignment->tutor->name }}<br>
+                                Student: {{ $assignment->student->name }}<br>
+                                Course: {{ $assignment->course->department }}-{{ $assignment->course->number }} {{ $assignment->course->description }}<br>
+                                Professor: {{ $assignment->professor->name }}</div></a></li>
+                        @endforeach
+                    </ul>
+                    <button type="button" onclick="location.href='/assignment/add'">New Assignment</button>
                 </div>
             </div>
         </div>

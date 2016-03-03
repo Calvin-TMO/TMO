@@ -20,6 +20,7 @@ class CreateAssignmentsTable extends Migration
             $table->integer('student_id');
             $table->date('assignment_date');
             $table->date('termination_date');
+            $table->timestamps();
         });
     }
 
