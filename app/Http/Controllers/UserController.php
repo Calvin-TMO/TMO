@@ -139,7 +139,12 @@ class UserController extends Controller
         //
     }
 
-    public function getTutors() {
+    /**
+     * Get the list of Tutors.
+     *
+     * @return Response
+     */
+    public static function getTutors() {
         $results = DB::table('users')
             ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
             ->join('roles', 'user_roles.role_id', '=', 'roles.id')
@@ -153,7 +158,43 @@ class UserController extends Controller
         return User::find($user_ids);
     }
 
-    public function getProfessors() {
+    /**
+     * Get the list of Students (can include Tutors).
+     *
+     * @return Response
+     */
+    public static function getStudents() {
+        // Tutors are students too!
+        $results = DB::table('users')
+            ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
+            ->join('roles', 'user_roles.role_id', '=', 'roles.id')
+            ->where('roles.name', '=', 'tutor')
+            ->select('users.id as id')
+            ->get();
+        $user_ids = array();
+        foreach ($results as $item) {
+            array_push($user_ids, $item->id);
+        }
+        
+        // Normal students
+        $results = DB::table('users')
+            ->leftJoin('user_roles', 'users.id', '=', 'user_roles.user_id')
+            ->whereNull('user_roles.user_id')
+            ->select('users.id as id')
+            ->get();
+        foreach ($results as $item) {
+            array_push($user_ids, $item->id);
+        }
+
+        return User::find($user_ids);
+    }
+
+    /**
+     * Get the list of Professors.
+     *
+     * @return Response
+     */
+    public static function getProfessors() {
         $results = DB::table('users')
             ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
             ->join('roles', 'user_roles.role_id', '=', 'roles.id')

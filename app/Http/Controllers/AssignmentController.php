@@ -43,9 +43,9 @@ class AssignmentController extends Controller
     {
         $data = array(
             'courses' => Course::all(),
-            'tutors' => User::all(),
-            'students' => User::all(),
-            'professors' => User::all()
+            'tutors' => UserController::getTutors(),
+            'students' => UserController::getStudents(),
+            'professors' => UserController::getProfessors()
         );
         return view('assignment_add', $data);
     }
@@ -101,9 +101,9 @@ class AssignmentController extends Controller
         $data = array(
             'assignment' => Assignment::find($id),
             'courses' => Course::all(),
-            'tutors' => User::all(),
-            'students' => User::all(),
-            'professors' => User::all()
+            'tutors' => UserController::getTutors(),
+            'students' => UserController::getStudents(),
+            'professors' => UserController::getProfessors()
         );
         return view('assignment_edit', $data);
     }
