@@ -138,4 +138,32 @@ class UserController extends Controller
     {
         //
     }
+
+    public function getTutors() {
+        $results = DB::table('users')
+            ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
+            ->join('roles', 'user_roles.role_id', '=', 'roles.id')
+            ->where('roles.name', '=', 'tutor')
+            ->select('users.id as id')
+            ->get();
+        $user_ids = array();
+        foreach ($results as $item) {
+            array_push($user_ids, $item->id);
+        }
+        return User::find($user_ids);
+    }
+
+    public function getProfessors() {
+        $results = DB::table('users')
+            ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
+            ->join('roles', 'user_roles.role_id', '=', 'roles.id')
+            ->where('roles.name', '=', 'professor')
+            ->select('users.id as id')
+            ->get();
+        $user_ids = array();
+        foreach ($results as $item) {
+            array_push($user_ids, $item->id);
+        }
+        return User::find($user_ids);
+    }
 }
