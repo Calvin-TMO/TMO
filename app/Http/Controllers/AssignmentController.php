@@ -30,7 +30,5 @@ class AssignmentController extends Controller
             'assignments' => Assignment::all()
             );
         return view('assignments', $data);
-        //$assignments = Assignment::table('assignments')->get();
-        //return view('assignments.index', ['assignments' => $assignments]);
     }
 }

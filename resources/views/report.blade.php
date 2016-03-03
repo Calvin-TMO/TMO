@@ -8,6 +8,9 @@
                 <div class="panel-heading">Reports</div>
 
                 <div class="panel-body">
+                    <form action="/reports/create">
+                        <input type="submit" value="Create New Report">
+                    </form>
                     <p>Coming soon!</p>
                 </div>
             </div>
