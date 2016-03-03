@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Assignment as Assignment;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use DB;
 
 class AssignmentController extends Controller
 {
@@ -22,8 +24,13 @@ class AssignmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function assignment()
+    public function index()
     {
-        return view('assignment');
+        $data = array(
+            'assignments' => Assignment::all()
+            );
+        return view('assignments', $data);
+        //$assignments = Assignment::table('assignments')->get();
+        //return view('assignments.index', ['assignments' => $assignments]);
     }
 }

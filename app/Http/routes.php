@@ -21,7 +21,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/home', 'HomeController@index');
-    Route::get('/assignments', 'AssignmentController@assignment');
+    //Route::get('/assignments', 'AssignmentController@assignment');
     Route::get('/reports', 'ReportController@report');
 
     // Admin only access. (see controller __constructor)
@@ -41,4 +41,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/course/{id}', 'CourseController@show');
     Route::get('/course/edit/{id}', 'CourseController@edit');
     Route::post('/course/edit/{id}', 'CourseController@update');
+    
+    // Assignments
+    Route::get('/assignments', 'AssignmentController@index');
 });
