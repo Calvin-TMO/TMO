@@ -8,9 +8,11 @@
                 <div class="panel-heading">Courses</div>
 
                 <div class="panel-body">
-                    @foreach ($courses as $course)
-		        <p><a href="/course/{{ $course->id }}"><div>{{ $course->department . "-" . $course->number . "    " . $course->description }}</div></a></p>
-                    @endforeach
+                    <ul class="list">
+                        @foreach ($courses as $course)
+		            <li><a href="/course/{{ $course->id }}"><div>{{ $course->department . "-" . $course->number . "    " . $course->description }}</div></a></li>
+                        @endforeach
+                    </ul>
                     <button type="button" onclick="location.href='/course/add'">New Course</button>
                 </div>
             </div>
