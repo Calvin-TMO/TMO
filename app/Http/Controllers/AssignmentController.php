@@ -42,8 +42,11 @@ class AssignmentController extends Controller
     public function create()
     {
         $data = array(
-            'roles' => Role::all()
-            );
+            'courses' => Course::all(),
+            'tutors' => User::all(),
+            'students' => User::all(),
+            'professors' => User::all()
+        );
         return view('assignment_add', $data);
     }
 
@@ -56,8 +59,10 @@ class AssignmentController extends Controller
     public function store(Request $request)
     {
         $assignment = new Assignment;
-        $assignment->name = $request->name;
-        $assignment->email = $request->email;
+        $assignment->tutor_id = $request->tutor;
+        $assignment->student_id = $request->student;
+        $assignment->course_id = $request->course;
+        $assignment->professor_id = $request->professor;
         $assignment->save();
         $roles = $request->roles;
         if ($roles != null) {
@@ -99,7 +104,7 @@ class AssignmentController extends Controller
             'tutors' => User::all(),
             'students' => User::all(),
             'professors' => User::all()
-            );
+        );
         return view('assignment_edit', $data);
     }
 
