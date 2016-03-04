@@ -40,7 +40,7 @@
 
                         <input type="submit" value="Save">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button type="button" onclick="location.href='/assignments">Cancel</button>
+                        <button type="button" onclick="location.href='/assignments'">Cancel</button>
                     </form>
                 </div>
             </div>
