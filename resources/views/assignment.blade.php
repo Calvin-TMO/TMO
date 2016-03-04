@@ -25,7 +25,7 @@
                     <div class="sublist">
                         <div class="sublist-header">Reports</div>
                         @foreach ($reports as $report)
-                            <div class="list-item"><a href="/report/{{ $report->id }}">{{ $report->submit_date }}</a></div>
+                            <div class="list-item"><a href="/report/{{ $report->id }}">{{ $report->submit_date }} {{ $report->topic }}</a></div>
                         @endforeach
                     </div>
                 </div>

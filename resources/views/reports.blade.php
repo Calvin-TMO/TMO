@@ -9,7 +9,7 @@
                 <div class="panel-body">
                     <ul class="list">
                         @foreach ($reports as $report)
-                            <li><a href="/report/{{ $report->id }}"><div>{{ $report->id }}</div></a></li>
+                            <li><a href="/report/{{ $report->id }}"><div>{{ $report->assignment->tutor->name }} {{ $report->assignment->course->description }} {{ $report->submit_date }} {{ $report->topic }}</div></a></li>
                         @endforeach
                     </ul>
                </div>
