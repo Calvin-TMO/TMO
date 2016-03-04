@@ -18,6 +18,10 @@
                 </div>
 
                 <div class="panel-body">
+                    <button type="button" onclick="location.href = '/report/add/{{ $assignment->id }}'">New Report</button>
+                </div>
+
+                <div class="panel-body">
                     <div class="sublist">
                         <div class="sublist-header">Reports</div>
                         @foreach ($reports as $report)

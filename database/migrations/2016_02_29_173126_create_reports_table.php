@@ -23,6 +23,7 @@ class CreateReportsTable extends Migration
             $table->string('plans');
             $table->string('student_plans');
             $table->string('comments');
+            $table->timestamps();
         });
     }
 

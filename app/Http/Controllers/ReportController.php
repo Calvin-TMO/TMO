@@ -32,6 +32,41 @@ class ReportController extends Controller
             );
         return view('reports', $data);
     }
+    
+    /**
+     * Show the form for creating a new report.
+     *
+     * @return Response
+     */
+    public function create($assignment_id)
+    {
+        $data = array(
+            'assignment_id' => $assignment_id
+            );
+        return view('report_add', $data);
+    }
+
+    /**
+     * Store a newly created report in storage.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function store(Request $request, $assignment_id)
+    {
+        $report = new Report;
+        $report->assignment_id = $assignment_id;
+        $report->submit_date = $request->submit_date;
+        $report->session_start = $request->session_start;
+        $report->session_end = $request->session_end;
+        $report->topic = $request->topic;
+        $report->response = $request->response;
+        $report->plans = $request->plans;
+        $report->student_plans = $request->student_plans;
+        $report->comments = $request->comments;
+        $report->save();
+        return redirect('/report/' . $report->id);
+    }
 
     /**
      * Display the specified resource.
@@ -70,19 +105,16 @@ class ReportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $roles = $request->roles;
-        DB::table('user_roles')->where('user_id', '=', $id)->delete();
-
-        if ($roles != null) {
-            foreach ($roles as $role_id) {
-                DB::table('user_roles')->insert([
-                    'user_id' => $id,
-                    'role_id' => $role_id
-                ]);
-            }
-        }
-        //$user->save();
+        $report = Report::find($id);
+        $report->submit_date = $request->submit_date;
+        $report->session_start = $request->session_start;
+        $report->session_end = $request->session_end;
+        $report->topic = $request->topic;
+        $report->response = $request->response;
+        $report->plans = $request->plans;
+        $report->student_plans = $request->student_plans;
+        $report->comments = $request->comments;
+        $report->save();
         return redirect('/report/' . $id);
     }
 

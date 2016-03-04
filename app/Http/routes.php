@@ -62,9 +62,9 @@ Route::group(['middleware' => 'web'], function () {
 
     // Reports
     Route::get('/reports', 'ReportController@index');
+    Route::get('/report/add/{assignment_id}', 'ReportController@create');
+    Route::post('/report/add/{assignment_id}', 'ReportController@store');
     Route::get('/report/{id}', 'ReportController@show');
     Route::get('/report/edit/{id}', 'ReportController@edit');
     Route::post('/report/edit/{id}', 'ReportController@update');
-    Route::get('/report/add', 'ReportController@create');
-    Route::post('/report/add', 'ReportController@store');
 });
