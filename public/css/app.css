@@ -113,6 +113,7 @@ nav.navbar {
 .sublist {
   margin-top: 1em;
   border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .sublist-header {

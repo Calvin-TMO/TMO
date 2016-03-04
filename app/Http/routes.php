@@ -47,6 +47,10 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/course/{id}', 'CourseController@show');
     Route::get('/course/edit/{id}', 'CourseController@edit');
     Route::post('/course/edit/{id}', 'CourseController@update');
+    Route::post('/course/professor/add/{id}', 'CourseController@add_professor');
+    Route::get('/course/professor/delete/{course_id}/{professor_id}', 'CourseController@delete_professor');
+    Route::post('/course/tutor/add/{id}', 'CourseController@add_tutor');
+    Route::get('/course/tutor/delete/{course_id}/{tutor_id}', 'CourseController@delete_tutor');
     
     // Assignments
     Route::get('/assignments', 'AssignmentController@index');

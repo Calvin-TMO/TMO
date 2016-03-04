@@ -10,6 +10,8 @@
                 <div class="panel-body">
                     <div>Name: {{ $user->name }}</div>
                     <div>Email: {{ $user->email }}</div>
+                    <button type="button" onclick="location.href = '/user/edit/{{ $user->id }}';">Edit</button>
+                    <button type="button" onclick="location.href = '/users';">Back</button>
                     @if ($user->roles()->first())
                         <div class="sublist">
                             <div class="sublist-header">Roles:</div>
@@ -34,8 +36,6 @@
                             @endforeach
                         </div>
                     @endif
-                    <button type="button" onclick="location.href = '/user/edit/{{ $user->id }}';">Edit</button>
-                    <button type="button" onclick="location.href = '/users';">Back</button>
                 </div>
             </div>
         </div>

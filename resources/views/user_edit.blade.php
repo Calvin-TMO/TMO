@@ -9,6 +9,7 @@
                 <div class="panel-body">
                     <div>Name: {{ $user->name }}</div>
                     <div>Email: {{ $user->email }}</div>
+                    <button type="button" onclick="location.href='/user/{{ $user->id }}'">Back</button>
                     <div class="sublist">
                         <div class="sublist-header">Roles:</div>
                         @foreach ($user->roles as $role)
@@ -70,7 +71,6 @@
                         </form>
                     </div>
                     @endif
-                    <button type="button" onclick="location.href='/user/{{ $user->id }}'">Back</button>
                 </div>
             </div>
         </div>
