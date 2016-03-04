@@ -85,7 +85,8 @@ class AssignmentController extends Controller
     public function show($id)
     {
         $data = array(
-            'assignment' => Assignment::find($id)
+            'assignment' => Assignment::find($id),
+            'reports' => Assignment::find($id)->reports
             );
         return view('assignment', $data);
     }

@@ -10,7 +10,7 @@
                     <div>Name: {{ $user->name }}</div>
                     <div>Email: {{ $user->email }}</div>
                     <div class="sublist">
-                        <div class="sublist-header">Role:</div>
+                        <div class="sublist-header">Roles:</div>
                         @foreach ($user->roles as $role)
                             <div class="list-item">
                                 <button type="button" onclick="location.href='/user_role/delete/{{ $user->id }}/{{ $role->id }}'">Remove</button>
