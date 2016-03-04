@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User as User;
 use App\Role as Role;
+use App\Course as Course;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use DB;
@@ -98,7 +99,8 @@ class UserController extends Controller
     {
         $data = array(
             'user' => User::find($id),
-            'roles' => Role::all()
+            'roles' => Role::all(),
+            'courses' => Course::all()
             );
         return view('user_edit', $data);
     }
@@ -137,6 +139,60 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function add_role(Request $request, $id) {
+        DB::table('user_roles')->insert([
+            'user_id' => $id,
+            'role_id' => $request->role
+        ]);
+        return redirect('/user/edit/' . $id);
+    }
+
+    public function delete_role($user_id, $role_id) {
+        DB::table('user_roles')
+            ->where([
+                ['user_id', '=', $user_id],
+                ['role_id', '=', $role_id]
+            ])
+            ->delete();
+        return redirect('/user/edit/' . $user_id);
+    }
+
+    public function add_current_professor(Request $request, $id) {
+        DB::table('current_professors')->insert([
+            'user_id' => $id,
+            'course_id' => $request->course
+        ]);
+        return redirect('/user/edit/' . $id);
+    }
+
+    public function delete_current_professor($user_id, $course_id) {
+        DB::table('current_professors')
+            ->where([
+                ['user_id', '=', $user_id],
+                ['course_id', '=', $course_id]
+            ])
+            ->delete();
+        return redirect('/user/edit/' . $user_id);
+    }
+
+    public function add_available_tutor(Request $request, $id) {
+        DB::table('available_tutors')->insert([
+            'user_id' => $id,
+            'course_id' => $request->course
+        ]);
+        return redirect('/user/edit/' . $id);
+    }
+
+    public function delete_available_tutor($user_id, $course_id) {
+        DB::table('available_tutors')
+            ->where([
+                ['user_id', '=', $user_id],
+                ['course_id', '=', $course_id]
+            ])
+            ->delete();
+        return redirect('/user/edit/' . $user_id);
     }
 
     /**

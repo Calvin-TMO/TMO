@@ -32,6 +32,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/user/edit/{id}', 'UserController@edit');
     Route::post('/user/edit/{id}', 'UserController@update');
 
+    // User Roles, Courses Taught, and Courses Tutored
+    Route::post('/user_role/add/{id}', 'UserController@add_role');
+    Route::get('/user_role/delete/{user_id}/{role_id}', 'UserController@delete_role');
+    Route::post('/current_professor/add/{id}', 'UserController@add_current_professor');
+    Route::get('/current_professor/delete/{user_id}/{course_id}', 'UserController@delete_current_professor');
+    Route::post('/available_tutor/add/{id}', 'UserController@add_available_tutor');
+    Route::get('/available_tutor/delete/{user_id}/{course_id}', 'UserController@delete_available_tutor');
+
     // Courses
     Route::get('/courses', 'CourseController@index');
     Route::get('/course/add', 'CourseController@create');
