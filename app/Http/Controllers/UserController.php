@@ -142,10 +142,12 @@ class UserController extends Controller
     }
 
     public function add_role(Request $request, $id) {
-        DB::table('user_roles')->insert([
-            'user_id' => $id,
-            'role_id' => $request->role
-        ]);
+        if ($request->role != 0) {
+            DB::table('user_roles')->insert([
+                'user_id' => $id,
+                'role_id' => $request->role
+            ]);
+        }
         return redirect('/user/edit/' . $id);
     }
 
@@ -160,10 +162,12 @@ class UserController extends Controller
     }
 
     public function add_current_professor(Request $request, $id) {
-        DB::table('current_professors')->insert([
-            'user_id' => $id,
-            'course_id' => $request->course
-        ]);
+        if ($request->course != 0) {
+            DB::table('current_professors')->insert([
+                'user_id' => $id,
+                'course_id' => $request->course
+            ]);
+        }
         return redirect('/user/edit/' . $id);
     }
 
@@ -178,10 +182,12 @@ class UserController extends Controller
     }
 
     public function add_available_tutor(Request $request, $id) {
-        DB::table('available_tutors')->insert([
-            'user_id' => $id,
-            'course_id' => $request->course
-        ]);
+        if ($request->course != 0) {
+            DB::table('available_tutors')->insert([
+                'user_id' => $id,
+                'course_id' => $request->course
+            ]);
+        }
         return redirect('/user/edit/' . $id);
     }
 
