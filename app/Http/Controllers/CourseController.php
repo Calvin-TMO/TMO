@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Course as Course;
+use App\Role as Role;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -84,7 +86,9 @@ class CourseController extends Controller
     public function edit($id)
     {
         $data = array(
-            'course' => Course::find($id)
+            'course' => Course::find($id),
+            'professors' => Role::where('name', '=', 'professor')->first()->users,
+            'tutors' => Role::where('name', '=', 'tutor')->first()->users
             );
         return view('course_edit', $data);
     }
@@ -115,5 +119,46 @@ class CourseController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function add_professor(Request $request, $id) {
+        if ($request->professor != 0) {
+            DB::table('current_professors')->insert([
+                'user_id' => $request->professor,
+                'course_id' => $id
+            ]);
+        }
+        return redirect('/course/edit/' . $id);
+    }
+
+    public function delete_professor($course_id, $professor_id) {
+        DB::table('current_professors')
+            ->where([
+                ['user_id', '=', $professor_id],
+                ['course_id', '=', $course_id]
+            ])
+            ->delete();
+        return redirect('/course/edit/' . $course_id);
+    }
+
+    public function add_tutor(Request $request, $id) {
+        if ($request->tutor != 0) {
+            DB::table('available_tutors')->insert([
+                'user_id' => $request->tutor,
+                'course_id' => $id
+            ]);
+        }
+
+        return redirect('/course/edit/' . $id);
+    }
+
+    public function delete_tutor($course_id, $tutor_id) {
+        DB::table('available_tutors')
+            ->where([
+                ['user_id', '=', $tutor_id],
+                ['course_id', '=', $course_id]
+            ])
+            ->delete();
+        return redirect('/course/edit/' . $course_id);
     }
 }

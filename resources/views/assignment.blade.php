@@ -18,7 +18,12 @@
                 </div>
 
                 <div class="panel-body">
-                    <p>List of reports:</p>
+                    <div class="sublist">
+                        <div class="sublist-header">Reports</div>
+                        @foreach ($reports as $report)
+                            <div class="list-item"><a href="/report/{{ $report->id }}">{{ $report->submit_date }}</a></div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

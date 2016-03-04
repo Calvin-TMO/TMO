@@ -16,6 +16,44 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button type="button" onclick="location.href='/course/{{ $course->id }}'">Cancel</button>
                     </form>
+                    <div class="sublist">
+                        <div class="sublist-header">Professors:</div>
+                        @foreach ($course->professors as $professor)
+                            <div class="list-item">
+                                <button type="button" onclick="location.href='/course/professor/delete/{{ $course->id }}/{{ $professor->id }}'">Remove</button>
+                                {{ $professor->name }}
+                            </div>
+                        @endforeach
+                        <form class="sublist-add" method="POST" action="/course/professor/add/{{ $course->id }}">
+                            <select name="professor">
+                                <option value="">Select professor to add...</option>
+                                @foreach ($professors as $professor)
+                                    <option value="{{ $professor->id }}">{{ $professor->name }}</option>
+                                @endforeach
+                            </select>
+                            <input type="submit" value="Add New Professor">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        </form>
+                    </div>
+                    <div class="sublist">
+                        <div class="sublist-header">Tutors:</div>
+                        @foreach ($course->tutors as $tutor)
+                            <div class="list-item">
+                                <button type="button" onclick="location.href='/course/tutor/delete/{{ $course->id }}/{{ $tutor->id }}'">Remove</button>
+                                {{ $tutor->name }}
+                            </div>
+                        @endforeach
+                        <form class="sublist-add" method="POST" action="/course/tutor/add/{{ $course->id }}">
+                            <select name="tutor">
+                                <option value="">Select tutor to add...</option>
+                                @foreach ($tutors as $tutor)
+                                    <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
+                                @endforeach
+                            </select>
+                            <input type="submit" value="Add New Tutor">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

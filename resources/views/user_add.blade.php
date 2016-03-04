@@ -11,12 +11,6 @@
                     <form method="POST">
                         <div>Name: <input type="text" name="name"></div>
                         <div>Email: <input type="email" name="email"></div>
-                        <div>Role:<br>
-                            @foreach ($roles as $role)
-                                <input type="checkbox" name="roles[]" value="{{ $role->id }}">{{ $role->name }}</option>
-                            @endforeach
-                        </div>
-
                         <input type="submit" value="Save">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button type="button" onclick="location.href='/users'">Cancel</button>

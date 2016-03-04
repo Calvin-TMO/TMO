@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User as User;
 use App\Role as Role;
+use App\Course as Course;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use DB;
@@ -98,7 +99,8 @@ class UserController extends Controller
     {
         $data = array(
             'user' => User::find($id),
-            'roles' => Role::all()
+            'roles' => Role::all(),
+            'courses' => Course::all()
             );
         return view('user_edit', $data);
     }
@@ -139,23 +141,73 @@ class UserController extends Controller
         //
     }
 
+    public function add_role(Request $request, $id) {
+        if ($request->role != 0) {
+            DB::table('user_roles')->insert([
+                'user_id' => $id,
+                'role_id' => $request->role
+            ]);
+        }
+        return redirect('/user/edit/' . $id);
+    }
+
+    public function delete_role($user_id, $role_id) {
+        DB::table('user_roles')
+            ->where([
+                ['user_id', '=', $user_id],
+                ['role_id', '=', $role_id]
+            ])
+            ->delete();
+        return redirect('/user/edit/' . $user_id);
+    }
+
+    public function add_current_professor(Request $request, $id) {
+        if ($request->course != 0) {
+            DB::table('current_professors')->insert([
+                'user_id' => $id,
+                'course_id' => $request->course
+            ]);
+        }
+        return redirect('/user/edit/' . $id);
+    }
+
+    public function delete_current_professor($user_id, $course_id) {
+        DB::table('current_professors')
+            ->where([
+                ['user_id', '=', $user_id],
+                ['course_id', '=', $course_id]
+            ])
+            ->delete();
+        return redirect('/user/edit/' . $user_id);
+    }
+
+    public function add_available_tutor(Request $request, $id) {
+        if ($request->course != 0) {
+            DB::table('available_tutors')->insert([
+                'user_id' => $id,
+                'course_id' => $request->course
+            ]);
+        }
+        return redirect('/user/edit/' . $id);
+    }
+
+    public function delete_available_tutor($user_id, $course_id) {
+        DB::table('available_tutors')
+            ->where([
+                ['user_id', '=', $user_id],
+                ['course_id', '=', $course_id]
+            ])
+            ->delete();
+        return redirect('/user/edit/' . $user_id);
+    }
+
     /**
      * Get the list of Tutors.
      *
      * @return Response
      */
     public static function getTutors() {
-        $results = DB::table('users')
-            ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
-            ->join('roles', 'user_roles.role_id', '=', 'roles.id')
-            ->where('roles.name', '=', 'tutor')
-            ->select('users.id as id')
-            ->get();
-        $user_ids = array();
-        foreach ($results as $item) {
-            array_push($user_ids, $item->id);
-        }
-        return User::find($user_ids);
+        return Role::where('name', '=', 'tutor')->first()->users;
     }
 
     /**
@@ -195,16 +247,6 @@ class UserController extends Controller
      * @return Response
      */
     public static function getProfessors() {
-        $results = DB::table('users')
-            ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
-            ->join('roles', 'user_roles.role_id', '=', 'roles.id')
-            ->where('roles.name', '=', 'professor')
-            ->select('users.id as id')
-            ->get();
-        $user_ids = array();
-        foreach ($results as $item) {
-            array_push($user_ids, $item->id);
-        }
-        return User::find($user_ids);
+        return Role::where('name', '=', 'professor')->first()->users;
     }
 }
