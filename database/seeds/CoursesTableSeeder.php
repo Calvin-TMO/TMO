@@ -38,7 +38,7 @@ class CoursesTableSeeder extends Seeder
 
         DB::table('courses')->insert([
             'department' => 'CS',
-            'number' => '112',
+            'number' => '195',
             'description' => 'Introductory Computing Seminar'
         ]);
 
