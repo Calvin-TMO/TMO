@@ -28,5 +28,11 @@ class CurrentProfessorsTableSeeder extends Seeder
             'user_id' => $user->id,
             'course_id' => '2'
         ]);
+
+        $user = User::where('name', '=', 'Keith VanderLinden')->first();
+        DB::table('current_professors')->insert([
+            'user_id' => $user->id,
+            'course_id' => '5'
+        ]);
     }
 }

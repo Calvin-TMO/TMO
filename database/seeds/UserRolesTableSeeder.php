@@ -47,5 +47,17 @@ class UserRolesTableSeeder extends Seeder
             ['user_id' => $user->id,
              'role_id' => $role->id]
         );
+
+        $user = User::where('name', '=', 'Keith VanderLinden')->first();
+        $role = Role::where('name', '=', 'professor')->first();
+            ['user_id' => $user->id,
+            'role_id' => $role->id]
+        );
+
+        $user = User::where('name', '=', 'Benjamin Braker')->first();
+        $role = Role::where('name', '=', 'tutor')->first();
+            ['user_id' => $user->id,
+            'role_id' => $role->id]
+        );
     }
 }

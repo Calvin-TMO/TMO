@@ -31,5 +31,14 @@ class AssignmentsTableSeeder extends Seeder
             'tutor_id' => $tutor->id,
             'student_id' => $student->id
         ]);
+        
+        $professor = User::where('name', '=', 'Keith VanderLinden')->first();
+        $student = User::where('name', '=', 'Mark VanderStel')->first();
+        DB::table('assignments')->insert([
+            'course_id' => '5',
+            'professor_id' => $professor->id,
+            'tutor_id' => $tutor->id,
+            'student_id' => $student->id
+        ]);
     }
 }
