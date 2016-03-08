@@ -45,6 +45,12 @@ class CoursesTableSeeder extends Seeder
         DB::table('courses')->insert([
             'department' => 'CS',
             'number' => '112',
+            'description' => 'Intro to Data Structures & Algorithms'
+        ]);
+
+        DB::table('courses')->insert([
+            'department' => 'CS',
+            'number' => '212',
             'description' => 'Data Structures & Algorithms'
         ]);
 
