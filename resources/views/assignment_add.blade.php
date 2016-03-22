@@ -10,41 +10,50 @@
                 <div class="panel-body">
                     <form method="POST">
                         <div>Tutor:
-                            <select name="tutor">
+                            <select class="ui fluid search dropdown" name="tutor">
+                                <option value="">Tutor</option>
                                 @foreach ($tutors as $tutor)
                                     <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div>Student:
-                            <select name="student">
+                            <select class="ui fluid search dropdown" name="student">
+                                <option value="">Student</option>
                                 @foreach ($students as $student)
                                     <option value="{{ $student->id }}">{{ $student->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div>Course:
-                            <select name="course">
+                            <select class="ui fluid search dropdown" name="course">
+                                <option value="">Course</option>
                                 @foreach ($courses as $course)
                                     <option value="{{ $course->id }}">{{ $course->department }}-{{ $course->number }} {{ $course->description }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div>Professor:
-                            <select name="professor">
+                            <select class="ui fluid search dropdown" name="professor">
+                                <option value="">Professor</option>
                                 @foreach ($professors as $professor)
                                     <option value="{{ $professor->id }}">{{ $professor->name }}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        <input type="submit" value="Save">
+                        <button type="submit" class="ui primary button">Save</button>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button type="button" onclick="location.href='/assignments'">Cancel</button>
+                        <button type="button" class="ui button" onclick="location.href='/assignments'">Discard</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $('.ui.dropdown')
+        .dropdown()
+    ;
+</script>
 @endsection
