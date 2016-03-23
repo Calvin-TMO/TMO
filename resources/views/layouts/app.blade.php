@@ -88,8 +88,8 @@
 
     @yield('content')
 
-    <div class="footer">
+    <!--<div class="footer">
         <a href="https://laravel.com/">Powered by Laravel</a>
-    </div>
+    </div>-->
 </body>
 </html>
