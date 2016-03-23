@@ -9,12 +9,13 @@
 
                 <div class="panel-body">
                     <form method="POST">
-                        <div>Department: <input type="text" name="department"></div>
-                        <div>Course number: <input type="text" name="number"></div>
-                        <div>Course Description: <input type="text" name="description"></div>
-                        <input type="submit" value="Save">
+                        <div class="ui input"><input type="text" placeholder="Department" name="department"></div>
+                        <div class="ui input"><input type="text" placeholder="Course number" name="number"></div>
+                        <div class="ui input"><input type="text" placeholder="Course Description" name="description"></div>
+                        <br><div class="ui hidden divider"></div><br>
+                        <button type="submit" class="ui primary button">Save</button>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button type="button" onclick="location.href='/courses'">Cancel</button>
+                        <button type="button" class="ui button" onclick="location.href='/courses'">Discard</button>
                     </form>
                 </div>
             </div>

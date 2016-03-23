@@ -8,19 +8,40 @@
                 <div class="panel-heading">Assignments</div>
 
                 <div class="panel-body">
-                    <ul class="list">
+                    <button class="ui button" onclick="location.href='/assignment/add'">New Assignment</button>
+                    <table class="ui sortable selectable celled table">
+                        <thead>
+                            <tr>
+                                <th class="">Tutor</th>
+                                <th class="">Student</th>
+                                <th class="">Course</th>
+                                <th class="">Professor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         @foreach ($assignments as $assignment)
-                            <li><a href="/assignment/{{ $assignment->id }}"><div>
-                                Tutor: {{ $assignment->tutor->name }}<br>
-                                Student: {{ $assignment->student->name }}<br>
-                                Course: {{ $assignment->course->department }}-{{ $assignment->course->number }} {{ $assignment->course->description }}<br>
-                                Professor: {{ $assignment->professor->name }}</div></a></li>
+                            <tr class="clickable-row" data-href="/assignment/{{ $assignment->id }}">
+                                <td>{{ $assignment->tutor->name }}</td>
+                                <td>{{ $assignment->student->name }}</td>
+                                <td>{{ $assignment->course->department }}-{{ $assignment->course->number }} {{ $assignment->course->description }}</td>
+                                <td>{{ $assignment->professor->name }}</td>
+                            </tr>
                         @endforeach
-                    </ul>
-                    <button type="button" onclick="location.href='/assignment/add'">New Assignment</button>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.document.location = $(this).data("href");
+    });
+    $('.sortable.table')
+        .tablesort()
+    ;
+});
+</script>
 @endsection

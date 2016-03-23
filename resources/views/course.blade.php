@@ -7,11 +7,25 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Course: {{ $course->description }}</div>
                 <div class="panel-body">
-                    <div>Department: {{ $course->department }}</div>
-                    <div>Course number: {{ $course->number }}</div>
-                    <div>Course description: {{ $course->description }}</div>
-                    <button type="button" onclick="location.href = '/course/edit/{{ $course->id }}';">Edit</button>
-                    <button type="button" onclick="location.href = '/courses';">Back</button>
+                    <table class="ui celled table">
+                        <thead>
+                            <tr>
+                                <th class="">Department</th>
+                                <th class="">Course Number</th>
+                                <th class="">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ $course->department }}</td>
+                                <td>{{ $course->number }}</td>
+                                <td>{{ $course->description }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <button type="button" class="ui button" onclick="location.href = '/course/edit/{{ $course->id }}';">Edit</button>
+                    <button type="button" class="ui button" onclick="location.href = '/courses';">Back</button>
                     @if ($course->professors()->first())
                         <div class="sublist">
                             <div class="sublist-header">Professors:</div>

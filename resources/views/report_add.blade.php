@@ -16,7 +16,7 @@
                         <div>End Time:</div>
                         <input type="time" name="session_end">
                         <div>Topic:</div>
-                        <input type="text" name="topic"">
+                        <input type="text" name="topic">
                         <div>Response:</div>
                         <input type="text" name="response">
                         <div>Plans:</div>
@@ -26,9 +26,9 @@
                         <div>Comments:</div>
                         <input type="text" name="comments">
                         <br></br>
-                        <input type="submit" value="Save">
+                        <button type="submit" class="ui primary button">Save</button>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button type="button" onclick="location.href='/assignment/{{ $assignment_id }}'">Back</button>
+                        <button type="button" class="ui button" onclick="location.href='/assignment/{{ $assignment_id }}'">Discard</button>
                     </form>
                 </div>
             </div>

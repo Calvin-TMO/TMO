@@ -9,11 +9,12 @@
 
                 <div class="panel-body">
                     <form method="POST">
-                        <div>Name: <input type="text" name="name"></div>
-                        <div>Email: <input type="email" name="email"></div>
-                        <input type="submit" value="Save">
+                        <div class="ui input"><input type="text" placeholder="Name" name="name"></div>
+                        <div class="ui input"><input type="text" placeholder="Email" name="email"></div>
+                        <br><div class="ui hidden divider"></div><br>
+                        <button type="submit" class="ui primary button">Save</button>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button type="button" onclick="location.href='/users'">Cancel</button>
+                        <button type="button" class="ui button" onclick="location.href='/users'">Discard</button>
                     </form>
                 </div>
             </div>
