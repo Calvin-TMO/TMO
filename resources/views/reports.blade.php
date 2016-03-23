@@ -7,14 +7,41 @@
             <div class="panel panel-default">
                 <div class="panel-heading">All Reports</div>
                 <div class="panel-body">
-                    <ul class="list">
+                    <table class="ui sortable selectable celled table">
+                        <thead>
+                            <tr>
+                                <th class="">Tutor</th>
+                                <th class="">Student</th>
+                                <th class="">Course</th>
+                                <th class="">Submit Date</th>
+                                <th class="">Topic</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         @foreach ($reports as $report)
-                            <li><a href="/report/{{ $report->id }}"><div>{{ $report->assignment->tutor->name }} {{ $report->assignment->course->description }} {{ $report->submit_date }} {{ $report->topic }}</div></a></li>
+                            <tr class="clickable-row" data-href="/report/{{ $report->id }}">
+                                <td>{{ $report->assignment->tutor->name }}</td>
+                                <td>{{ $report->assignment->student->name }}</td>
+                                <td>{{ $report->assignment->course->description }}</td>
+                                <td>{{ $report->submit_date }}</td>
+                                <td>{{ $report->topic }}</td>
+                            </tr>
                         @endforeach
-                    </ul>
+                        </tbody>
+                    </table>
                </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.document.location = $(this).data("href");
+    });
+    $('.sortable.table')
+        .tablesort()
+    ;
+});
+</script>
 @endsection

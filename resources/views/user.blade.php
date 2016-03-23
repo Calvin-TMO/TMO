@@ -8,10 +8,24 @@
                 <div class="panel-heading">User: {{ $user->name }}</div>
 
                 <div class="panel-body">
-                    <div>Name: {{ $user->name }}</div>
-                    <div>Email: {{ $user->email }}</div>
-                    <button type="button" onclick="location.href = '/user/edit/{{ $user->id }}';">Edit</button>
-                    <button type="button" onclick="location.href = '/users';">Back</button>
+                    <table class="ui celled table">
+                        <thead>
+                            <tr>
+                                <th class="">Name</th>
+                                <th class="">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <button type="button" class="ui button" onclick="location.href = '/user/edit/{{ $user->id }}';">Edit</button>
+                    <button type="button" class="ui button" onclick="location.href = '/users';">Back</button>
                     @if ($user->roles()->first())
                         <div class="sublist">
                             <div class="sublist-header">Roles:</div>
@@ -24,7 +38,7 @@
                         <div class="sublist">
                             <div class="sublist-header">Courses Teaching:</div>
                             @foreach ($user->courses_taught as $course)
-                                <div class="list-item">{{ $course->department }}{{ $course->number }}</div>
+                                <div class="list-item">{{ $course->department }}-{{ $course->number }}</div>
                             @endforeach
                         </div>
                     @endif
@@ -32,7 +46,7 @@
                         <div class="sublist">
                             <div class="sublist-header">Courses Tutoring:</div>
                             @foreach ($user->courses_tutored as $course)
-                                <div class="list-item">{{ $course->department }}{{ $course->number }}</div>
+                                <div class="list-item">{{ $course->department }}-{{ $course->number }}</div>
                             @endforeach
                         </div>
                     @endif

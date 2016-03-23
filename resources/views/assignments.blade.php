@@ -8,6 +8,7 @@
                 <div class="panel-heading">Assignments</div>
 
                 <div class="panel-body">
+                    <button class="ui button" onclick="location.href='/assignment/add'">New Assignment</button>
                     <table class="ui sortable selectable celled table">
                         <thead>
                             <tr>
@@ -24,11 +25,10 @@
                                 <td>{{ $assignment->student->name }}</td>
                                 <td>{{ $assignment->course->department }}-{{ $assignment->course->number }} {{ $assignment->course->description }}</td>
                                 <td>{{ $assignment->professor->name }}</td>
-                            </a></tr>
+                            </tr>
                         @endforeach
                         </tbody>
                     </table>
-                    <button class="ui button" onclick="location.href='/assignment/add'">New Assignment</button>
                 </div>
             </div>
         </div>

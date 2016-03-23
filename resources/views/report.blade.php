@@ -18,8 +18,8 @@
                     <div>Student Plans: {{ $report->student_plans }}</div>
                     <div>Comments: {{ $report->comments }}</div>
 
-                    <button type="button" onclick="location.href = '/report/edit/{{ $report->id }}';">Edit</button>
-                    <button type="button" onclick="location.href = '/reports';">Back</button>
+                    <button type="button" class="ui button" onclick="location.href = '/report/edit/{{ $report->id }}';">Edit</button>
+                    <button type="button" class="ui button" onclick="location.href = '/reports';">Back</button>
                 </div>
             </div>
         </div>
