@@ -142,3 +142,7 @@ nav.navbar {
 .sublist-add>input[type=submit] {
   float: right;
 }
+
+.stretched {
+  width:100%;
+}
