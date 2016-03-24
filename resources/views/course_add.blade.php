@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
                     <form method="POST">
-                        <div class="ui input"><input type="text" placeholder="Department" name="department"></div>
+                        <div class="ui input"><input type="text" placeholder="Department" name="department" autofocus></div>
                         <div class="ui input"><input type="text" placeholder="Course number" name="number"></div>
                         <div class="ui input"><input type="text" placeholder="Course Description" name="description"></div>
                         <br><div class="ui hidden divider"></div><br>

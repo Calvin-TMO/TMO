@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
                     <form method="POST">
-                        <div class="ui input"><input type="text" placeholder="Name" name="name"></div>
+                        <div class="ui input"><input type="text" placeholder="Name" name="name" autofocus></div>
                         <div class="ui input"><input type="text" placeholder="Email" name="email"></div>
                         <br><div class="ui hidden divider"></div><br>
                         <button type="submit" class="ui primary button">Save</button>
