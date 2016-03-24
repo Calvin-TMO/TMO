@@ -57,4 +57,8 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function comments() {
+        return $this->hasMany('App\Comment', 'author_id');
+    }
 }

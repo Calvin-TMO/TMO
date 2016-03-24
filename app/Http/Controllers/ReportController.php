@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon;
 use App\Report as Report;
+use App\Comment as Comment;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class ReportController extends Controller
@@ -118,4 +121,21 @@ class ReportController extends Controller
         return redirect('/report/' . $id);
     }
 
+    public function addComment(Request $request, $id) {
+        if ($request->comment_text != '') {
+            $comment = new Comment;
+            $comment->report_id = $id;
+            $comment->author_id = Auth::user()->id;
+            $comment->posted_date = Carbon\Carbon::now();
+            $comment->comment_text = $request->comment_text;
+            $comment->save();
+        }
+
+        return redirect('/report/' . $id);
+    }
+
+    public function removeComment($report_id, $comment_id) {
+        Comment::find($comment_id)->delete();
+        return redirect('/report/'. $report_id);
+    }
 }
