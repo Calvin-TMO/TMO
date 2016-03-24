@@ -7,6 +7,7 @@ use App\User as User;
 use App\Course as Course;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class AssignmentController extends Controller
@@ -29,7 +30,9 @@ class AssignmentController extends Controller
     public function index()
     {
         $data = array(
-            'assignments' => Assignment::all()
+            'assignments' => Assignment::all(),
+            'tutor_assignments' => Auth::user()->tutor_assignments,
+            'professor_assignments' => Auth::user()->professor_assignments
             );
         return view('assignments', $data);
     }
@@ -41,6 +44,9 @@ class AssignmentController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->hasRole('admin')) {
+            return redirect('/assignments');
+        }
         $data = array(
             'courses' => Course::all(),
             'tutors' => UserController::getTutors(),
@@ -84,11 +90,19 @@ class AssignmentController extends Controller
      */
     public function show($id)
     {
-        $data = array(
-            'assignment' => Assignment::find($id),
-            'reports' => Assignment::find($id)->reports
-            );
-        return view('assignment', $data);
+        $user = Auth::user();
+        $assignment = Assignment::find($id);
+        if ($user->hasRole('admin')
+            || ($user->hasRole('tutor') && $user->id == $assignment->tutor_id)
+            || ($user->hasRole('professor') && $user->id == $assignment->professor_id))
+        {
+            $data = array(
+                'assignment' => $assignment,
+                'reports' => $assignment->reports
+                );
+            return view('assignment', $data);
+        }
+        return redirect('/assignments');
     }
 
     /**
@@ -99,14 +113,22 @@ class AssignmentController extends Controller
      */
     public function edit($id)
     {
-        $data = array(
-            'assignment' => Assignment::find($id),
-            'courses' => Course::all(),
-            'tutors' => UserController::getTutors(),
-            'students' => UserController::getStudents(),
-            'professors' => UserController::getProfessors()
-        );
-        return view('assignment_edit', $data);
+        $user = Auth::user();
+        $assignment = Assignment::find($id);
+        if ($user->hasRole('admin')
+            || ($user->hasRole('tutor') && $user->id == $assignment->tutor_id)
+            || ($user->hasRole('professor') && $user->id == $assignment->professor_id))
+        {
+            $data = array(
+                'assignment' => $assignment,
+                'courses' => Course::all(),
+                'tutors' => UserController::getTutors(),
+                'students' => UserController::getStudents(),
+                'professors' => UserController::getProfessors()
+            );
+            return view('assignment_edit', $data);
+        }
+        return redirect('/assignments');
     }
 
     /**

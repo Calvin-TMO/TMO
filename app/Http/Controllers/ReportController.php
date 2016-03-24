@@ -30,8 +30,27 @@ class ReportController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
+        $reports = [];
+        if ($user->hasRole('admin')) {
+            $reports = Report::all();
+        }
+        else if ($user->hasRole('tutor')) {
+            foreach ($user->tutor_assignments as $assignment) {
+                foreach ($assignment->reports as $report) {
+                    array_push($reports, $report);
+                }
+            }
+        }
+        else if ($user->hasRole('professor')) {
+            foreach ($user->professor_assignments as $assignment) {
+                foreach ($assignment->reports as $report) {
+                    array_push($reports, $report);
+                }
+            }
+        }
         $data = array(
-            'reports' => Report::all()
+            'reports' => $reports
             );
         return view('reports', $data);
     }
@@ -79,10 +98,19 @@ class ReportController extends Controller
      */
     public function show($id)
     {
-        $data = array(
-            'report' => Report::find($id)
-            );
-        return view('report', $data);
+        $user = Auth::user();
+        $report = Report::find($id);
+        $assignment = $report->assignment;
+        if ($user->hasRole('admin')
+            || ($user->hasRole('tutor') && $user->id == $assignment->tutor_id)
+            || ($user->hasRole('professor') && $user->id == $assignment->professor_id))
+        {
+            $data = array(
+                'report' => Report::find($id)
+                );
+            return view('report', $data);
+        }
+        return redirect('/reports');
     }
 
     /**
@@ -93,10 +121,20 @@ class ReportController extends Controller
      */
     public function edit($id)
     {
-        $data = array(
-            'report' => Report::find($id)
-            );
-        return view('report_edit', $data);
+
+        $user = Auth::user();
+        $report = Report::find($id);
+        $assignment = $report->assignment;
+        if ($user->hasRole('admin')
+            || ($user->hasRole('tutor') && $user->id == $assignment->tutor_id)
+            || ($user->hasRole('professor') && $user->id == $assignment->professor_id))
+        {
+            $data = array(
+                'report' => Report::find($id)
+                );
+            return view('report_edit', $data);
+        }
+        return redirect('/reports');
     }
 
     /**
