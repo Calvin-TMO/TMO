@@ -88,6 +88,12 @@
 
     @yield('content')
 
+    <script type="text/javascript">
+        $('.sortable.table')
+            .tablesort()
+        ;
+    </script>
+
     <!--<div class="footer">
         <a href="https://laravel.com/">Powered by Laravel</a>
     </div>-->

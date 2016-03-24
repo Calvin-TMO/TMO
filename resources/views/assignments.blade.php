@@ -21,7 +21,7 @@
                             </thead>
                             <tbody>
                             @foreach ($assignments as $assignment)
-                                <tr class="clickable-row" data-href="/assignment/{{ $assignment->id }}">
+                                <tr onclick="location.href='/assignment/{{ $assignment->id }}'" style="cursor: pointer;">
                                     <td>{{ $assignment->tutor->name }}</td>
                                     <td>{{ $assignment->student->name }}</td>
                                     <td>{{ $assignment->course->department }}-{{ $assignment->course->number }} {{ $assignment->course->description }}</td>
@@ -42,7 +42,7 @@
                             </thead>
                             <tbody>
                             @foreach ($tutor_assignments as $assignment)
-                                <tr class="clickable-row" data-href="/assignment/{{ $assignment->id }}">
+                                <tr onclick="location.href='/assignment/{{ $assignment->id }}'" style="cursor: pointer;">
                                     <td>{{ $assignment->student->name }}</td>
                                     <td>{{ $assignment->course->department }}-{{ $assignment->course->number }} {{ $assignment->course->description }}</td>
                                     <td>{{ $assignment->professor->name }}</td>
@@ -62,7 +62,7 @@
                             </thead>
                             <tbody>
                             @foreach ($professor_assignments as $assignment)
-                                <tr class="clickable-row" data-href="/assignment/{{ $assignment->id }}">
+                                <tr onclick="location.href='/assignment/{{ $assignment->id }}'" style="cursor: pointer;">
                                     <td>{{ $assignment->tutor->name }}</td>
                                     <td>{{ $assignment->student->name }}</td>
                                     <td>{{ $assignment->course->department }}-{{ $assignment->course->number }} {{ $assignment->course->description }}</td>
@@ -76,14 +76,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
-        window.document.location = $(this).data("href");
-    });
-    $('.sortable.table')
-        .tablesort()
-    ;
-});
-</script>
 @endsection

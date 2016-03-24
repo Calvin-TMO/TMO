@@ -19,7 +19,7 @@
                         </thead>
                         <tbody>
                         @foreach ($courses as $course)
-                            <tr class="clickable-row" data-href="/course/{{ $course->id }}">
+                            <tr onclick="location.href='/course/{{ $course->id }}'" style="cursor: pointer;">
                                 <td>{{ $course->department }}</td>
                                 <td>{{ $course->number }}</td>
                                 <td>{{ $course->description }}</td>
@@ -32,14 +32,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
-        window.document.location = $(this).data("href");
-    });
-    $('.sortable.table')
-        .tablesort()
-    ;
-});
-</script>
 @endsection
