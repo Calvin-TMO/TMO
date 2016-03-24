@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon;
 use App\Report as Report;
+use App\Comment as Comment;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class ReportController extends Controller
@@ -118,4 +121,35 @@ class ReportController extends Controller
         return redirect('/report/' . $id);
     }
 
+    /**
+     * Create a comment for the report with the given id for the current user and current time.
+     *
+     * @param  Request  $request
+     * @param  int  $id
+     * @return Response
+     */
+    public function addComment(Request $request, $id) {
+        if ($request->comment_text != '') {
+            $comment = new Comment;
+            $comment->report_id = $id;
+            $comment->author_id = Auth::user()->id;
+            $comment->posted_date = Carbon\Carbon::now();
+            $comment->comment_text = $request->comment_text;
+            $comment->save();
+        }
+
+        return redirect('/report/' . $id);
+    }
+
+    /**
+     * Remove the specified comment from storage and redirect to the specified report.
+     *
+     * @param  int  $report_id
+     * @param  int  $comment_id
+     * @return Response
+     */
+    public function removeComment($report_id, $comment_id) {
+        Comment::find($comment_id)->delete();
+        return redirect('/report/'. $report_id);
+    }
 }

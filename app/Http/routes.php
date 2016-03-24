@@ -67,4 +67,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/report/{id}', 'ReportController@show');
     Route::get('/report/edit/{id}', 'ReportController@edit');
     Route::post('/report/edit/{id}', 'ReportController@update');
+    Route::post('/report/comment/add/{report_id}', 'ReportController@addComment');
+    Route::get('/report/comment/delete/{report_id}/{comment_id}', 'ReportController@removeComment');
 });
