@@ -38,7 +38,7 @@
                     <table class="ui sortable selectable celled table">
                         <thead>
                             <tr>
-                                <th class="">Submit Date</th>
+                                <th class="default-sort desc">Submit Date</th>
                                 <th class="">Topic</th>
                             </tr>
                         </thead>

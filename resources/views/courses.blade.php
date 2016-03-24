@@ -13,7 +13,7 @@
                         <thead>
                             <tr>
                                 <th class="">Department</th>
-                                <th class="">Course Number</th>
+                                <th class="default-sort asc">Course Number</th>
                                 <th class="">Description</th>
                             </tr>
                         </thead>

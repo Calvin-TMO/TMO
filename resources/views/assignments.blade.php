@@ -13,7 +13,7 @@
                         <table class="ui sortable selectable celled table">
                             <thead>
                                 <tr>
-                                    <th class="">Tutor</th>
+                                    <th class="default-sort asc">Tutor</th>
                                     <th class="">Student</th>
                                     <th class="">Course</th>
                                     <th class="">Professor</th>
