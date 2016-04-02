@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Redirect;
 use App\User as User;
 use App\Role as Role;
 use App\Course as Course;
@@ -183,68 +184,68 @@ class AdminController extends Controller
      * Add the request course to the specifed professor.
      *
      * @param  Request  $request
-     * @param  int  $professor_id
      * @return Response
      */
-    public function add_professor_course(Request $request, $professor_id) {
-        if ($request->course != 0) {
+    public function add_course_professor(Request $request) {
+        if ($request->course != 0 && $request->professor != 0) {
             DB::table('current_professors')->insert([
-                'user_id' => $professor_id,
+                'user_id' => $request->professor,
                 'course_id' => $request->course
             ]);
         }
-        return redirect('/user/edit/' . $professor_id);
+        return Redirect::back()->with('success', 'Professor added to course.');
     }
 
     /**
      * Remove the specified course from the specified professor.
      *
-     * @param  int  $professor_id
-     * @param  int  $course_id
+     * @param  Request $request
      * @return Response
      */
-    public function delete_professor_course($professor_id, $course_id) {
-        DB::table('current_professors')
-            ->where([
-                ['user_id', '=', $professor_id],
-                ['course_id', '=', $course_id]
-            ])
-            ->delete();
-        return redirect('/user/edit/' . $professor_id);
+    public function delete_course_professor(Request $request) {
+        if ($request->course != 0 && $request->professor != 0) {
+            DB::table('current_professors')
+                ->where([
+                    ['user_id', '=', $request->professor],
+                    ['course_id', '=', $request->course]
+                ])
+                ->delete();
+        }
+        return Redirect::back()->with('success', 'Professor removed from course.');
     }
 
     /**
      * Add the request course to the specifed tutor.
      *
      * @param  Request  $request
-     * @param  int  $tutor_id
      * @return Response
      */
-    public function add_tutor_course(Request $request, $tutor_id) {
-        if ($request->course != 0) {
+    public function add_course_tutor(Request $request) {
+        if ($request->course != 0 && $request->tutor != 0) {
             DB::table('available_tutors')->insert([
-                'user_id' => $tutor_id,
+                'user_id' => $request->tutor,
                 'course_id' => $request->course
             ]);
         }
-        return redirect('/user/edit/' . $tutor_id);
+        return Redirect::back()->with('success', 'Tutor added to course.');
     }
 
     /**
      * Remove the specified course from the specified tutor.
      *
-     * @param  int  $tutor_id
-     * @param  int  $course_id
+     * @param  Request $request
      * @return Response
      */
-    public function delete_tutor_course($tutor_id, $course_id) {
-        DB::table('available_tutors')
-            ->where([
-                ['user_id', '=', $tutor_id],
-                ['course_id', '=', $course_id]
-            ])
-            ->delete();
-        return redirect('/user/edit/' . $tutor_id);
+    public function delete_course_tutor(Request $request) {
+        if ($request->course != 0 && $request->tutor != 0) {
+            DB::table('available_tutors')
+                ->where([
+                    ['user_id', '=', $request->tutor],
+                    ['course_id', '=', $request->course]
+                ])
+                ->delete();
+        }
+        return Redirect::back()->with('success', 'Tutor removed from course.');
     }
 
     /**

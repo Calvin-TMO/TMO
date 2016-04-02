@@ -63,14 +63,19 @@
                                 <div class="ui grid">
                                     <div class="ten wide column">{{ $course->department }}-{{ $course->number }}</div>
                                     <div class="right floated right aligned four wide column">
-                                        <button type="button" class="ui icon button" onclick="location.href='/professor/course/delete/{{ $user->id }}/{{ $course->id }}'">
-                                            <i class="remove icon"></i>
-                                        </button>
+                                        <form method="POST" action="/course/professor/delete">
+                                            <input type="hidden" name="course" value="{{ $course->id }}">
+                                            <input type="hidden" name="professor" value="{{ $user->id }}">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <button type="submit" class="ui icon button">
+                                                <i class="remove icon"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                        <form class="sublist-add" method="POST" action="/professor/course/add/{{ $user->id }}">
+                        <form class="sublist-add" method="POST" action="/course/professor/add">
                             <div class="ui grid">
                                 <div class="ten wide column">
                                     <select class="ui fluid search dropdown" name="course">
@@ -80,6 +85,7 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <input type="hidden" name="professor" value="{{ $user->id }}">
                                 <div class="right floated right aligned four wide column">
                                     <button class="ui button" type="submit">Add Course Taught</button>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -96,14 +102,19 @@
                                 <div class="ui grid">
                                     <div class="ten wide column">{{ $course->department }}-{{ $course->number }}</div>
                                     <div class="right floated right aligned four wide column">
-                                        <button type="button" class="ui icon button" onclick="location.href='/tutor/course/delete/{{ $user->id }}/{{ $course->id }}'">
-                                            <i class="remove icon"></i>
-                                        </button>
+                                        <form method="POST" action="/course/tutor/delete">
+                                            <input type="hidden" name="course" value="{{ $course->id }}">
+                                            <input type="hidden" name="tutor" value="{{ $user->id }}">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <button type="submit" class="ui icon button">
+                                                <i class="remove icon"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                        <form class="sublist-add" method="POST" action="/tutor/course/add/{{ $user->id }}">
+                        <form class="sublist-add" method="POST" action="/course/tutor/add">
                             <div class="ui grid">
                                 <div class="ten wide column">
                                     <select class="ui fluid search dropdown" name="course">
@@ -113,6 +124,7 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <input type="hidden" name="tutor" value="{{ $user->id }}">
                                 <div class="right floated right aligned four wide column">
                                     <button class="ui button" type="submit">Add Course Tutored</button>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
