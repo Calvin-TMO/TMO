@@ -88,6 +88,17 @@
 
     @yield('content')
 
+    <script type="text/javascript">
+        var table = $('.sortable.table').tablesort().data('tablesort');
+        if ($("th.default-sort.asc")[0]) {
+            // Passing in the sort type does not work for some reason, so we just sort twice
+            table.sort($("th.default-sort.asc"));
+            table.sort($("th.default-sort.asc"));
+        } else if ($("th.default-sort.desc")[0]) {
+            table.sort($("th.default-sort.desc"));
+        }
+    </script>
+
     <!--<div class="footer">
         <a href="https://laravel.com/">Powered by Laravel</a>
     </div>-->

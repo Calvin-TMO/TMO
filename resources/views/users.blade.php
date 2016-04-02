@@ -12,7 +12,7 @@
                     <table class="ui sortable celled table">
                         <thead>
                             <tr>
-                                <th class="">Name</th>
+                                <th class="default-sort asc">Name</th>
                                 <th class="">Email</th>
                             </tr>
                         </thead>

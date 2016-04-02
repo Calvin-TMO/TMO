@@ -38,13 +38,13 @@
                     <table class="ui sortable selectable celled table">
                         <thead>
                             <tr>
-                                <th class="">Submit Date</th>
+                                <th class="default-sort desc">Submit Date</th>
                                 <th class="">Topic</th>
                             </tr>
                         </thead>
                         <tbody>
                         @foreach ($reports as $report)
-                            <tr class="clickable-row" data-href="/report/{{ $report->id }}">
+                            <tr onclick="location.href='/report/{{ $report->id }}'" style="cursor: pointer;">
                                 <td>{{ $report->submit_date }}</td>
                                 <td>{{ $report->topic }}</td>
                             </tr>
@@ -56,14 +56,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
-        window.document.location = $(this).data("href");
-    });
-    $('.sortable.table')
-        .tablesort()
-    ;
-});
-</script>
 @endsection

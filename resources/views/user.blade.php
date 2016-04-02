@@ -38,7 +38,7 @@
                         <div class="sublist">
                             <div class="sublist-header">Courses Teaching:</div>
                             @foreach ($user->courses_taught as $course)
-                                <div class="list-item">{{ $course->department }}-{{ $course->number }}</div>
+                                <div class="list-item"><a href="/course/{{ $course->id }}">{{ $course->department }}-{{ $course->number }}</a></div>
                             @endforeach
                         </div>
                     @endif
@@ -46,7 +46,7 @@
                         <div class="sublist">
                             <div class="sublist-header">Courses Tutoring:</div>
                             @foreach ($user->courses_tutored as $course)
-                                <div class="list-item">{{ $course->department }}-{{ $course->number }}</div>
+                                <div class="list-item"><a href="/course/{{ $course->id }}">{{ $course->department }}-{{ $course->number }}</a></div>
                             @endforeach
                         </div>
                     @endif

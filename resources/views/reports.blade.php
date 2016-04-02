@@ -13,13 +13,13 @@
                                 <th class="">Tutor</th>
                                 <th class="">Student</th>
                                 <th class="">Course</th>
-                                <th class="">Submit Date</th>
+                                <th class="default-sort desc">Submit Date</th>
                                 <th class="">Topic</th>
                             </tr>
                         </thead>
                         <tbody>
                         @foreach ($reports as $report)
-                            <tr class="clickable-row" data-href="/report/{{ $report->id }}">
+                            <tr onclick="location.href='/report/{{ $report->id }}'" style="cursor: pointer;">
                                 <td>{{ $report->assignment->tutor->name }}</td>
                                 <td>{{ $report->assignment->student->name }}</td>
                                 <td>{{ $report->assignment->course->description }}</td>
@@ -34,14 +34,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
-        window.document.location = $(this).data("href");
-    });
-    $('.sortable.table')
-        .tablesort()
-    ;
-});
-</script>
 @endsection

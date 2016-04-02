@@ -17,6 +17,10 @@
                     <div>Plans: {{ $report->plans }}</div>
                     <div>Student Plans: {{ $report->student_plans }}</div>
                     <div>Comments: {{ $report->comments }}</div>
+
+                    <button type="button" class="ui button" onclick="location.href = '/report/edit/{{ $report->id }}';">Edit</button>
+                    <button type="button" class="ui button" onclick="location.href = '/reports';">Back</button>
+
                     <div class="sublist">
                         <div class="sublist-header">Additional Comments:</div>
                         <table class="ui celled table">
@@ -24,7 +28,7 @@
                         @foreach ($report->additional_comments as $comment)
                             <tr>
                                 <td>{{ $comment->posted_date }}</td>
-                                <td>{{ $comment->author->name }}</td>
+                                <td class="selectable"><a href="/user/{{ $comment->author->id }}">{{ $comment->author->name }}</a></td>
                                 <td>{{ $comment->comment_text }}</td>
 			        <td><button type="button" class="ui icon button" onclick="location.href='/report/comment/delete/{{ $report->id }}/{{ $comment->id }}'">
                                             <i class="remove icon"></i>
@@ -45,9 +49,6 @@
                             </div>
                         </form>
                     </div>
-
-                    <button type="button" class="ui button" onclick="location.href = '/report/edit/{{ $report->id }}';">Edit</button>
-                    <button type="button" class="ui button" onclick="location.href = '/reports';">Back</button>
                 </div>
             </div>
         </div>
