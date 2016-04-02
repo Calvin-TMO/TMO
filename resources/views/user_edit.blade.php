@@ -31,14 +31,14 @@
                                 <div class="ui grid">
                                     <div class="ten wide column">{{ $role->name }}</div>
                                     <div class="right floated right aligned four wide column">
-                                        <button type="button" class="ui icon button" onclick="location.href='/user_role/delete/{{ $user->id }}/{{ $role->id }}'">
+                                        <button type="button" class="ui icon button" onclick="location.href='/user/role/delete/{{ $user->id }}/{{ $role->id }}'">
                                             <i class="remove icon"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                        <form class="sublist-add" method="POST" action="/user_role/add/{{ $user->id }}">
+                        <form class="sublist-add" method="POST" action="/user/role/add/{{ $user->id }}">
                             <div class="ui grid">
                                 <div class="ten wide column">
                                     <select class="ui fluid dropdown" name="role">
@@ -63,14 +63,14 @@
                                 <div class="ui grid">
                                     <div class="ten wide column">{{ $course->department }}-{{ $course->number }}</div>
                                     <div class="right floated right aligned four wide column">
-                                        <button type="button" class="ui icon button" onclick="location.href='/current_professor/delete/{{ $user->id }}/{{ $course->id }}'">
+                                        <button type="button" class="ui icon button" onclick="location.href='/professor/course/delete/{{ $user->id }}/{{ $course->id }}'">
                                             <i class="remove icon"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                        <form class="sublist-add" method="POST" action="/current_professor/add/{{ $user->id }}">
+                        <form class="sublist-add" method="POST" action="/professor/course/add/{{ $user->id }}">
                             <div class="ui grid">
                                 <div class="ten wide column">
                                     <select class="ui fluid search dropdown" name="course">
@@ -96,14 +96,14 @@
                                 <div class="ui grid">
                                     <div class="ten wide column">{{ $course->department }}-{{ $course->number }}</div>
                                     <div class="right floated right aligned four wide column">
-                                        <button type="button" class="ui icon button" onclick="location.href='/available_tutor/delete/{{ $user->id }}/{{ $course->id }}'">
+                                        <button type="button" class="ui icon button" onclick="location.href='/tutor/course/delete/{{ $user->id }}/{{ $course->id }}'">
                                             <i class="remove icon"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                        <form class="sublist-add" method="POST" action="/available_tutor/add/{{ $user->id }}">
+                        <form class="sublist-add" method="POST" action="/tutor/course/add/{{ $user->id }}">
                             <div class="ui grid">
                                 <div class="ten wide column">
                                     <select class="ui fluid search dropdown" name="course">
