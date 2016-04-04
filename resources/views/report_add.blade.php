@@ -25,15 +25,15 @@
                         <div>End Time:</div>
                         <input type="time" name="session_end">
                         <div>What we worked on this session:</div>
-                        <input type="text" name="topic">
+                        <textarea class="ui fluid stretched" name="topic"></textarea>
                         <div>How the student is responding:</div>
-                        <input type="text" name="response">
+                        <textarea class="ui fluid stretched" name="response"></textarea>
                         <div>My plans to prepare for next session:</div>
-                        <input type="text" name="plans">
+                        <textarea class="ui fluid stretched" name="plans"></textarea>
                         <div>Student plans to prepare for next session:</div>
-                        <input type="text" name="student_plans">
+                        <textarea class="ui fluid stretched" name="student_plans"></textarea>
                         <div>Comments about how the session went:</div>
-                        <input type="text" name="comments">
+                        <textarea class="ui fluid stretched" name="comments"></textarea>
                         <br></br>
                         <button type="submit" class="ui primary button">Save</button>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
