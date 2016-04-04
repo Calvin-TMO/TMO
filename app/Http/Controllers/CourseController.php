@@ -102,6 +102,17 @@ class CourseController extends Controller
                 );
             return view('course_add', $data);
         }
+
+        if ($request->department == "" || $request->number == "" || $request->description == "") {
+            $data = array(
+                'errors' => 'All fields are required. Please fill them out.',
+                'old_department' => $request->department,
+                'old_number' => $request->number,
+                'old_description' => $request->description
+                );
+            return view('course_add', $data);
+        }
+
         $course = new Course;
         $course->department = $request->department;
         $course->number = $request->number;
