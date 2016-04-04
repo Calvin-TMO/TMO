@@ -8,10 +8,11 @@
                 <div class="panel-heading">New Course</div>
 
                 <div class="panel-body">
+                    <div class="error" @if ($errors) style="display:block" @endif>{{ $errors }}</div>
                     <form method="POST">
-                        <div class="ui input"><input type="text" placeholder="Department" name="department" autofocus></div>
-                        <div class="ui input"><input type="text" placeholder="Course number" name="number"></div>
-                        <div class="ui input"><input type="text" placeholder="Course Description" name="description"></div>
+                        <div class="ui input"><input type="text" placeholder="Department" name="department" autofocus value="{{ $old_department }}"></div>
+                        <div class="ui input"><input type="text" placeholder="Course number" name="number" value="{{ $old_number }}"></div>
+                        <div class="ui input"><input type="text" placeholder="Course Description" name="description" value="{{ $old_description }}"></div>
                         <br><div class="ui hidden divider"></div><br>
                         <button type="submit" class="ui primary button">Save</button>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">

@@ -31,14 +31,19 @@
                                 <div class="ui grid">
                                     <div class="ten wide column">{{ $role->name }}</div>
                                     <div class="right floated right aligned four wide column">
-                                        <button type="button" class="ui icon button" onclick="location.href='/user/role/delete/{{ $user->id }}/{{ $role->id }}'">
-                                            <i class="remove icon"></i>
-                                        </button>
+                                        <form method="POST" action="/user/role/delete">
+                                            <input type="hidden" name="role" value="{{ $role->id }}">
+                                            <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <button type="submit" class="ui icon button">
+                                                <i class="remove icon"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                        <form class="sublist-add" method="POST" action="/user/role/add/{{ $user->id }}">
+                        <form class="sublist-add" method="POST" action="/user/role/add">
                             <div class="ui grid">
                                 <div class="ten wide column">
                                     <select class="ui fluid dropdown" name="role">
@@ -49,8 +54,9 @@
                                     </select>
                                 </div>
                                 <div class="right floated right aligned four wide column">
-                                    <button class="ui button" type="submit">Add Role</button>
+                                    <input type="hidden" name="user_id" value="{{ $user->id }}">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <button class="ui button" type="submit">Add Role</button>
                                 </div>
                             </div>
                         </form>
@@ -85,10 +91,10 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <input type="hidden" name="professor" value="{{ $user->id }}">
                                 <div class="right floated right aligned four wide column">
-                                    <button class="ui button" type="submit">Add Course Taught</button>
+                                    <input type="hidden" name="professor" value="{{ $user->id }}">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <button class="ui button" type="submit">Add Course Taught</button>
                                 </div>
                             </div>
                         </form>
@@ -124,10 +130,10 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <input type="hidden" name="tutor" value="{{ $user->id }}">
                                 <div class="right floated right aligned four wide column">
-                                    <button class="ui button" type="submit">Add Course Tutored</button>
+                                    <input type="hidden" name="tutor" value="{{ $user->id }}">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <button class="ui button" type="submit">Add Course Tutored</button>
                                 </div>
                             </div>
                         </form>

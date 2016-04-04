@@ -24,7 +24,7 @@ class Admin
                 return redirect()->guest('login');
             }
         } else if (!Auth::guard($guard)->user()->hasRole('admin')) {
-            return redirect('/home');
+            return view('access_denied');
         }
         return $next($request);
     }

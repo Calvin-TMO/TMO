@@ -25,60 +25,54 @@ Route::group(['middleware' => 'web'], function () {
 
 
     // Admin user pages
-    Route::get('/users', 'AdminController@all_users');
-    Route::get('/user/add', 'AdminController@new_user');
-    Route::post('/user/add', 'AdminController@add_user');
-    Route::get('/user/{id}', 'AdminController@show_user');
-    Route::get('/user/edit/{id}', 'AdminController@edit_user');
-    Route::post('/user/edit/{id}', 'AdminController@update_user');
+    Route::get('/users', 'UserController@all_users');
+    Route::get('/user/add', 'UserController@new_user');
+    Route::get('/user/{id}', 'UserController@view_user');
+    Route::get('/user/edit/{id}', 'UserController@edit_user');
+    Route::post('/user/add', 'UserController@add_user');
+    Route::post('/user/edit/', 'UserController@update_user');
+    Route::post('/user/delete/', 'UserController@delete_user');
 
-    // Roles
-    Route::post('/user/role/add/{id}', 'AdminController@add_user_role');
-    Route::get('/user/role/delete/{user_id}/{role_id}', 'AdminController@delete_user_role');
-
-    // Course professors
-    Route::post('/course/professor/add', 'AdminController@add_course_professor');
-    Route::post('/course/professor/delete', 'AdminController@delete_course_professor');
-
-    // Course tutors
-    Route::post('/course/tutor/add', 'AdminController@add_course_tutor');
-    Route::post('/course/tutor/delete', 'AdminController@delete_course_tutor');
-
-
+    // Admin user role posts
+    Route::post('/user/role/add', 'UserRoleController@add_user_role');
+    Route::post('/user/role/delete', 'UserRoleController@delete_user_role');
 
     // Admin course pages
-    Route::get('/courses', 'CourseController@index');
-    Route::get('/course/add', 'CourseController@create');
-    Route::post('/course/add', 'CourseController@store');
-    Route::get('/course/{id}', 'CourseController@show');
-    Route::get('/course/edit/{id}', 'CourseController@edit');
-    Route::post('/course/edit/{id}', 'CourseController@update');
+    Route::get('/courses', 'CourseController@all_courses');
+    Route::get('/course/add', 'CourseController@new_course');
+    Route::get('/course/{id}', 'CourseController@view_course');
+    Route::get('/course/edit/{id}', 'CourseController@edit_course');
+    Route::post('/course/add', 'CourseController@add_course');
+    Route::post('/course/edit', 'CourseController@update_course');
+    Route::post('/course/delete', 'CourseController@delete_course');
 
-    // Professors
-    Route::post('/course/professor/add/{id}', 'CourseController@add_professor');
-    Route::get('/course/professor/delete/{course_id}/{professor_id}', 'CourseController@delete_professor');
+    // Course professor posts
+    Route::post('/course/professor/add', 'CourseProfessorController@add_course_professor');
+    Route::post('/course/professor/delete', 'CourseProfessorController@delete_course_professor');
 
-    // Tutors
-    Route::post('/course/tutor/add/{id}', 'CourseController@add_tutor');
-    Route::get('/course/tutor/delete/{course_id}/{tutor_id}', 'CourseController@delete_tutor');
-    
+    // Course tutor posts
+    Route::post('/course/tutor/add', 'CourseTutorController@add_course_tutor');
+    Route::post('/course/tutor/delete', 'CourseTutorController@delete_course_tutor');
 
+    // Assignment pages
+    Route::get('/assignments', 'AssignmentController@all_assignments');
+    Route::get('/assignment/add', 'AssignmentController@new_assignment');
+    Route::get('/assignment/{id}', 'AssignmentController@view_assignment');
+    Route::get('/assignment/edit/{id}', 'AssignmentController@edit_assignment');
+    Route::post('/assignment/add', 'AssignmentController@add_assignment');
+    Route::post('/assignment/edit', 'AssignmentController@update_assignment');
+    Route::post('/assignment/delete', 'AssignmentController@delete_assignment');
 
-    // Assignments
-    Route::get('/assignments', 'AssignmentController@index');
-    Route::get('/assignment/add', 'AssignmentController@create');
-    Route::post('/assignment/add', 'AssignmentController@store');
-    Route::get('/assignment/{id}', 'AssignmentController@show');
-    Route::get('/assignment/edit/{id}', 'AssignmentController@edit');
-    Route::post('/assignment/edit/{id}', 'AssignmentController@update');
+    // Report pages
+    Route::get('/reports', 'ReportController@all_reports');
+    Route::get('/report/add', 'ReportController@new_report');
+    Route::get('/report/add/{assignment_id}', 'ReportController@new_report');
+    Route::get('/report/{id}', 'ReportController@view_report');
+    Route::get('/report/edit/{id}', 'ReportController@edit_report');
+    Route::post('/report/add', 'ReportController@add_report');
+    Route::post('/report/edit', 'ReportController@update_report');
 
-    // Reports
-    Route::get('/reports', 'ReportController@index');
-    Route::get('/report/add/{assignment_id}', 'ReportController@create');
-    Route::post('/report/add/{assignment_id}', 'ReportController@store');
-    Route::get('/report/{id}', 'ReportController@show');
-    Route::get('/report/edit/{id}', 'ReportController@edit');
-    Route::post('/report/edit/{id}', 'ReportController@update');
-    Route::post('/report/comment/add/{report_id}', 'ReportController@addComment');
-    Route::get('/report/comment/delete/{report_id}/{comment_id}', 'ReportController@removeComment');
+    // Comment posts
+    Route::post('/report/comment/add', 'CommentController@add_report_comment');
+    Route::post('/report/comment/delete', 'CommentController@delete_report_comment');
 });

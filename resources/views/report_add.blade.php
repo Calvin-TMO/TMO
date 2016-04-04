@@ -7,23 +7,32 @@
             <div class="panel panel-default">
                 <div class="panel-heading">New Report</div>
                 <div class="panel-body">
-                    <form method="POST">
-                        <div>Tutor Assignment: {{ $assignment_id }}</div>
-                        <div>Submission Date:</div>
-                        <input type="date" name="submit_date" format="yyyy-dd-mm">
+                    <form method="POST" action="/report/add">
+                        <div>Tutor Assignment: {{ $assignment_id }}
+                            <select class="ui fluid search dropdown" name="assignment">
+                                <option value="">Assignment</option>
+                                @foreach ($assignments as $assignment)
+                                    <option value="{{ $assignment->id }}" @if ($assignment->id == $assignment_id) selected @endif>
+                                        {{ $assignment->student->name }}:{{ $assignment->course->department }}-{{ $assignment->course->number }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>Session Date:</div>
+                        <input type="date" name="submit_date" format="yyyy-mm-dd" value="{{ date('Y-m-d') }}">
                         <div>Start Time:</div>
                         <input type="time" name="session_start">
                         <div>End Time:</div>
                         <input type="time" name="session_end">
-                        <div>Topic:</div>
+                        <div>What we worked on this session:</div>
                         <input type="text" name="topic">
-                        <div>Response:</div>
+                        <div>How the student is responding:</div>
                         <input type="text" name="response">
-                        <div>Plans:</div>
+                        <div>My plans to prepare for next session:</div>
                         <input type="text" name="plans">
-                        <div>Student Plans:</div>
+                        <div>Student plans to prepare for next session:</div>
                         <input type="text" name="student_plans">
-                        <div>Comments:</div>
+                        <div>Comments about how the session went:</div>
                         <input type="text" name="comments">
                         <br></br>
                         <button type="submit" class="ui primary button">Save</button>
@@ -35,4 +44,9 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $('.ui.dropdown')
+        .dropdown()
+    ;
+</script>
 @endsection

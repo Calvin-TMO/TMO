@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-use App\Course as Course;
-use App\Role as Role;
-use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use Redirect;
+use DB;
+
+use App\Role as Role;
+use App\Course as Course;
 
 class CourseController extends Controller
 {
@@ -21,11 +23,11 @@ class CourseController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Display a list of all courses.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function index()
+    public function all_courses()
     {
         $data = array(
             'courses' => Course::all()
@@ -34,26 +36,71 @@ class CourseController extends Controller
     }
 
     /**
-     * Show the form for creating a new course.
+     * Display a form for creating a new course.
      *
      * @return Response
      */
-    public function create()
+    public function new_course()
     {
-        return view('course_add');
+        $data = array(
+            'errors' => '',
+            'old_department' => '',
+            'old_number' => '',
+            'old_description' => ''
+            );
+        return view('course_add', $data);
     }
 
     /**
-     * Store a newly created course in storage.
+     * Display the specified course.
+     *
+     * @param  int  $course_id
+     * @return Response
+     */
+    public function view_course($course_id)
+    {
+        $data = array(
+            'course' => Course::find($course_id)
+            );
+        return view('course', $data);
+    }
+
+    /**
+     * Display a form for editing the specified course.
+     *
+     * @param  int  $course_id
+     * @return Response
+     */
+    public function edit_course($course_id)
+    {
+        $data = array(
+            'course' => Course::find($course_id),
+            'professors' => Role::where('name', '=', 'professor')->first()->users,
+            'tutors' => Role::where('name', '=', 'tutor')->first()->users
+            );
+        return view('course_edit', $data);
+    }
+
+    /**
+     * Save request info as new course in database.
      *
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function add_course(Request $request)
     {
-        $check = Course::where('description', '=', '$request->description')->first();
-        if ($check != null) {
-            die("description already used" . $check);
+        $check = DB::table('courses')
+            ->where('department', '=', '$request->department')
+            ->where('number', '=', '$request->number')
+            ->get();
+        if (empty($check)) {
+            $data = array(
+                'errors' => 'Department-Number course already exists.',
+                'old_department' => $request->department,
+                'old_number' => $request->number,
+                'old_description' => $request->description
+                );
+            return view('course_add', $data);
         }
         $course = new Course;
         $course->department = $request->department;
@@ -64,101 +111,30 @@ class CourseController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        $data = array(
-            'course' => Course::find($id)
-            );
-        return view('course', $data);
-    }
-
-    /**
-     * Show the form for editing the specified course.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        $data = array(
-            'course' => Course::find($id),
-            'professors' => Role::where('name', '=', 'professor')->first()->users,
-            'tutors' => Role::where('name', '=', 'tutor')->first()->users
-            );
-        return view('course_edit', $data);
-    }
-
-    /**
-     * Update the specified course in storage.
+     * Update the specified course with request info.
      *
      * @param  Request  $request
-     * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update_course(Request $request)
     {
-        $course = Course::find($id);
+        $course = Course::find($request->course_id);
         $course->department = $request->department;
         $course->number = $request->number;
         $course->description = $request->description;
         $course->save();
-        return redirect('/course/' . $id);
+
+        return Redirect::back()->with('success', 'Course has been updated.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified course from storage.
      *
-     * @param  int  $id
+     * @param  Request $request
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
-    }
-
-    public function add_professor(Request $request, $id) {
-        if ($request->professor != 0) {
-            DB::table('current_professors')->insert([
-                'user_id' => $request->professor,
-                'course_id' => $id
-            ]);
-        }
-        return redirect('/course/edit/' . $id);
-    }
-
-    public function delete_professor($course_id, $professor_id) {
-        DB::table('current_professors')
-            ->where([
-                ['user_id', '=', $professor_id],
-                ['course_id', '=', $course_id]
-            ])
-            ->delete();
-        return redirect('/course/edit/' . $course_id);
-    }
-
-    public function add_tutor(Request $request, $id) {
-        if ($request->tutor != 0) {
-            DB::table('available_tutors')->insert([
-                'user_id' => $request->tutor,
-                'course_id' => $id
-            ]);
-        }
-
-        return redirect('/course/edit/' . $id);
-    }
-
-    public function delete_tutor($course_id, $tutor_id) {
-        DB::table('available_tutors')
-            ->where([
-                ['user_id', '=', $tutor_id],
-                ['course_id', '=', $course_id]
-            ])
-            ->delete();
-        return redirect('/course/edit/' . $course_id);
     }
 }

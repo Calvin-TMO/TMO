@@ -8,7 +8,7 @@
                 <div class="panel-heading">Assignment</div>
 
                 <div class="panel-body">
-                    <form method="POST">
+                    <form method="POST" action="/assignment/edit">
                         <div>Tutor:
                             <select class="ui fluid search dropdown" name="tutor">
                                 <option value="">Tutor</option>
@@ -50,8 +50,9 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="ui primary button">Save</button>
+                        <input type="hidden" name="assignment_id" value="{{ $assignment->id }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="ui primary button">Save</button>
                         <button type="button" class="ui button" onclick="location.href='/assignment/{{ $assignment->id }}'">Discard</button>
                     </form>
                 </div>

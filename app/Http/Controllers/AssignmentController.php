@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use Redirect;
+
 use App\Assignment as Assignment;
 use App\User as User;
 use App\Course as Course;
-use App\Http\Requests;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use DB;
 
 class AssignmentController extends Controller
 {
@@ -23,11 +24,11 @@ class AssignmentController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Display a list of all assignments.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function index()
+    public function all_assignments()
     {
         $data = array(
             'assignments' => Assignment::all(),
@@ -38,125 +39,133 @@ class AssignmentController extends Controller
     }
 
     /**
-     * Show the form for creating a new assignment.
+     * Display a form for creating a new assignment.
      *
      * @return Response
      */
-    public function create()
+    public function new_assignment()
     {
         if (!Auth::user()->hasRole('admin')) {
-            return redirect('/assignments');
+            return view('access_denied');
         }
+
         $data = array(
             'courses' => Course::all(),
-            'tutors' => AdminController::getTutors(),
-            'students' => AdminController::getStudents(),
-            'professors' => AdminController::getProfessors()
+            'tutors' => UserController::getTutors(),
+            'students' => UserController::getStudents(),
+            'professors' => UserController::getProfessors()
         );
         return view('assignment_add', $data);
     }
 
     /**
-     * Store a newly created assignment in storage.
+     * Display the specified assignment.
+     *
+     * @param  int  $assignment_id
+     * @return Response
+     */
+    public function view_assignment($assignment_id)
+    {
+        $user = Auth::user();
+        $assignment = Assignment::find($assignment_id);
+        if (!$user->hasRole('admin')
+            && !($user->hasRole('tutor') && $user->id == $assignment->tutor_id)
+            && !($user->hasRole('professor') && $user->id == $assignment->professor_id))
+        {
+            return view('access_denied');
+        }
+
+        $data = array(
+            'assignment' => $assignment,
+            'reports' => $assignment->reports
+            );
+        return view('assignment', $data);
+    }
+
+    /**
+     * Display a form for editing the specified assignment.
+     *
+     * @param  int  $assignment_id
+     * @return Response
+     */
+    public function edit_assignment($assignment_id)
+    {
+        if (!Auth::user()->hasRole('admin'))
+        {
+            return view('access_denied');
+        }
+
+        $assignment = Assignment::find($assignment_id);
+        $data = array(
+            'assignment' => $assignment,
+            'courses' => Course::all(),
+            'tutors' => UserController::getTutors(),
+            'students' => UserController::getStudents(),
+            'professors' => UserController::getProfessors()
+        );
+        return view('assignment_edit', $data);
+    }
+
+    /**
+     * Save request info as new assignment in database.
      *
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function add_assignment(Request $request)
     {
+        if (!Auth::user()->hasRole('admin'))
+        {
+            return view('access_denied');
+        }
+
+        // TODO: Add check for duplicates.
         $assignment = new Assignment;
         $assignment->tutor_id = $request->tutor;
         $assignment->student_id = $request->student;
         $assignment->course_id = $request->course;
         $assignment->professor_id = $request->professor;
         $assignment->save();
-        $roles = $request->roles;
-        if ($roles != null) {
-            foreach ($roles as $role_id) {
-                DB::table('assignment_roles')->insert([
-                    'assignment_id' => $assignment->id,
-                    'role_id' => $role_id
-                ]);
-            }
-        }
+
         return redirect('/assignment/' . $assignment->id);
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        $user = Auth::user();
-        $assignment = Assignment::find($id);
-        if ($user->hasRole('admin')
-            || ($user->hasRole('tutor') && $user->id == $assignment->tutor_id)
-            || ($user->hasRole('professor') && $user->id == $assignment->professor_id))
-        {
-            $data = array(
-                'assignment' => $assignment,
-                'reports' => $assignment->reports
-                );
-            return view('assignment', $data);
-        }
-        return redirect('/assignments');
-    }
-
-    /**
-     * Show the form for editing the specified assignment.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        $user = Auth::user();
-        $assignment = Assignment::find($id);
-        if ($user->hasRole('admin')
-            || ($user->hasRole('tutor') && $user->id == $assignment->tutor_id)
-            || ($user->hasRole('professor') && $user->id == $assignment->professor_id))
-        {
-            $data = array(
-                'assignment' => $assignment,
-                'courses' => Course::all(),
-                'tutors' => AdminController::getTutors(),
-                'students' => AdminController::getStudents(),
-                'professors' => AdminController::getProfessors()
-            );
-            return view('assignment_edit', $data);
-        }
-        return redirect('/assignments');
-    }
-
-    /**
-     * Update the specified assignment in storage.
+     * Update the specified assignment with request info.
      *
      * @param  Request  $request
-     * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update_assignment(Request $request)
     {
-        $assignment = Assignment::find($id);
+        if (!Auth::user()->hasRole('admin'))
+        {
+            return view('access_denied');
+        }
+
+        $assignment = Assignment::find($request->assignment_id);
         $assignment->tutor_id = $request->tutor;
         $assignment->student_id = $request->student;
         $assignment->course_id = $request->course;
         $assignment->professor_id = $request->professor;
         $assignment->save();
-        return redirect('/assignment/' . $id);
+
+        return Redirect::back()->with('success', 'Assignment has been updated.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified assignment from storage.
      *
-     * @param  int  $id
+     * @param  Request  $request
      * @return Response
      */
-    public function destroy($id)
+    public function delete_assignment(Request $request)
     {
+        if (!Auth::user()->hasRole('admin'))
+        {
+            return view('access_denied');
+        }
+
         //
     }
 }
