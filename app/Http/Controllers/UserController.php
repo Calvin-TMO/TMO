@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use Redirect;
+use DB;
+
 use App\User as User;
 use App\Role as Role;
 use App\Course as Course;
-use App\Http\Requests;
-use Illuminate\Http\Request;
-use DB;
 
 class UserController extends Controller
 {
@@ -22,11 +24,11 @@ class UserController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Display a list of all users.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function index()
+    public function all_users()
     {
         $data = array(
             'users' => User::all()
@@ -35,70 +37,44 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new user.
+     * Display a form for creating a new user.
      *
      * @return Response
      */
-    public function create()
+    public function new_user()
     {
         $data = array(
-            'roles' => Role::all()
+            'errors' => '',
+            'old_name' => '',
+            'old_email' => ''
             );
         return view('user_add', $data);
     }
 
     /**
-     * Store a newly created user in storage.
+     * Display the specified user.
      *
-     * @param  Request  $request
+     * @param  int  $user_id
      * @return Response
      */
-    public function store(Request $request)
-    {
-        $check = User::where('email', '=', '$request->email')->first();
-        if ($check != null) {
-            die("email already used" . $check);
-        }
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->save();
-        $roles = $request->roles;
-        if ($roles != null) {
-            foreach ($roles as $role_id) {
-                DB::table('user_roles')->insert([
-                    'user_id' => $user->id,
-                    'role_id' => $role_id
-                ]);
-            }
-        }
-        return redirect('/user/' . $user->id);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
+    public function view_user($user_id)
     {
         $data = array(
-            'user' => User::find($id)
+            'user' => User::find($user_id)
             );
         return view('user', $data);
     }
 
     /**
-     * Show the form for editing the specified user.
+     * Display a form for editing the specified user.
      *
-     * @param  int  $id
+     * @param  int  $user_id
      * @return Response
      */
-    public function edit($id)
+    public function edit_user($user_id)
     {
         $data = array(
-            'user' => User::find($id),
+            'user' => User::find($user_id),
             'roles' => Role::all(),
             'courses' => Course::all()
             );
@@ -106,100 +82,85 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified user in storage.
+     * Save request info as new user in database.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * eparam  Renuest  $request
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function add_user(Request $request)
     {
-        $user = User::find($id);
-        $roles = $request->roles;
-        DB::table('user_roles')->where('user_id', '=', $id)->delete();
-
-        if ($roles != null) {
-            foreach ($roles as $role_id) {
-                DB::table('user_roles')->insert([
-                    'user_id' => $id,
-                    'role_id' => $role_id
-                ]);
-            }
+        $check = User::where('email', '=', $request->email)->first();
+        if ($check != null)
+        {
+            $data = array(
+                'errors' => 'This email already has an account associated with it.',
+                'old_name' => $request->name,
+                'old_email' => $request->email
+                );
+            return view('user_add', $data);
         }
-        //$user->save();
-        return redirect('/user/' . $id);
+
+        if ($request->email == "" || $request->name == "" || $request->password == "")
+        {
+            $data = array(
+                'errors' => 'You are missing information. Please fill out all fields.',
+                'old_name' => $request->name,
+                'old_email' => $request->email
+                );
+            return view('user_add', $data);
+        }
+
+        if ($request->password != $request->password_confirmation)
+        {
+            $data = array(
+                'errors' => 'Passwords do not match.',
+                'old_name' => $request->name,
+                'old_email' => $request->email
+                );
+            return view('user_add', $data);
+        }
+
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        return redirect('/user/' . $user->id);
+    }
+    /**
+     * Updates the specified user with request info.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function update_user(Request $request)
+    {
+        $user = User::find($request->user_id);
+        $user->name = $request->name;
+        $user->save();
+
+        return Redirect::back()->with('success', 'User has been updated.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified user from storage.
      *
-     * @param  int  $id
+     * @param  Request  $request
      * @return Response
      */
-    public function destroy($id)
+    public function delete_user(Request $request)
     {
         //
     }
 
-    public function add_role(Request $request, $id) {
-        if ($request->role != 0) {
-            DB::table('user_roles')->insert([
-                'user_id' => $id,
-                'role_id' => $request->role
-            ]);
-        }
-        return redirect('/user/edit/' . $id);
-    }
 
-    public function delete_role($user_id, $role_id) {
-        DB::table('user_roles')
-            ->where([
-                ['user_id', '=', $user_id],
-                ['role_id', '=', $role_id]
-            ])
-            ->delete();
-        return redirect('/user/edit/' . $user_id);
-    }
 
-    public function add_current_professor(Request $request, $id) {
-        if ($request->course != 0) {
-            DB::table('current_professors')->insert([
-                'user_id' => $id,
-                'course_id' => $request->course
-            ]);
-        }
-        return redirect('/user/edit/' . $id);
-    }
 
-    public function delete_current_professor($user_id, $course_id) {
-        DB::table('current_professors')
-            ->where([
-                ['user_id', '=', $user_id],
-                ['course_id', '=', $course_id]
-            ])
-            ->delete();
-        return redirect('/user/edit/' . $user_id);
-    }
 
-    public function add_available_tutor(Request $request, $id) {
-        if ($request->course != 0) {
-            DB::table('available_tutors')->insert([
-                'user_id' => $id,
-                'course_id' => $request->course
-            ]);
-        }
-        return redirect('/user/edit/' . $id);
-    }
 
-    public function delete_available_tutor($user_id, $course_id) {
-        DB::table('available_tutors')
-            ->where([
-                ['user_id', '=', $user_id],
-                ['course_id', '=', $course_id]
-            ])
-            ->delete();
-        return redirect('/user/edit/' . $user_id);
-    }
+
+
 
     /**
      * Get the list of Tutors.
@@ -227,7 +188,7 @@ class UserController extends Controller
         foreach ($results as $item) {
             array_push($user_ids, $item->id);
         }
-        
+
         // Normal students
         $results = DB::table('users')
             ->leftJoin('user_roles', 'users.id', '=', 'user_roles.user_id')
