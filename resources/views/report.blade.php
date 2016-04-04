@@ -8,15 +8,20 @@
                 <div class="panel-heading">Report</div>
 
                 <div class="panel-body">
-                    <div>Tutor Assignment: {{ $report->assignment_id }}</div>
+                    <h2>{{ $report->assignment->student->name }} : {{ $report->assignment->course->department }}-{{ $report->assignment->course->number }}</h2>
                     <div>Submission Date: {{ $report->submit_date }}</div>
                     <div>Start Time: {{ $report->session_start }}</div>
                     <div>End Time: {{ $report->session_end }}</div>
-                    <div>Topic: {{ $report->topic }}</div>
-                    <div>Reponse: {{ $report->response }}</div>
-                    <div>Plans: {{ $report->plans }}</div>
-                    <div>Student Plans: {{ $report->student_plans }}</div>
-                    <div>Comments: {{ $report->comments }}</div>
+                    <div>What we worked on this session:</div>
+                    <textarea class="ui fluid stretched" readonly>{{ $report->topic }}</textarea>
+                    <div>How the student is responding:<div>
+                    <textarea class="ui fluid stretched" readonly>{{ $report->response }}</textarea>
+                    <div>My plans to prepare for next session:</div>
+                    <textarea class="ui fluid stretched" readonly>{{ $report->plans }}</textarea>
+                    <div>Student plans to prepare for next session:</div>
+                    <textarea class="ui fluid stretched" readonly>{{ $report->student_plans }}</textarea>
+                    <div>Comments about how the session went:</div>
+                    <textarea class="ui fluid stretched" readonly>{{ $report->comments }}</textarea>
 
                     <button type="button" class="ui button" onclick="location.href = '/report/edit/{{ $report->id }}';">Edit</button>
                     <button type="button" class="ui button" onclick="location.href = '/reports';">Back</button>
@@ -43,8 +48,8 @@
                                     <textarea class="ui fluid stretched" name="comment_text"></textarea>
                                 </div>
                                 <div class="right floated right aligned four wide column">
-                                    <button class="ui button" type="submit">Add Comment</button>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <button class="ui button" type="submit">Add Comment</button>
                                 </div>
                             </div>
                         </form>

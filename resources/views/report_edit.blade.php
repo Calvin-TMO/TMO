@@ -15,16 +15,16 @@
                         <input type="time" name="session_start" value="{{ $report->session_start }}">
                         <div>End Time:</div>
                         <input type="time" name="session_end" value="{{ $report->session_end }}">
-                        <div>Topic:</div>
-                        <input type="text" name="topic" value="{{ $report->topic }}">
-                        <div>Response:</div>
-                        <input type="text" name="response" value="{{ $report->response }}">
-                        <div>Plans:</div>
-                        <input type="text" name="plans" value="{{ $report->plans }}">
-                        <div>Student Plans:</div>
-                        <input type="text" name="student_plans" value="{{ $report->student_plans }}">
-                        <div>Comments:</div>
-                        <input type="text" name="comments" value="{{ $report->comments }}">
+                        <div>What we worked on this session:</div>
+                        <textarea class="ui fluid stretched" name="topic">{{ $report->topic }}</textarea>
+                        <div>How the student is responding:</div>
+                        <textarea class="ui fluid stretched" name="response">{{ $report->response }}</textarea>
+                        <div>My plans to prepare for next session:</div>
+                        <textarea class="ui fluid stretched" name="plans">{{ $report->plans }}</textarea>
+                        <div>Student plans to prepare for next session:</div>
+                        <textarea class="ui fluid stretched" name="student_plans">{{ $report->student_plans }}</textarea>
+                        <div>Comments about how the session went:</div>
+                        <textarea class="ui fluid stretched" name="comments">{{ $report->comments }}</textarea>
                         <br></br>
                         <button type="submit" class="ui primary button">Save</button>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
