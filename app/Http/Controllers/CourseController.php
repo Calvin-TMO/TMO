@@ -92,8 +92,8 @@ class CourseController extends Controller
         $check = DB::table('courses')
             ->where('department', '=', '$request->department')
             ->where('number', '=', '$request->number')
-            ->get();
-        if (empty($check)) {
+            ->first();
+        if (!empty($check)) {
             $data = array(
                 'errors' => 'Department-Number course already exists.',
                 'old_department' => $request->department,
