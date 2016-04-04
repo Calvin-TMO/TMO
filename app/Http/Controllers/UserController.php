@@ -100,6 +100,16 @@ class UserController extends Controller
             return view('user_add', $data);
         }
 
+        if ($request->email == "" || $request->name == "" || $request->password == "")
+        {
+            $data = array(
+                'errors' => 'You are missing information. Please fill out all fields.',
+                'old_name' => $request->name,
+                'old_email' => $request->email
+                );
+            return view('user_add', $data);
+        }
+
         if ($request->password != $request->password_confirmation)
         {
             $data = array(
