@@ -35,19 +35,26 @@
                                 <td>{{ $comment->posted_date }}</td>
                                 <td class="selectable"><a href="/user/{{ $comment->author->id }}">{{ $comment->author->name }}</a></td>
                                 <td>{{ $comment->comment_text }}</td>
-			        <td><button type="button" class="ui icon button" onclick="location.href='/report/comment/delete/{{ $report->id }}/{{ $comment->id }}'">
+			        <td>
+                                    <form method="POST" action="/report/comment/delete">
+                                        <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <button type="submit" class="ui icon button">
                                             <i class="remove icon"></i>
-                                        </button></td>
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
                         </table>
-                        <form class="sublist-add" method="POST" action="/report/comment/add/{{ $report->id }}">
+                        <form class="sublist-add" method="POST" action="/report/comment/add">
                             <div class="ui grid">
                                 <div class="ten wide column">
                                     <textarea class="ui fluid stretched" name="comment_text"></textarea>
                                 </div>
                                 <div class="right floated right aligned four wide column">
+                                    <input type="hidden" name="report_id" value="{{ $report->id }}">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <button class="ui button" type="submit">Add Comment</button>
                                 </div>

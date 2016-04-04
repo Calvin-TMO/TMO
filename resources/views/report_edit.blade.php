@@ -7,8 +7,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Edit Report</div>
                 <div class="panel-body">
-                    <form method="POST">
-                        <div>Tutor Assignment: {{ $report->assignment_id }}</div>
+                    <form method="POST" action="/report/edit">
+                        <div>Tutor Assignment:</div>
+                        <input type="text" name="assignment" value="{{ $report->assignment_id }}" readonly>
                         <div>Submission Date:</div>
                         <input type="date" name="submit_date" format="yyyy-dd-mm" value="{{ $report->submit_date }}">
                         <div>Start Time:</div>
@@ -27,6 +28,7 @@
                         <textarea class="ui fluid stretched" name="comments">{{ $report->comments }}</textarea>
                         <br></br>
                         <button type="submit" class="ui primary button">Save</button>
+                        <input type="hidden" name="report_id" value="{{ $report->id }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button type="button" class="ui button" onclick="location.href='/report/{{ $report->id }}'">Discard</button>
                     </form>

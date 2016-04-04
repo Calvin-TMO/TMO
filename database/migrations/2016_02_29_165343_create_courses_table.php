@@ -16,7 +16,8 @@ class CreateCoursesTable extends Migration
             $table->increments('id');
             $table->string('department');
             $table->string('number');
-            $table->string('description')->unique();
+            $table->string('description');
+            $table->unique(array('department', 'number'));
             $table->timestamps();
         });
 
