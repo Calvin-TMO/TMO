@@ -9,9 +9,10 @@
 
                 <div class="panel-body">
                     <h2>{{ $report->assignment->student->name }} : {{ $report->assignment->course->department }}-{{ $report->assignment->course->number }}</h2>
-                    <div>Submission Date: {{ $report->submit_date }}</div>
-                    <div>Start Time: {{ $report->session_start }}</div>
-                    <div>End Time: {{ $report->session_end }}</div>
+                    <div>Session Date: {{ date_format(date_create($report->session_date), 'm/d/Y') }}</div>
+                    <div>Start Time: {{ date_format(date_create($report->session_start), 'g:ia') }}</div>
+                    <div>End Time: {{ date_format(date_create($report->session_end), 'g:ia') }}</div>
+                    <br></br>
                     <div>What we worked on this session:</div>
                     <textarea class="ui fluid stretched" readonly>{{ $report->topic }}</textarea>
                     <div>How the student is responding:<div>
