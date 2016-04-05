@@ -15,7 +15,7 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('assignment_id');
-            $table->date('submit_date');
+            $table->date('session_date');
             $table->datetime('session_start');
             $table->datetime('session_end');
             $table->string('topic');

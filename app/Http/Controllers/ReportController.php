@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Redirect;
+use DateTime;
 
 use App\Assignment as Assignment;
 use App\Report as Report;
@@ -77,7 +78,7 @@ class ReportController extends Controller
         }
         else if ($user->hasRole('tutor'))
         {
-            $assignments = $user->courses_tutored;
+            $assignments = $user->tutor_assignments;
         }
 
         $data = array(
@@ -155,16 +156,16 @@ class ReportController extends Controller
 
         $report = new Report;
         $report->assignment_id = $request->assignment;
-        $report->submit_date = $request->submit_date;
-        $report->session_start = $request->session_start;
-        $report->session_end = $request->session_end;
+        $report->session_date = $request->session_date;
+        $report->session_start = DateTime::createFromFormat('Y-m-d g:ia', $request->session_date . ' ' . $request->session_start);
+        $report->session_end = DateTime::createFromFormat('Y-m-d g:ia', $request->session_date . ' ' . $request->session_end);
         $report->topic = $request->topic;
         $report->response = $request->response;
         $report->plans = $request->plans;
         $report->student_plans = $request->student_plans;
         $report->comments = $request->comments;
         $report->save();
-        return redirect('/report/' . $request->id);
+        return redirect('/report/' . $report->id);
     }
 
     /**
@@ -187,9 +188,9 @@ class ReportController extends Controller
         }
 
         $report = Report::find($request->report_id);
-        $report->submit_date = $request->submit_date;
-        $report->session_start = $request->session_start;
-        $report->session_end = $request->session_end;
+        $report->session_date = $request->session_date;
+        $report->session_start = DateTime::createFromFormat('Y-m-d g:ia', $request->session_date . ' ' . $request->session_start);
+        $report->session_end = DateTime::createFromFormat('Y-m-d g:ia', $request->session_date . ' ' . $request->session_end);
         $report->topic = $request->topic;
         $report->response = $request->response;
         $report->plans = $request->plans;
