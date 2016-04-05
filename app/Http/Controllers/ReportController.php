@@ -78,7 +78,7 @@ class ReportController extends Controller
         }
         else if ($user->hasRole('tutor'))
         {
-            $assignments = $user->courses_tutored;
+            $assignments = $user->tutor_assignments;
         }
 
         $data = array(
