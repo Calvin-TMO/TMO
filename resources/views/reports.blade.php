@@ -13,7 +13,7 @@
                                 <th class="">Tutor</th>
                                 <th class="">Student</th>
                                 <th class="">Course</th>
-                                <th class="default-sort desc">Submit Date</th>
+                                <th class="default-sort desc">Session Date</th>
                                 <th class="">Topic</th>
                             </tr>
                         </thead>
@@ -23,7 +23,7 @@
                                 <td>{{ $report->assignment->tutor->name }}</td>
                                 <td>{{ $report->assignment->student->name }}</td>
                                 <td>{{ $report->assignment->course->description }}</td>
-                                <td>{{ $report->submit_date }}</td>
+                                <td>{{ $report->session_date }}</td>
                                 <td>{{ $report->topic }}</td>
                             </tr>
                         @endforeach
