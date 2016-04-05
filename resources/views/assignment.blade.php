@@ -26,7 +26,9 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button type="button" class="ui button" onclick="location.href='/assignment/edit/{{ $assignment->id }}';">Edit</button>
+                    @if (Auth::user()->hasRole('admin'))
+                        <button type="button" class="ui button" onclick="location.href='/assignment/edit/{{ $assignment->id }}';">Edit</button>
+                    @endif
                     <button type="button" class="ui button" onclick="location.href = '/assignments';">Back</button>
                 </div>
 
@@ -38,14 +40,14 @@
                     <table class="ui sortable selectable celled table">
                         <thead>
                             <tr>
-                                <th class="default-sort desc">Submit Date</th>
+                                <th class="default-sort desc">Session Date</th>
                                 <th class="">Topic</th>
                             </tr>
                         </thead>
                         <tbody>
                         @foreach ($reports as $report)
                             <tr onclick="location.href='/report/{{ $report->id }}'" style="cursor: pointer;">
-                                <td>{{ $report->submit_date }}</td>
+                                <td>{{ $report->session_date }}</td>
                                 <td>{{ $report->topic }}</td>
                             </tr>
                         @endforeach
