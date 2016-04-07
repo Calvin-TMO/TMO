@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use DateTime;
+use App\Http\Controllers\DateTime;
 
 class ReportsTableSeeder extends Seeder
 {
