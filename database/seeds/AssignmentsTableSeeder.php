@@ -1784,7 +1784,7 @@ class AssignmentsTableSeeder extends Seeder
         ]);
 
         $professor = User::where('name', '=', 'Chere Vonderheide')->first();
-        $tutor = User::where('name', '=', 'Sybol Fulcher')->first();
+        $tutor = User::where('name', '=', 'Sybil Fulcher')->first();
         $student = User::where('name', '=', 'Harriette Mcgurk')->first();
 
         DB::table('assignments')->insert([
@@ -1795,7 +1795,7 @@ class AssignmentsTableSeeder extends Seeder
         ]);
 
         $professor = User::where('name', '=', 'Chere Vonderheide')->first();
-        $tutor = User::where('name', '=', 'Sybol Fulcher')->first();
+        $tutor = User::where('name', '=', 'Sybil Fulcher')->first();
         $student = User::where('name', '=', 'Roland Hilyard')->first();
 
         DB::table('assignments')->insert([
@@ -1806,7 +1806,7 @@ class AssignmentsTableSeeder extends Seeder
         ]);
 
         $professor = User::where('name', '=', 'Chere Vonderheide')->first();
-        $tutor = User::where('name', '=', 'Sybol Fulcher')->first();
+        $tutor = User::where('name', '=', 'Sybil Fulcher')->first();
         $student = User::where('name', '=', 'Beatrice Warnke')->first();
 
         DB::table('assignments')->insert([
@@ -1817,7 +1817,7 @@ class AssignmentsTableSeeder extends Seeder
         ]);
 
         $professor = User::where('name', '=', 'Chere Vonderheide')->first();
-        $tutor = User::where('name', '=', 'Sybol Fulcher')->first();
+        $tutor = User::where('name', '=', 'Sybil Fulcher')->first();
         $student = User::where('name', '=', 'Dominque Carrier')->first();
 
         DB::table('assignments')->insert([
