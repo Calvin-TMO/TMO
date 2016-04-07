@@ -200,7 +200,7 @@ class AssignmentsTableSeeder extends Seeder
         ]);
 
         $professor = User::where('name', '=', 'Liane Valerius')->first();
-        $tutor = User::where('name', '=', 'Virginia Chadburn')->first();
+        $tutor = User::where('name', '=', 'Virgina Chadburn')->first();
         $student = User::where('name', '=', 'Carmelina Troy')->first();
 
         DB::table('assignments')->insert([
@@ -211,7 +211,7 @@ class AssignmentsTableSeeder extends Seeder
         ]);
 
         $professor = User::where('name', '=', 'Liane Valerius')->first();
-        $tutor = User::where('name', '=', 'Virginia Chadburn')->first();
+        $tutor = User::where('name', '=', 'Virgina Chadburn')->first();
         $student = User::where('name', '=', 'Ivonne Dillenbeck')->first();
 
         DB::table('assignments')->insert([
@@ -222,7 +222,7 @@ class AssignmentsTableSeeder extends Seeder
         ]);
 
         $professor = User::where('name', '=', 'Liane Valerius')->first();
-        $tutor = User::where('name', '=', 'Virginia Chadburn')->first();
+        $tutor = User::where('name', '=', 'Virgina Chadburn')->first();
         $student = User::where('name', '=', 'Latina Casterline')->first();
 
         DB::table('assignments')->insert([
@@ -233,7 +233,7 @@ class AssignmentsTableSeeder extends Seeder
         ]);
 
         $professor = User::where('name', '=', 'Liane Valerius')->first();
-        $tutor = User::where('name', '=', 'Virginia Chadburn')->first();
+        $tutor = User::where('name', '=', 'Virgina Chadburn')->first();
         $student = User::where('name', '=', 'Aubrey Failla')->first();
 
         DB::table('assignments')->insert([
