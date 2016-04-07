@@ -12,8 +12,8 @@ class ReportsTableSeeder extends Seeder
      */
     public function run()
     {
-        $topics = {'Programming in C++', 'Giving an Effective Presentation (Even with PowerPoint)', 'Taxes', 'Lethargy'};A
-        $date = DateTime:createFromFormat('Y-m-d g:ia', "2016-1-1 08:00am");
+        $topics = ['Programming in C++', 'Giving an Effective Presentation (Even with PowerPoint)', 'Taxes', 'Lethargy'];
+        $date = DateTime::createFromFormat('Y-m-d g:ia', "2016-1-1 08:00am");
         for ($i = 1; $i <= 201; $i++) {
             $date = strtotime("+1 day", $date);
             for ($j = 1; $j <= 4; $j++) {
