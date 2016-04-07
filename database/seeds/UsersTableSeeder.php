@@ -18,48 +18,12 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'student1',
-            'email' => 'student1@tmo.rycieos.com',
-            'password' => bcrypt('student')
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'student2',
-            'email' => 'student2@tmo.rycieos.com',
-            'password' => bcrypt('student')
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'tutor1',
-            'email' => 'tutor1@tmo.rycieos.com',
-            'password' => bcrypt('tutor')
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'tutor2',
-            'email' => 'tutor2@tmo.rycieos.com',
-            'password' => bcrypt('tutor')
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'professor1',
-            'email' => 'professor1@tmo.rycieos.com',
-            'password' => bcrypt('professor')
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'professor2',
-            'email' => 'professor2@tmo.rycieos.com',
-            'password' => bcrypt('professor')
-        ]);
-        
-            DB::table('users')->insert([
             'name' => 'Joel Adams',
             'email' => 'adams@calvin.edu',
             'password' => bcrypt('professor')
         ]);
         
-            DB::table('users')->insert([
+        DB::table('users')->insert([
             'name' => 'Patrick Bailey',
             'email' => 'pmb4@calvin.edu',
             'password' => bcrypt('professor')
