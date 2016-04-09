@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Redirect;
 use DateTime;
+use Mail;
 
 use App\Assignment as Assignment;
 use App\Report as Report;
@@ -79,7 +80,6 @@ class ReportController extends Controller
         else if ($user->hasRole('tutor'))
         {
             $assignments = $user->tutor_assignments;
-            
         }
 
         $data = array(
@@ -143,6 +143,7 @@ class ReportController extends Controller
 
     /**
      * Save request info as new report in database.
+     * and send an email of the report
      *
      * @param  Request  $request
      * @return Response
@@ -166,6 +167,12 @@ class ReportController extends Controller
         $report->student_plans = $request->student_plans;
         $report->comments = $request->comments;
         $report->save();
+
+        Mail::send('emails.report_add_email', ['user' => $user, 'report' => $report], function ($message) use ($user, $report){
+            $message->from('calvin.tutoring.management@gmail.com', 'Calvin Tutoring Reports');
+            $message->to($user->email)->subject('Report submitted');
+        });
+
         return redirect('/report/' . $report->id);
     }
 
@@ -214,5 +221,4 @@ class ReportController extends Controller
             return view('access_denied');
         }
     }
-
 }
