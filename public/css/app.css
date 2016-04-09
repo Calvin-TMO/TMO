@@ -134,6 +134,10 @@ nav.navbar {
   float: right;
 }
 
+.list-item>p.comment {
+  padding: 0.5em;
+}
+
 .list-item.selectable:hover {
   background-color: rgba(0,0,0,.15);
 }

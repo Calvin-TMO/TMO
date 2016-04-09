@@ -19,7 +19,19 @@
                                     </div>
                                 </div>
                             @endforeach
-                        </div>
+                    </div>
+                    <div class="sublist">
+                        <div class="sublist-header">Recent Comments</div>
+                            @foreach ( $comments as $comment )
+                                <div class="list-item selectable" onClick="location.href='/report/{{ $comment->id }}'">
+                                    <div class="ui grid">
+                                        <div class="four wide column">{{ $comment->session_date }}</div>
+                                        <div class="six wide column">{{ $comment->name }}</div>
+                                        <div class="right floated right aligned four wide column">{{ $comment->department }}-{{ $comment->number }}</div>
+                                    </div>
+                                    <p class="comment">{{ $comment->comment_text }}</p>
+                                </div>
+                            @endforeach
                     </div>
                 </div>
             </div>
