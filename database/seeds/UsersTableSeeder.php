@@ -413,8 +413,8 @@ class UsersTableSeeder extends Seeder
         $handle = fopen($professors, "r") or die ("Unable to open professors.txt!");
         while(!eof($handle)) {
             $line = fgets($handle);
-            $firstNam="$(echo $line | head -c 3)"
-            $lastName="$(echo $line | awk '{print $2}')"
+            $firstNam=shell_exec('echo ' . $line . ' | head -c 3');
+            $lastName=shell_exec('echo ' . $line . ' | awk /'{print $2}/'');
             DB::table('users')->insert(
                 ['name' => $line,
                 'email' => "$firstNam$lastName@students.calvin.edu",
