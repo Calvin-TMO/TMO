@@ -170,7 +170,7 @@ class ReportController extends Controller
 
         Mail::send('emails.report_add_email', ['user' => $user, 'report' => $report], function ($message) use ($user, $report){
             $message->from('calvin.tutoring.management@gmail.com', 'Calvin Tutoring Reports');
-            $message->to($user->email)->subject('Report submitted');
+            $message->to($report->assignment->professor->email)->subject('Report submitted');
         });
 
         return redirect('/report/' . $report->id);
