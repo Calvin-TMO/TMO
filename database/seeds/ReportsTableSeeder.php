@@ -19,7 +19,7 @@ class ReportsTableSeeder extends Seeder
             for ($j = 1; $j <= 4; $j++) {
                 $here_date = $date;
                 $here_date->add(new DateInterval('P' . $j . 'D'));
-                $end_time = $here_date
+                $end_time = $here_date;
                 $end_time->add(new DateInterval('T1H'));
                 DB::table('reports')->insert([
                     'session_date' => $here_date,
