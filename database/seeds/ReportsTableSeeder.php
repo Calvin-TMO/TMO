@@ -15,9 +15,9 @@ class ReportsTableSeeder extends Seeder
         $topics = ['Programming in C++', 'Giving an Effective Presentation (Even with PowerPoint)', 'Taxes', 'Lethargy'];
         $date = DateTime::createFromFormat('Y-m-d H:i:s', "2015-1-1 08:00:00");
         for ($i = 1; $i <= 201; $i++) {
-            $date = strtotime($date . ' +1 day');
+            $date->add(new DateInterval('P1D'));
             for ($j = 1; $j <= 4; $j++) {
-                $here_date = strtotime("+" . $j . " weeks", $date);
+                $here_date->add(new DateInterval("P7D");
                 DB::table('reports')->insert([
                     'session_date' => $here_date,
                     'session_start' => $here_date,
