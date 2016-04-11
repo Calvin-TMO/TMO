@@ -19,10 +19,12 @@ class ReportsTableSeeder extends Seeder
             for ($j = 1; $j <= 4; $j++) {
                 $here_date = $date;
                 $here_date->add(new DateInterval('P' . $j . 'D'));
+                $end_time = $here_date
+                $end_time->add(new DateInterval('T1H'));
                 DB::table('reports')->insert([
                     'session_date' => $here_date,
                     'session_start' => $here_date,
-                    'session_end' => $here_date->add(new DateInterval('T1H'),
+                    'session_end' => $end_time,
                     'assignment_id' => $i,
                     'topic' => $topics[$j],
                     'response' => 'Bacon ipsum dolor amet ham hock swine beef ribs, fatback ham andouille pig tenderloin. Porchetta kielbasa ham rump. Prosciutto jerky andouille ball tip, pork belly short loin alcatra bresaola doner tri-tip shoulder turducken. Tri-tip kielbasa pastrami landjaeger leberkas. Alcatra pork leberkas drumstick cow fatback chuck kielbasa swine tail ball tip ham brisket',
