@@ -12,7 +12,7 @@ class ReportsTableSeeder extends Seeder
      */
     public function run()
     {
-        $topics = ['Programming in C++', 'Giving an Effective Presentation (Even with PowerPoint)', 'Taxes', 'Lethargy'];
+        $topics = ['Programming in C++', 'Giving an Effective Presentation (Even with PowerPoint)', 'Taxes', 'Lethargy', 'Coping With The Dehumanizing Affects of the Educational System'];
         $date = DateTime::createFromFormat('Y-m-d H:i:s', "2015-1-1 08:00:00");
         for ($i = 1; $i <= 201; $i++) {
             $date->add(new DateInterval('P1D'));
