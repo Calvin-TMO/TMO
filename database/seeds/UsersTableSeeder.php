@@ -407,7 +407,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('students')
         ]);
 
-        $names = "professors.txt";
+        $names = 'names.txt';
         $i=0;
         $handle = fopen($names, "r") or die ("Unable to open $names!");
         while(!eof($handle)) {
