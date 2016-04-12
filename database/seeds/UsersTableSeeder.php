@@ -408,19 +408,17 @@ class UsersTableSeeder extends Seeder
         ]);
 
         $names = "names.txt";
-
-        //while there are still names to read, place into database and assign emails
-        $handle = fopen($names, "r") or die ("Unable to open $names");
-        $i = 0;
+        $i=0;
+        $handle = fopen($names, "r") or die ("Unable to open $names!");
         while(!eof($handle)) {
             $line = fgets($handle);
-            DB::table('users')->insert(
-                ['name' => $line,
+            DB::table('users')->insert([
+                'name' => $line,
                 'email' => "$i@students.calvin.edu",
-                'password' => bcrypt ('students')
+                'password' => bcrypt('students')
             ]);
             $i++;
         }
-        fclose($names);
+        fclose($handle);
     }
 }
