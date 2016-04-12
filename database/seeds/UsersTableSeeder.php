@@ -410,7 +410,7 @@ class UsersTableSeeder extends Seeder
         $names = "names.txt";
 
         //while there are still names to read, place into database and assign emails
-        $handle = fopen($names, "r") or die ("Unable to open names.txt!");
+        $handle = fopen($names, "r") or die ("Unable to open $names");
         $i = 0;
         while(!eof($handle)) {
             $line = fgets($handle);
