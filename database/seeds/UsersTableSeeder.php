@@ -407,9 +407,8 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('students')
         ]);
 
-        $names = 'names.txt';
         $i=0;
-        $handle = fopen($names, "r") or die ("Unable to open $names!");
+        $handle = fopen('names.txt', 'r') or die ("Unable to open $names!");
         while(!eof($handle)) {
             $line = fgets($handle);
             DB::table('users')->insert([
