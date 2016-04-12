@@ -411,15 +411,15 @@ class UsersTableSeeder extends Seeder
 
         //while there are still names to read, place into database and assign emails
         $handle = fopen($professors, "r") or die ("Unable to open professors.txt!");
+        $i = 0
         while(!eof($handle)) {
             $line = fgets($handle);
-            $firstNam=shell_exec('echo ' . $line . ' | head -c 3');
-            $lastName=shell_exec('echo ' . $line . ' | awk /'/{print $2/}/'');
             DB::table('users')->insert(
                 ['name' => $line,
-                'email' => "$firstNam$lastName@students.calvin.edu",
+                'email' => "$i@students.calvin.edu",
                 'password' => bcrypt ('students')
             ]);
+            $i++;
         }
     }
 }
