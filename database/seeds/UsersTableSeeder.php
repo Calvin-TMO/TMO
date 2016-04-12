@@ -408,7 +408,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         $i=0;
-        $handle = fopen('names.txt', 'r') or die ("Unable to open $names!");
+        $handle = fopen("names.txt", "r") or die ('Unable to open names.txt!');
         while(!eof($handle)) {
             $line = fgets($handle);
             DB::table('users')->insert([
