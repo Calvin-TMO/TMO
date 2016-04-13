@@ -8,38 +8,54 @@
                 <div class="panel-heading">Home</div>
 
                 <div class="panel-body">
-                    <p>If you see this home page, you are logged in. Here is your user info.</p>
-                    <p>{{ Auth::user() }}</p>
-                    <p>Roles: 
-                    @foreach (Auth::user()->roles as $role )
-                        {{ $role->name }} 
-                    @endforeach
-                    </p>
-                    <p>Courses Taught: 
-                    @foreach (Auth::user()->courses_taught as $course )
-                        {{ $course->department }}{{ $course->number }} 
-                    @endforeach
-                    </p>
-                    <p>Courses Tutored: 
-                    @foreach (Auth::user()->courses_tutored as $course )
-                        {{ $course->department }}{{ $course->number }} 
-                    @endforeach
-                    </p>
-                    <p>Student Assignments: 
-                    @foreach (Auth::user()->student_assignments as $assignment )
-                        {{ $assignment->student->name }} 
-                    @endforeach
-                    </p>
-                    <p>Tutor Assignments: 
-                    @foreach (Auth::user()->tutor_assignments as $assignment )
-                        {{ $assignment->student->name }} 
-                    @endforeach
-                    </p>
-                    <p>Professor Assignments: 
-                    @foreach (Auth::user()->professor_assignments as $assignment )
-                        {{ $assignment->student->name }}  
-                    @endforeach
-                    </p>
+                    <div class="sublist">
+                        <div class="sublist-header">Recent Reports</div>
+                        <table class="ui sortable selectable celled table">
+                            <thead>
+                                <tr>
+                                    <th class="default-sort desc">Session Date</th>
+                                    <th class="">Tutor</th>
+                                    <th class="">Student</th>
+                                    <th class="">Course</th>
+                                    <th class="">Report Topic</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ( $reports as $report )
+                                <tr onClick="location.href='/report/{{ $report->id }}'" style="cursor: pointer;">
+                                    <td>{{ $report->session_date }}</td>
+                                    <td>{{ $report->tutor }}</td>
+                                    <td>{{ $report->student }}</td>
+                                    <td>{{ $report->department }}-{{ $report->number }}</td>
+                                    <td>{{ $report->topic }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="sublist">
+                        <div class="sublist-header">Recent Comments</div>
+                        <table class="ui sortable selectable celled table">
+                            <thead>
+                                <tr>
+                                    <th class="default-sort desc">Posted Date</th>
+                                    <th class="">Commenter</th>
+                                    <th class="">Report Topic</th>
+                                    <th class="">Comments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ( $comments as $comment )
+                                <tr onClick="location.href='/report/{{ $comment->id }}'" style="cursor: pointer;">
+                                    <td>{{ $comment->posted_date }}</td>
+                                    <td>{{ $comment->name }}</td>
+                                    <td>{{ $comment->topic }}</td>
+                                    <td>{{ $comment->comment_text }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
