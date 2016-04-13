@@ -134,6 +134,14 @@ nav.navbar {
   float: right;
 }
 
+.list-item>p.comment {
+  padding: 0.5em;
+}
+
+.list-item.selectable:hover {
+  background-color: rgba(0,0,0,.15);
+}
+
 .sublist-add {
   line-height: 15px;
   padding: 1em;
