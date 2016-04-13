@@ -10,28 +10,51 @@
                 <div class="panel-body">
                     <div class="sublist">
                         <div class="sublist-header">Recent Reports</div>
+                        <table class="ui sortable selectable celled table">
+                            <thead>
+                                <tr>
+                                    <th class="default-sort desc">Session Date</th>
+                                    <th class="">Tutor</th>
+                                    <th class="">Student</th>
+                                    <th class="">Course</th>
+                                    <th class="">Report Topic</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             @foreach ( $reports as $report )
-                                <div class="list-item selectable" onClick="location.href='/report/{{ $report->id }}'">
-                                    <div class="ui grid">
-                                        <div class="four wide column">{{ $report->session_date }}</div>
-                                        <div class="six wide column">{{ $report->name }}</div>
-                                        <div class="right floated right aligned four wide column">{{ $report->department }}-{{ $report->number }}</div>
-                                    </div>
-                                </div>
+                                <tr onClick="location.href='/report/{{ $report->id }}'" style="cursor: pointer;">
+                                    <td>{{ $report->session_date }}</td>
+                                    <td>{{ $report->tutor }}</td>
+                                    <td>{{ $report->student }}</td>
+                                    <td>{{ $report->department }}-{{ $report->number }}</td>
+                                    <td>{{ $report->topic }}</td>
+                                </tr>
                             @endforeach
+                            </tbody>
+                        </table>
                     </div>
                     <div class="sublist">
                         <div class="sublist-header">Recent Comments</div>
+                        <table class="ui sortable selectable celled table">
+                            <thead>
+                                <tr>
+                                    <th class="default-sort desc">Posted Date</th>
+                                    <th class="">Commenter</th>
+                                    <th class="">Report Topic</th>
+                                    <th class="">Comments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             @foreach ( $comments as $comment )
-                                <div class="list-item selectable" onClick="location.href='/report/{{ $comment->id }}'">
-                                    <div class="ui grid">
-                                        <div class="four wide column">{{ $comment->session_date }}</div>
-                                        <div class="six wide column">{{ $comment->name }}</div>
-                                        <div class="right floated right aligned four wide column">{{ $comment->department }}-{{ $comment->number }}</div>
-                                    </div>
-                                    <p class="comment">{{ $comment->comment_text }}</p>
-                                </div>
+                                <tr onClick="location.href='/report/{{ $comment->id }}'" style="cursor: pointer;">
+                                    <td>{{ $comment->posted_date }}</td>
+                                    <td>{{ $comment->name }}</td>
+                                    <td>{{ $comment->topic }}</td>
+                                    <td>{{ $comment->comment_text }}</td>
+                                </tr>
                             @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
