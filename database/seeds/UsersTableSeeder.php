@@ -16,14 +16,14 @@ class UsersTableSeeder extends Seeder
             'email' => 'tmo_admin@tmo.rycieos.com',
             'password' => bcrypt('tmoadmin')
         ]);
-
-        DB::table('users')->insert([
+        
+            DB::table('users')->insert([
             'name' => 'Joel Adams',
             'email' => 'adams@calvin.edu',
             'password' => bcrypt('professor')
         ]);
         
-        DB::table('users')->insert([
+            DB::table('users')->insert([
             'name' => 'Patrick Bailey',
             'email' => 'pmb4@calvin.edu',
             'password' => bcrypt('professor')
