@@ -32,8 +32,8 @@ class UserRolesTableSeeder extends Seeder
             $user = User::where('name', '=', $line)->first();
             $role = Role::where('name', '=', 'professor')->first();
             DB::table('user_roles')->insert(
-                ['user_id' => \$user->id,
-                'role_id' => \$role->id]
+                ['user_id' => $user->id,
+                'role_id' => $role->id]
             );
         }
         fclose($handle);
@@ -45,8 +45,8 @@ class UserRolesTableSeeder extends Seeder
             $user = User::where('name', '=', $line)->first();
             $role = Role::where('name', '=', 'tutor')->first();
             DB::table('user_roles')->insert(
-                ['user_id' => \$user->id,
-                'role_id' => \$role->id]
+                ['user_id' => $user->id,
+                'role_id' => $role->id]
             );
         }
         fclose($handle);
