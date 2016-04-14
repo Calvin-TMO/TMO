@@ -26,7 +26,7 @@ class UserRolesTableSeeder extends Seeder
 
         //while there are still professors to read from the file, assign
         //them to professorship
-        $handle = fopen($professors, "r") or die ("Unable to open professors.txt!");
+        $handle = fopen("$professors", "r") or die ("Unable to open professors.txt!");
         while(!eof($handle)) {
             $line = fgets($handle);
             $user = User::where('name', '=', $line)->first();
@@ -39,7 +39,7 @@ class UserRolesTableSeeder extends Seeder
         fclose($handle);
         
         //do the same for tutors
-        $handle = fopen($tutors, "r") or die ("Unable to open tutors.txt!");
+        $handle = fopen("$tutors", "r") or die ("Unable to open tutors.txt!");
         while(!eof($handle)) {
             $line = fgets($handle);
             $user = User::where('name', '=', $line)->first();
