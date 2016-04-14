@@ -169,13 +169,13 @@ class ReportController extends Controller
         $report->save();
         
         // send an email to the corresponding professor whenever a tutor submits a report
-        $report_link = '/report/' . $report->id
+        
         Mail::send('emails.report_add_email', ['user' => $user, 'report' => $report], function ($message) use ($user, $report){
             $message->from('calvin.tutoring.management@gmail.com', 'Calvin Tutoring Reports');
-            $message->to($report->assignment->professor->email)->subject('Report submitted');
+            $message->to($report->assignment->professor->email)->subject($report->assignment->course->department . '-' . $report->assignment->course->number . ' report submitted');
         });
 
-        return redirect($report_link);
+        return redirect('report/' . $report->id);
     }
 
     /**
