@@ -20,34 +20,6 @@ class UserRolesTableSeeder extends Seeder
              'role_id' => $role->id]
         );
 
-        $user = User::where('name', '=', 'tutor1')->first();
-        $role = Role::where('name', '=', 'tutor')->first();
-        DB::table('user_roles')->insert(
-            ['user_id' => $user->id,
-             'role_id' => $role->id]
-        );
-
-        $user = User::where('name', '=', 'tutor2')->first();
-        $role = Role::where('name', '=', 'tutor')->first();
-        DB::table('user_roles')->insert(
-            ['user_id' => $user->id,
-             'role_id' => $role->id]
-        );
-
-        $user = User::where('name', '=', 'professor1')->first();
-        $role = Role::where('name', '=', 'professor')->first();
-        DB::table('user_roles')->insert(
-            ['user_id' => $user->id,
-             'role_id' => $role->id]
-        );
-
-        $user = User::where('name', '=', 'professor2')->first();
-        $role = Role::where('name', '=', 'professor')->first();
-        DB::table('user_roles')->insert(
-            ['user_id' => $user->id,
-             'role_id' => $role->id]
-        );
-
         $user = User::where('name', '=', 'Keith VanderLinden')->first();
         $role = Role::where('name', '=', 'professor')->first();
         DB::table('user_roles')->insert(
