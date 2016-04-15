@@ -8,35 +8,53 @@
                 <div class="panel-heading">New User</div>
 
                 <div class="panel-body">
-                    <div class="error" @if ($errors) style="display:block" @endif>{{ $errors }}</div>
-                    <form method="POST">
+                    <form role="form" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-                        <div>
+                        <div class="form-group {{ isset($errors['name']) ? ' has-error' : '' }}">
                             <label class="ui block">Name</label>
                             <div class="ui input">
-                                <input type="text"name="name" value="{{ $old_name }}">
+                                <input type="text"name="name" value="{{ $old->has('name') ? $old->name : '' }}">
+                                @if (isset($errors['name']))
+                                    <span class="help-block">
+                                        <strong>{{ $errors['name'] }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
-                        <div>
+                        <div class="form-group {{ isset($errors['email']) ? ' has-error' : '' }}">
                             <label class="ui block">E-Mail Address</label>
                             <div class="ui input">
-                                <input type="email" name="email" value="{{ $old_email }}">
+                                <input type="email" name="email" value="{{ $old->has('email') ? $old->email : '' }}">
+                                @if (isset($errors['email']))
+                                    <span class="help-block">
+                                        <strong>{{ $errors['email'] }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
-                        <div>
+                        <div class="form-group {{ isset($errors['password']) ? ' has-error' : '' }}">
                             <label class="ui block">Password</label>
                             <div class="ui input">
                                 <input type="password" name="password">
+                                @if (isset($errors['password']))
+                                    <span class="help-block">
+                                        <strong>{{ $errors['password'] }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 
-                        <div>
+                        <div class="form-group {{ isset($errors['password_confirmation']) ? ' has-error' : '' }}">
                             <label class="ui block">Confirm Password</label>
                             <div class="ui input">
                                 <input type="password" name="password_confirmation">
+                                @if (isset($errors['password_confirmation']))
+                                    <span class="help-block">
+                                        <strong>{{ $errors['password_confirmation'] }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 

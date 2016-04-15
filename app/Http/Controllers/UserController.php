@@ -44,9 +44,8 @@ class UserController extends Controller
     public function new_user()
     {
         $data = array(
-            'errors' => '',
-            'old_name' => '',
-            'old_email' => ''
+            'errors' => array(),
+            'old' => Request()
             );
         return view('user_add', $data);
     }
@@ -89,34 +88,40 @@ class UserController extends Controller
      */
     public function add_user(Request $request)
     {
+        $errors = array();
+
         $check = User::where('email', '=', $request->email)->first();
         if ($check != null)
         {
-            $data = array(
-                'errors' => 'This email already has an account associated with it.',
-                'old_name' => $request->name,
-                'old_email' => $request->email
-                );
-            return view('user_add', $data);
+            $errors['email'] = 'Email already exists in database.';
         }
 
-        if ($request->email == "" || $request->name == "" || $request->password == "")
+        if ($request->email == "")
         {
-            $data = array(
-                'errors' => 'You are missing information. Please fill out all fields.',
-                'old_name' => $request->name,
-                'old_email' => $request->email
-                );
-            return view('user_add', $data);
+            $errors['email'] = 'The email field is required.';
+        }
+
+        if ($request->name == "")
+        {
+            $errors['name'] = 'The name field is required.';
+        }
+
+        if ($request->password == "")
+        {
+            $errors['password'] = 'Both password fields are required.';
         }
 
         if ($request->password != $request->password_confirmation)
         {
+            $errors['password_confirmation'] = 'Passwords do not match.';
+        }
+
+        if (!empty($errors))
+        {
             $data = array(
-                'errors' => 'Passwords do not match.',
-                'old_name' => $request->name,
-                'old_email' => $request->email
-                );
+                'errors' => $errors,
+                'old' => $request
+            );
             return view('user_add', $data);
         }
 
