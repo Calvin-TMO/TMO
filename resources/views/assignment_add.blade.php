@@ -9,14 +9,6 @@
 
                 <div class="panel-body">
                     <form method="POST">
-                        <div>Tutor:
-                            <select class="ui fluid search dropdown" name="tutor">
-                                <option value="">Tutor</option>
-                                @foreach ($tutors as $tutor)
-                                    <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
                         <div>Student:
                             <select class="ui fluid search dropdown" name="student">
                                 <option value="">Student</option>
@@ -38,6 +30,14 @@
                                 <option value="">Professor</option>
                                 @foreach ($professors as $professor)
                                     <option value="{{ $professor->id }}">{{ $professor->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>Tutor:
+                            <select class="ui fluid search dropdown" name="tutor">
+                                <option value="">Tutor</option>
+                                @foreach ($tutors as $tutor)
+                                    <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
                                 @endforeach
                             </select>
                         </div>
