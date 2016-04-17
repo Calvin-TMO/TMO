@@ -207,6 +207,8 @@ class ReportController extends Controller
         $report->student_plans = $request->student_plans;
         $report->comments = $request->comments;
         $report->save();
+
+
         return redirect('/report/' . $request->report_id);
     }
 
