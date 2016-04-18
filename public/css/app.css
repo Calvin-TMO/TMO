@@ -162,3 +162,20 @@ nav.navbar {
 .help-block {
   padding-left: 0.75em;
 }
+
+.textarea {
+  border: 1px solid #222;
+  border-radius: 4px;
+  padding: 0.5em;
+  min-height: 50px;
+  margin-bottom: 1em;
+  background-color: #ddd;
+}
+
+.dropdown-readable {
+  border: 1px solid #222;
+  border-radius: 4px;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  background-color: #ddd;
+}

@@ -81,9 +81,13 @@ class ReportController extends Controller
             $assignments = $user->tutor_assignments;
         }
 
+        $request = Request();
+        $request->request->add(['assignment_id' => $assignment_id]);
+
         $data = array(
-            'assignments' => $assignments,
-            'assignment_id' => $assignment_id
+            'errors' => array(),
+            'old' => $request,
+            'assignments' => $assignments
             );
         return view('report_add', $data);
     }
@@ -110,6 +114,7 @@ class ReportController extends Controller
         }
 
         $data = array(
+            'errors' => array(),
             'report' => $report
             );
         return view('report', $data);
@@ -152,6 +157,34 @@ class ReportController extends Controller
         if (!$user->hasRole('admin') && !$user->hasRole('tutor'))
         {
             return view('access_denied');
+        }
+
+        $errors = array();
+        if ($request->assignment == 0 )
+        {
+            $errors['assignment'] = 'The assignment field is required.';
+        }
+
+        // TODO: Add additional error checks.
+
+        if (!empty($errors))
+        {
+            $assignments = [];
+            if ($user->hasRole('admin'))
+            {
+                $assignments = Assignment::all();
+            }
+            else if ($user->hasRole('tutor'))
+            {
+                 $assignments = $user->tutor_assignments;
+            }
+
+            $data = array(
+                'errors' => $errors,
+                'old' => $request,
+                'assignments' => $assignments
+                );
+            return view('report_add', $data);
         }
 
         $report = new Report;
