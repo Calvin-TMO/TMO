@@ -30,7 +30,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/user/{id}', 'UserController@view_user');
     Route::get('/user/edit/{id}', 'UserController@edit_user');
     Route::post('/user/add', 'UserController@add_user');
-    Route::post('/user/edit/', 'UserController@update_user');
+    Route::post('/user/edit/{id}', 'UserController@update_user');
     Route::post('/user/delete/', 'UserController@delete_user');
 
     // Admin user role posts
@@ -43,7 +43,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/course/{id}', 'CourseController@view_course');
     Route::get('/course/edit/{id}', 'CourseController@edit_course');
     Route::post('/course/add', 'CourseController@add_course');
-    Route::post('/course/edit', 'CourseController@update_course');
+    Route::post('/course/edit/{id}', 'CourseController@update_course');
     Route::post('/course/delete', 'CourseController@delete_course');
 
     // Course professor posts

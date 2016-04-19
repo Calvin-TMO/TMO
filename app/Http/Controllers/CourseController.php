@@ -43,10 +43,7 @@ class CourseController extends Controller
     public function new_course()
     {
         $data = array(
-            'errors' => '',
-            'old_department' => '',
-            'old_number' => '',
-            'old_description' => ''
+            'old' => Request()
             );
         return view('course_add', $data);
     }
@@ -74,6 +71,7 @@ class CourseController extends Controller
     public function edit_course($course_id)
     {
         $data = array(
+            'old' => Request(),
             'course' => Course::find($course_id),
             'professors' => Role::where('name', '=', 'professor')->first()->users,
             'tutors' => Role::where('name', '=', 'tutor')->first()->users
@@ -93,23 +91,13 @@ class CourseController extends Controller
             ->where('department', '=', '$request->department')
             ->where('number', '=', '$request->number')
             ->first();
-        if (!empty($check)) {
-            $data = array(
-                'errors' => 'Department-Number course already exists.',
-                'old_department' => $request->department,
-                'old_number' => $request->number,
-                'old_description' => $request->description
-                );
-            return view('course_add', $data);
-        }
 
-        if ($request->department == "" || $request->number == "" || $request->description == "") {
+        if (!empty($check))
+        {
             $data = array(
-                'errors' => 'All fields are required. Please fill them out.',
-                'old_department' => $request->department,
-                'old_number' => $request->number,
-                'old_description' => $request->description
+                'old' => $request,
                 );
+            session()->put('error', 'Course with department and number already exists.');
             return view('course_add', $data);
         }
 
@@ -118,6 +106,8 @@ class CourseController extends Controller
         $course->number = $request->number;
         $course->description = $request->description;
         $course->save();
+
+        session()->put('success', 'Course has been added.');
         return redirect('/course/' . $course->id);
     }
 
@@ -127,15 +117,37 @@ class CourseController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function update_course(Request $request)
+    public function update_course(Request $request, $course_id)
     {
-        $course = Course::find($request->course_id);
+        $course = Course::find($course_id);
+
+        if ($course->department != $request->department || $course->number != $request->number)
+        {
+            $duplication_check = DB::table('courses')
+                ->where('department', '=', $request->department)
+                ->where('number', '=', $request->number)
+                ->first();
+
+            if (!empty($duplication_check))
+            {
+                $data = array(
+                    'old' => $request,
+                    'course' => Course::find($course_id),
+                    'professors' => Role::where('name', '=', 'professor')->first()->users,
+                    'tutors' => Role::where('name', '=', 'tutor')->first()->users
+                    );
+                session()->put('error', 'Course with department and number already exists.');
+                return view('course_edit', $data);
+            }
+        }
+
         $course->department = $request->department;
         $course->number = $request->number;
         $course->description = $request->description;
         $course->save();
 
-        return Redirect::back()->with('success', 'Course has been updated.');
+        session()->put('success', 'Course has been updated.');
+        return redirect('/course/' . $course_id);
     }
 
     /**
