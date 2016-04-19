@@ -1,9 +1,0 @@
-{
-	"port": 8001, 
-	"repositories": 
-	[{
-		"url": "https://github.com/Calvin-TMO/TMO", 
-		"path": "/var/www",
-		"deploy": "/var/www/autodeploy/deploy.sh"
-	}]
-}
