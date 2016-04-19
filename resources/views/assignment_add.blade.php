@@ -66,7 +66,7 @@
                         <br><div class="ui hidden divider"></div><br>
                         <button type="submit" class="ui primary button">Save</button>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button type="button" class="ui button" onclick="location.href='/assignments'">Discard</button>
+                        <button type="button" class="ui button" onclick="location.href='{{ isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/assignments' }}'">Discard</button>
                     </form>
                 </div>
             </div>
