@@ -47,6 +47,8 @@
                     <div class="panel-body">
                         <p>Number of assignments: {{ $assignment_count }}</p>
                         <p>Number of reports: {{ $report_count }}</p>
+                        <p>Average session time: {{ $average_session }} minutes</p>
+                        <p>Average report length: {{ $average_report }} words</p>
                     </div>
                 @else
                     <h1>Invalid User:</h1>
