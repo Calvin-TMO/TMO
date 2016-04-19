@@ -30,6 +30,10 @@ class UserController extends Controller
      */
     public function all_users()
     {
+        //unsets error session variables
+        session()->forget('error');
+        session()->forget('status');
+
         $data = array(
             'users' => User::all()
             );

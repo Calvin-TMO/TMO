@@ -8,44 +8,61 @@
                 <div class="panel-heading">Assignment</div>
 
                 <div class="panel-body">
-                    <form method="POST" action="/assignment/edit">
-                        <div>Tutor:
-                            <select class="ui fluid search dropdown" name="tutor">
-                                <option value="">Tutor</option>
-                                @foreach ($tutors as $tutor)
-                                    <option @if($tutor->id == $assignment->tutor->id)
-                                                selected
-                                            @endif value="{{ $tutor->id }}">{{ $tutor->name }}</option>
-                                @endforeach
-                            </select>
+                    @if (Session::has('error'))
+                        <div class="alert alert-danger">
+                              {{ Session::get('error') }}
                         </div>
+                    @endif
+                    <form method="POST" action="/assignment/edit/{{ $assignment->id }}">
                         <div>Student:
-                            <select class="ui fluid search dropdown" name="student">
+                            <select class="ui fluid search dropdown" name="student" required>
                                 <option value="">Student</option>
                                 @foreach ($students as $student)
+                                    @if ($old->has('student'))
+                                        <option value="{{ $student->id }}" @if ($student->id == $old->student) selected @endif>{{ $student->name }}</option>
+                                    @else
                                     <option @if($student->id == $assignment->student->id)
                                                 selected
-                                            @endif value="{{ $student->id }}">{{ $student->name }}</option>
+                                            @endif
+                                            value="{{ $student->id }}">{{ $student->name }}
+                                    </option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
                         <div>Course:
-                            <select class="ui fluid search dropdown" name="course">
+                            <select class="ui fluid search dropdown" name="course" required>
                                 <option value="">Course</option>
                                 @foreach ($courses as $course)
+                                    @if ($old->has('course'))
+                                        <option value="{{ $course->id }}" @if ($course->id == $old->course) selected @endif>{{ $course->department }}-{{ $course->number }} {{ $course->description }}</option>
+                                    @else
                                     <option @if($course->id == $assignment->course->id)
                                                 selected
-                                            @endif value="{{ $course->id }}">{{ $course->department }}-{{ $course->number }} {{ $course->description }}</option>
+                                            @endif
+                                            value="{{ $course->id }}">{{ $course->department }}-{{ $course->number }} {{ $course->description }}
+                                    </option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
                         <div>Professor:
-                            <select class="ui fluid search dropdown" name="professor">
+                            <select class="ui fluid search dropdown" name="professor" required>
                                 <option value="">Professor</option>
                                 @foreach ($professors as $professor)
                                     <option @if($professor->id == $assignment->professor->id)
                                                 selected
                                             @endif value="{{ $professor->id }}">{{ $professor->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>Tutor:
+                            <select class="ui fluid search dropdown" name="tutor" required>
+                                <option value="">Tutor</option>
+                                @foreach ($tutors as $tutor)
+                                    <option @if($tutor->id == $assignment->tutor->id)
+                                                selected
+                                            @endif value="{{ $tutor->id }}">{{ $tutor->name }}</option>
                                 @endforeach
                             </select>
                         </div>

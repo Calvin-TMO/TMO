@@ -60,7 +60,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/assignment/{id}', 'AssignmentController@view_assignment');
     Route::get('/assignment/edit/{id}', 'AssignmentController@edit_assignment');
     Route::post('/assignment/add', 'AssignmentController@add_assignment');
-    Route::post('/assignment/edit', 'AssignmentController@update_assignment');
+    Route::post('/assignment/edit/{id}', 'AssignmentController@update_assignment');
     Route::post('/assignment/delete', 'AssignmentController@delete_assignment');
 
     // Report pages

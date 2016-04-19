@@ -8,6 +8,11 @@
                 <div class="panel-heading">Assignment</div>
 
                 <div class="panel-body">
+                    @if (Session::has('status'))
+                        <div class="alert alert-success">
+                              {{ Session::get('status') }}
+                        </div>
+                    @endif
                     <table class="ui celled table">
                         <thead>
                             <tr>
