@@ -13,16 +13,16 @@
                     <div>Start Time: {{ date_format(date_create($report->session_start), 'g:ia') }}</div>
                     <div>End Time: {{ date_format(date_create($report->session_end), 'g:ia') }}</div>
                     <br></br>
-                    <div>What we worked on this session:</div>
-                    <textarea class="ui fluid stretched" readonly>{{ $report->topic }}</textarea>
-                    <div>How the student is responding:<div>
-                    <textarea class="ui fluid stretched" readonly>{{ $report->response }}</textarea>
-                    <div>My plans to prepare for next session:</div>
-                    <textarea class="ui fluid stretched" readonly>{{ $report->plans }}</textarea>
-                    <div>Student plans to prepare for next session:</div>
-                    <textarea class="ui fluid stretched" readonly>{{ $report->student_plans }}</textarea>
-                    <div>Comments about how the session went:</div>
-                    <textarea class="ui fluid stretched" readonly>{{ $report->comments }}</textarea>
+                    <label>What we worked on this session:</label>
+                    <div class="ui fluid textarea stretched" readonly>{{ $report->topic }}</div>
+                    <label>How the student is responding:</label>
+                    <div class="ui fluid textarea stretched" readonly>{{ $report->response }}</div>
+                    <label>My plans to prepare for next session:</label>
+                    <div class="ui fluid textarea stretched" readonly>{{ $report->plans }}</div>
+                    <label>Student plans to prepare for next session:</label>
+                    <div class="ui fluid textarea stretched" readonly>{{ $report->student_plans }}</div>
+                    <label>Comments about how the session went:</label>
+                    <div class="ui fluid textarea stretched" readonly>{{ $report->comments }}</div>
 
                     <button type="button" class="ui button" onclick="location.href = '/report/edit/{{ $report->id }}';">Edit</button>
                     <button type="button" class="ui button" onclick="location.href = '/reports';">Back</button>

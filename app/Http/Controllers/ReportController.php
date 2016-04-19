@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Redirect;
 use DateTime;
+use Mail;
 
 use App\Assignment as Assignment;
 use App\Report as Report;
@@ -81,9 +82,13 @@ class ReportController extends Controller
             $assignments = $user->tutor_assignments;
         }
 
+        $request = Request();
+        $request->request->add(['assignment_id' => $assignment_id]);
+
         $data = array(
-            'assignments' => $assignments,
-            'assignment_id' => $assignment_id
+            'errors' => array(),
+            'old' => $request,
+            'assignments' => $assignments
             );
         return view('report_add', $data);
     }
@@ -110,6 +115,7 @@ class ReportController extends Controller
         }
 
         $data = array(
+            'errors' => array(),
             'report' => $report
             );
         return view('report', $data);
@@ -142,6 +148,7 @@ class ReportController extends Controller
 
     /**
      * Save request info as new report in database.
+     * and send an email of the report
      *
      * @param  Request  $request
      * @return Response
@@ -152,6 +159,34 @@ class ReportController extends Controller
         if (!$user->hasRole('admin') && !$user->hasRole('tutor'))
         {
             return view('access_denied');
+        }
+
+        $errors = array();
+        if ($request->assignment == 0 )
+        {
+            $errors['assignment'] = 'The assignment field is required.';
+        }
+
+        // TODO: Add additional error checks.
+
+        if (!empty($errors))
+        {
+            $assignments = [];
+            if ($user->hasRole('admin'))
+            {
+                $assignments = Assignment::all();
+            }
+            else if ($user->hasRole('tutor'))
+            {
+                 $assignments = $user->tutor_assignments;
+            }
+
+            $data = array(
+                'errors' => $errors,
+                'old' => $request,
+                'assignments' => $assignments
+                );
+            return view('report_add', $data);
         }
 
         $report = new Report;
@@ -165,7 +200,15 @@ class ReportController extends Controller
         $report->student_plans = $request->student_plans;
         $report->comments = $request->comments;
         $report->save();
-        return redirect('/report/' . $report->id);
+        
+        // send an email to the corresponding professor whenever a tutor submits a report
+        
+        Mail::send('emails.report_add_email', ['user' => $user, 'report' => $report], function ($message) use ($user, $report){
+            $message->from('calvin.tutoring.management@gmail.com', 'Calvin Tutoring Reports');
+            $message->to($report->assignment->professor->email)->subject($report->assignment->course->department . '-' . $report->assignment->course->number . ' report submitted');
+        });
+
+        return redirect('report/' . $report->id);
     }
 
     /**
@@ -197,6 +240,8 @@ class ReportController extends Controller
         $report->student_plans = $request->student_plans;
         $report->comments = $request->comments;
         $report->save();
+
+
         return redirect('/report/' . $request->report_id);
     }
 
@@ -213,5 +258,4 @@ class ReportController extends Controller
             return view('access_denied');
         }
     }
-
 }

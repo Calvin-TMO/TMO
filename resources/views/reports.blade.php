@@ -7,6 +7,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">All Reports</div>
                 <div class="panel-body">
+                    @if (Auth::user()->hasRole('tutor') || Auth::user()->hasRole('admin'))
+                        <button class="ui button" onclick="location.href='/report/add'">New Report</button>
+                    @endif
                     <table class="ui sortable selectable celled table">
                         <thead>
                             <tr>
