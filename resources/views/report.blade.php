@@ -52,7 +52,7 @@
                         <form class="sublist-add" method="POST" action="/report/comment/add">
                             <div class="ui grid">
                                 <div class="ten wide column">
-                                    <textarea class="ui fluid stretched" name="comment_text"></textarea>
+                                    <textarea class="ui fluid stretched" name="comment_text" required></textarea>
                                 </div>
                                 <div class="right floated right aligned four wide column">
                                     <input type="hidden" name="report_id" value="{{ $report->id }}">
