@@ -69,6 +69,7 @@
                                 @if (Auth::user()->hasRole('admin'))
                                     <li><a href="{{ url('/users') }}"><i class="fa fa-btn"></i>Users</a></li>
                                     <li><a href="{{ url('/courses') }}"><i class="fa fa-btn"></i>Courses</a></li>
+                                    <li><a href="{{ url('/evals') }}"><i class="fa fa-btn"></i>Tutor evaluations</a></li>
                                 @endif
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
