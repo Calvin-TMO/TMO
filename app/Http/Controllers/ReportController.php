@@ -82,9 +82,13 @@ class ReportController extends Controller
             $assignments = $user->tutor_assignments;
         }
 
+        $request = Request();
+        $request->request->add(['assignment_id' => $assignment_id]);
+
         $data = array(
-            'assignments' => $assignments,
-            'assignment_id' => $assignment_id
+            'errors' => array(),
+            'old' => $request,
+            'assignments' => $assignments
             );
         return view('report_add', $data);
     }
@@ -136,6 +140,7 @@ class ReportController extends Controller
         }
 
         $data = array(
+            'errors' => array(),
             'report' => $report
             );
         return view('report_edit', $data);
@@ -156,6 +161,34 @@ class ReportController extends Controller
             return view('access_denied');
         }
 
+        $errors = array();
+        if ($request->assignment == 0 )
+        {
+            $errors['assignment'] = 'The assignment field is required.';
+        }
+
+        // TODO: Add additional error checks.
+
+        if (!empty($errors))
+        {
+            $assignments = [];
+            if ($user->hasRole('admin'))
+            {
+                $assignments = Assignment::all();
+            }
+            else if ($user->hasRole('tutor'))
+            {
+                 $assignments = $user->tutor_assignments;
+            }
+
+            $data = array(
+                'errors' => $errors,
+                'old' => $request,
+                'assignments' => $assignments
+                );
+            return view('report_add', $data);
+        }
+
         $report = new Report;
         $report->assignment_id = $request->assignment;
         $report->session_date = $request->session_date;
@@ -169,12 +202,14 @@ class ReportController extends Controller
         $report->save();
         
         // send an email to the corresponding professor whenever a tutor submits a report
-        
+        /*
         Mail::send('emails.report_add_email', ['user' => $user, 'report' => $report], function ($message) use ($user, $report){
             $message->from('calvin.tutoring.management@gmail.com', 'Calvin Tutoring Reports');
             $message->to($report->assignment->professor->email)->subject($report->assignment->course->department . '-' . $report->assignment->course->number . ' report submitted');
         });
+        */
 
+        session()->put('success', 'New Report has been added.');
         return redirect('report/' . $report->id);
     }
 
@@ -208,7 +243,7 @@ class ReportController extends Controller
         $report->comments = $request->comments;
         $report->save();
 
-
+        session()->put('success', 'Report has been updated.');
         return redirect('/report/' . $request->report_id);
     }
 

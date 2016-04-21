@@ -6,7 +6,6 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">New User</div>
-
                 <div class="panel-body">
                     <form role="form" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -57,10 +56,9 @@
                                 @endif
                             </div>
                         </div>
-
                         <div>
                             <button type="submit" class="ui button">Save</button>
-                            <button type="button" class="ui button" onclick="location.href='/users'">Discard</button>
+                            <button type="button" class="ui button" onclick="location.href='{{ isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/users' }}'">Discard</button>
                         </div>
                     </form>
 

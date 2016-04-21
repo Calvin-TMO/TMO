@@ -8,12 +8,10 @@
                 <div class="panel-heading">Edit Report</div>
                 <div class="panel-body">
                     <form method="POST" action="/report/edit">
-                        <div>Tutor Assignment:</div>
-                        <select class="ui fluid dropdown" name="assignment" readonly>
-                            <option value="{{ $report->assignment_id }}" selected>
-                                {{ $report->assignment->student->name }}:{{ $report->assignment->course->department }}-{{ $report->assignment->course->number }}
-                            </option>
-                        </select>
+                        <label>Tutor Assignment:</label>
+                        <div class="ui fluid dropdown-readable" name="assignment" value="{{ $report->assignment_id }}" readonly>
+                            {{ $report->assignment->student->name }}:{{ $report->assignment->course->department }}-{{ $report->assignment->course->number }}
+                        </div>
                         <div>Session Date:</div>
                         <input type="date" name="session_date" format="yyyy-dd-mm" value="{{ $report->session_date }}">
 
@@ -49,21 +47,21 @@
                         <div>End Time:</div>
                         <input list="time_values" name="session_end" value="{{ date_format(date_create($report->session_end), 'g:ia') }}">
                         <br></br>
-                        <div>What we worked on this session:</div>
+                        <label>What we worked on this session:</label>
                         <textarea class="ui fluid stretched" name="topic">{{ $report->topic }}</textarea>
-                        <div>How the student is responding:</div>
+                        <label>How the student is responding:</label>
                         <textarea class="ui fluid stretched" name="response">{{ $report->response }}</textarea>
-                        <div>My plans to prepare for next session:</div>
+                        <label>My plans to prepare for next session:</label>
                         <textarea class="ui fluid stretched" name="plans">{{ $report->plans }}</textarea>
-                        <div>Student plans to prepare for next session:</div>
+                        <label>Student plans to prepare for next session:</label>
                         <textarea class="ui fluid stretched" name="student_plans">{{ $report->student_plans }}</textarea>
-                        <div>Comments about how the session went:</div>
+                        <label>Comments about how the session went:</label>
                         <textarea class="ui fluid stretched" name="comments">{{ $report->comments }}</textarea>
                         <br></br>
                         <button type="submit" class="ui primary button">Save</button>
                         <input type="hidden" name="report_id" value="{{ $report->id }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button type="button" class="ui button" onclick="location.href='/report/{{ $report->id }}'">Discard</button>
+                        <button type="button" class="ui button" onclick="location.href='{{ isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : ('/report/' . $report->id) }}'">Discard Changes</button>
                     </form>
                 </div>
             </div>

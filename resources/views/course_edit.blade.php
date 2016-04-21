@@ -5,18 +5,32 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Course: {{ $course->description }}</div>
+                <div class="panel-heading">Course: {{ $course->department }}:{{ $course->number }}</div>
 
                 <div class="panel-body">
-                    <form method="POST" action="/course/edit">
-                        <div class="ui input"><input type="text" placeholder="Department" name="department" value="{{ $course->department }}" readonly></div>
-                        <div class="ui input"><input type="text" placeholder="Course number" name="number" value="{{ $course->number }}" readonly></div>
-                        <div class="ui input"><input type="text" placeholder="Course Description" name="description" value="{{ $course->description }}"></div>
-                        <br><div class="ui hidden divider"></div><br>
+                    <form method="POST" action="/course/edit/{{ $course->id }}">
+                        <div class="form-group">
+                            <label class="ui block">Department</label>
+                            <div class="ui input">
+                                <input type="text" name="department" value="{{ $old->has('department') ? $old->department : $course->department }}" autofocus required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="ui block">Number</label>
+                            <div class="ui input">
+                                <input type="text" name="number" value="{{ $old->has('number') ? $old->number : $course->number }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="ui block">Description</label>
+                            <div class="ui input">
+                                <input type="text" name="description" value="{{ $old->has('description') ? $old->description : $course->description }}" required>
+                            </div>
+                        </div>
+
                         <button type="submit" class="ui primary button">Save</button>
-                        <input type="hidden" name="course_id" value="{{ $course->id }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button type="button" class="ui button" onclick="location.href='/course/{{ $course->id }}'">Discard</button>
+                        <button type="button" class="ui button" onclick="location.href='{{ '/course/' . $course->id }}'">Discard</button>
                     </form>
 
                     <div class="sublist">

@@ -130,7 +130,8 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();
-
+        
+        session()->put('success', 'User successfully created!');
         return redirect('/user/' . $user->id);
     }
     /**

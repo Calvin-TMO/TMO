@@ -80,6 +80,17 @@
         </div>
     </nav>
     
+    @if (Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+    @endif
+    @if (Session::has('error'))
+        <div class="alert alert-danger">
+            {{ Session::get('error') }}
+        </div>
+    @endif
+
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -99,7 +110,11 @@
             table.sort($("th.default-sort.desc"));
         }
     </script>
-
+    <?php
+        Session::forget('success');
+        Session::forget('error');
+    ?>
+ 
     <!--<div class="footer">
         <a href="https://laravel.com/">Powered by Laravel</a>
     </div>-->

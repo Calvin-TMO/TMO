@@ -40,10 +40,12 @@ class CommentController extends Controller
             $comment->comment_text = $request->comment_text;
             $comment->save();
 
+            /*
             Mail::send('emails.report_comment_changed', ['comment' => $comment], function ($message) use ($comment){
                 $message->from('calvin.tutoring.management@gmail.com', 'Calvin Tutoring Reports');
                 $message->to($comment->report->assignment->tutor->email)->subject($comment->report->assignment->course->department . '-' . $comment->report->assignment->course->number . ' tutoring report comment');
             });
+            */
         }
         return Redirect::back()->with('success', 'Comment has been added to report.');
     }

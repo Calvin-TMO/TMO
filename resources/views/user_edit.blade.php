@@ -5,9 +5,10 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">User: {{ $user->name }}</div>
+                <div class="panel-heading">Edit User: {{ $user->name }}</div>
 
                 <div class="panel-body">
+
                     <table class="ui celled table">
                         <thead>
                             <tr>
@@ -46,7 +47,7 @@
                         <form class="sublist-add" method="POST" action="/user/role/add">
                             <div class="ui grid">
                                 <div class="ten wide column">
-                                    <select class="ui fluid dropdown" name="role">
+                                    <select class="ui fluid dropdown" name="role" required>
                                         <option value="">Select role to add...</option>
                                         @foreach ($roles as $role)
                                             <option value="{{ $role->id }}">{{ $role->name }}</option>
@@ -84,7 +85,7 @@
                         <form class="sublist-add" method="POST" action="/course/professor/add">
                             <div class="ui grid">
                                 <div class="ten wide column">
-                                    <select class="ui fluid search dropdown" name="course">
+                                    <select class="ui fluid search dropdown" name="course" required>
                                         <option value="">Select course to add...</option>
                                         @foreach ($courses as $course)
                                             <option value="{{ $course->id }}">{{ $course->department }}-{{ $course->number }}</option>
@@ -123,7 +124,7 @@
                         <form class="sublist-add" method="POST" action="/course/tutor/add">
                             <div class="ui grid">
                                 <div class="ten wide column">
-                                    <select class="ui fluid search dropdown" name="course">
+                                    <select class="ui fluid search dropdown" name="course" required>
                                         <option value="">Select course to add...</option>
                                         @foreach ($courses as $course)
                                             <option value="{{ $course->id }}">{{ $course->department }}-{{ $course->number }}</option>
