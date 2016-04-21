@@ -60,7 +60,7 @@
 
                         <div>
                             <button type="submit" class="ui button">Save</button>
-                            <button type="button" class="ui button" onclick="location.href='/users'">Discard</button>
+                            <button type="button" class="ui button" onclick="location.href='{{ isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/users' }}'">Discard</button>
                         </div>
                     </form>
 
