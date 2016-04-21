@@ -46,6 +46,10 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/course/edit', 'CourseController@update_course');
     Route::post('/course/delete', 'CourseController@delete_course');
 
+    // Admin tutor evals
+    Route::get('/evals', 'EvalController@all_evals');
+    Route::get('/eval/{id}', 'EvalController@view_eval');
+
     // Course professor posts
     Route::post('/course/professor/add', 'CourseProfessorController@add_course_professor');
     Route::post('/course/professor/delete', 'CourseProfessorController@delete_course_professor');

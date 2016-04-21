@@ -43,6 +43,9 @@
                         </div>
                     @endif
                     @if ($user->hasRole('tutor'))
+                        @if (Auth::user()->hasRole('admin'))
+                            <br><button type="button" class="ui button" onclick="location.href='/eval/{{ $user->id }}';">Tutor Evaluation</button>
+                        @endif
                         <div class="sublist">
                             <div class="sublist-header">Courses Tutoring:</div>
                             @foreach ($user->courses_tutored as $course)
