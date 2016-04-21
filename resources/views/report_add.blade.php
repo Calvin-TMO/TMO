@@ -59,17 +59,16 @@
                         <div>End Time:</div>
                         <input list="time_values" name="session_end" value="{{ isset($old['session_end']) ? $old['session_end'] : '' }}">
                         <br></br>
-                        <div>What we worked on this session:</div>
+                        <label>What we worked on this session:</label>
                         <textarea class="ui fluid stretched" name="topic">{{ isset($old['topic']) ? $old['topic'] : '' }}</textarea>
-                        <div>How the student is responding:</div>
+                        <label>How the student is responding:</label>
                         <textarea class="ui fluid stretched" name="response">{{ isset($old['response']) ? $old['response'] : '' }}</textarea>
-                        <div>My plans to prepare for next session:</div>
+                        <label>My plans to prepare for next session:</label>
                         <textarea class="ui fluid stretched" name="plans">{{ isset($old['plans']) ? $old['plans'] : '' }}</textarea>
-                        <div>Student plans to prepare for next session:</div>
+                        <label>Student plans to prepare for next session:</label>
                         <textarea class="ui fluid stretched" name="student_plans">{{ isset($old['student_plans']) ? $old['student_plans'] : '' }}</textarea>
-                        <div>Comments about how the session went:</div>
+                        <label>Comments about how the session went:</label>
                         <textarea class="ui fluid stretched" name="comments">{{ isset($old['comments']) ? $old['comments'] : '' }}</textarea>
-                        <br></br>
                         <button type="submit" class="ui primary button">Save</button>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button type="button" class="ui button" onclick="location.href='{{ isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/reports' }}'">Discard</button>

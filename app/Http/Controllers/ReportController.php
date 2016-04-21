@@ -115,7 +115,6 @@ class ReportController extends Controller
         }
 
         $data = array(
-            'errors' => array(),
             'report' => $report
             );
         return view('report', $data);
@@ -141,6 +140,7 @@ class ReportController extends Controller
         }
 
         $data = array(
+            'errors' => array(),
             'report' => $report
             );
         return view('report_edit', $data);
@@ -202,12 +202,14 @@ class ReportController extends Controller
         $report->save();
         
         // send an email to the corresponding professor whenever a tutor submits a report
-        
+        /*
         Mail::send('emails.report_add_email', ['user' => $user, 'report' => $report], function ($message) use ($user, $report){
             $message->from('calvin.tutoring.management@gmail.com', 'Calvin Tutoring Reports');
             $message->to($report->assignment->professor->email)->subject($report->assignment->course->department . '-' . $report->assignment->course->number . ' report submitted');
         });
+        */
 
+        session()->put('success', 'New Report has been added.');
         return redirect('report/' . $report->id);
     }
 
@@ -241,7 +243,7 @@ class ReportController extends Controller
         $report->comments = $request->comments;
         $report->save();
 
-
+        session()->put('success', 'Report has been updated.');
         return redirect('/report/' . $request->report_id);
     }
 

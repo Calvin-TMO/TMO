@@ -179,3 +179,7 @@ nav.navbar {
   margin-bottom: 1em;
   background-color: #ddd;
 }
+
+.alert {
+  text-align: center;
+}
