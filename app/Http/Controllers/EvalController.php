@@ -57,7 +57,11 @@ class EvalController extends Controller
             $wordcount += str_word_count($report->student_plans);
             $wordcount += str_word_count($report->comments);
         }
-        $wordcount = $wordcount / count($reports);
+        if (count($reports) == 0) {
+            $wordcount = 0;
+        } else {
+            $wordcount = $wordcount / count($reports);
+        }
 
         $data = array(
             'user' => User::find($user_id),
