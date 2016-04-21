@@ -30,10 +30,6 @@ class UserController extends Controller
      */
     public function all_users()
     {
-        //unsets error session variables
-        session()->forget('error');
-        session()->forget('status');
-
         $data = array(
             'users' => User::all()
             );
@@ -135,7 +131,7 @@ class UserController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
         
-        session()->put('status', 'User successfully created!');
+        session()->put('success', 'User successfully created!');
         return redirect('/user/' . $user->id);
     }
     /**

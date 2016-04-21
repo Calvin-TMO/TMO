@@ -8,11 +8,6 @@
                 <div class="panel-heading">New Assignment</div>
 
                 <div class="panel-body">
-                    @if (Session::has('error'))
-                        <div class="alert alert-danger">
-                              {{ Session::get('error') }}
-                        </div>
-                    @endif
                     <form method="POST">
                         <div>Student:
                             <select class="ui fluid search dropdown" name="student" required>

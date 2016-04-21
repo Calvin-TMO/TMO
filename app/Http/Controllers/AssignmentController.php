@@ -31,9 +31,6 @@ class AssignmentController extends Controller
      */
     public function all_assignments()
     {
-        //unsets error session variables
-        session()->forget('error');
-        session()->forget('status');
         $data = array(
             'assignments' => Assignment::all(),
             'tutor_assignments' => Auth::user()->tutor_assignments,
@@ -49,9 +46,6 @@ class AssignmentController extends Controller
      */
     public function new_assignment()
     {
-        //unsets error session variables
-        session()->forget('error');
-
         if (!Auth::user()->hasRole('admin')) {
             return view('access_denied');
         }
@@ -74,9 +68,6 @@ class AssignmentController extends Controller
      */
     public function view_assignment($assignment_id)
     {
-        //unsets error session variables
-        session()->forget('error');
-
         $user = Auth::user();
         $assignment = Assignment::find($assignment_id);
         if (!$user->hasRole('admin')
@@ -170,7 +161,7 @@ class AssignmentController extends Controller
         $assignment->course_id = $request->course;
         $assignment->professor_id = $request->professor;
         $assignment->save();
-        session()->put('status', 'Tutor assignment successfully created!');
+        session()->put('success', 'Tutor assignment successfully created!');
         return redirect('/assignment/' . $assignment->id);
     }
 
@@ -223,7 +214,7 @@ class AssignmentController extends Controller
         $assignment->course_id = $request->course;
         $assignment->professor_id = $request->professor;
         $assignment->save();
-        session()->put('status', 'Tutor assignment successfully updated!');
+        session()->put('success', 'Tutor assignment successfully updated!');
         return redirect('/assignment/' . $assignment->id);
     }
 
