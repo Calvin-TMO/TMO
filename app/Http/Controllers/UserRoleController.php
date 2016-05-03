@@ -49,6 +49,21 @@ class UserRoleController extends Controller
                     ['role_id', '=', $request->role]
                 ])
                 ->delete();
+            if ($request->role == 1) {  // Tutor
+                DB::table('available_tutors')
+                    ->where([
+                        ['user_id', '=', $request->user_id]
+                    ])
+                    ->delete();
+            }
+            if ($request->role == 2) {  // Professor
+                DB::table('current_professors')
+                    ->where([
+                        ['user_id', '=', $request->user_id]
+                    ])
+                    ->delete();
+            }
+
         }
         return Redirect::back()->with('success', 'Role has been removed from user.');
     }
