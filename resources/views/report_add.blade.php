@@ -25,7 +25,7 @@
                             @endif
                         </div>
                         <div>Session Date:</div>
-                        <input type="date" name="session_date" format="yyyy-mm-dd" value="{{ isset($old['session_date']) ? $old['session_date'] : date('Y-m-d') }}">
+                        <input type="date" name="session_date" format="yyyy-mm-dd" value="{{ isset($old['session_date']) ? $old['session_date'] : date('Y-m-d') }}" required>
 
                         <datalist id="time_values">
                             <option value="12:00am"/>
@@ -55,9 +55,9 @@
                         </datalist>
 
                         <div>Start Time:</div>
-                        <input list="time_values" name="session_start" value="{{ isset($old['session_start']) ? $old['session_start'] : '' }}">
+                        <input list="time_values" name="session_start" value="{{ isset($old['session_start']) ? $old['session_start'] : '' }}" required>
                         <div>End Time:</div>
-                        <input list="time_values" name="session_end" value="{{ isset($old['session_end']) ? $old['session_end'] : '' }}">
+                        <input list="time_values" name="session_end" value="{{ isset($old['session_end']) ? $old['session_end'] : '' }}" required>
                         <br></br>
                         <label>What we worked on this session:</label>
                         <textarea class="ui fluid stretched" name="topic">{{ isset($old['topic']) ? $old['topic'] : '' }}</textarea>

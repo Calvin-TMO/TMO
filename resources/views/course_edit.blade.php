@@ -55,7 +55,7 @@
                         <form class="sublist-add" method="POST" action="/course/professor/add">
                             <div class="ui grid">
                                 <div class="ten wide column">
-                                    <select class="ui fluid search dropdown" name="professor">
+                                    <select class="ui fluid search dropdown" name="professor" required>
                                         <option value="">Select professor to add...</option>
                                         @foreach ($professors as $professor)
                                             <option value="{{ $professor->id }}">{{ $professor->name }}</option>
@@ -92,7 +92,7 @@
                         <form class="sublist-add" method="POST" action="/course/tutor/add">
                             <div class="ui grid">
                                 <div class="ten wide column">
-                                    <select class="ui fluid search dropdown" name="tutor">
+                                    <select class="ui fluid search dropdown" name="tutor" required>
                                         <option value="">Select tutor to add...</option>
                                         @foreach ($tutors as $tutor)
                                             <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>

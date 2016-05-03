@@ -13,7 +13,7 @@
                             {{ $report->assignment->student->name }}:{{ $report->assignment->course->department }}-{{ $report->assignment->course->number }}
                         </div>
                         <div>Session Date:</div>
-                        <input type="date" name="session_date" format="yyyy-dd-mm" value="{{ $report->session_date }}">
+                        <input type="date" name="session_date" format="yyyy-dd-mm" value="{{ $report->session_date }}" required>
 
                         <datalist id="time_values">
                             <option value="12:00am"/>
@@ -43,9 +43,9 @@
                         </datalist>
 
                         <div>Start Time:</div>
-                        <input list="time_values" name="session_start" value="{{ date_format(date_create($report->session_start), 'g:ia') }}">
+                        <input list="time_values" name="session_start" value="{{ date_format(date_create($report->session_start), 'g:ia') }}" required>
                         <div>End Time:</div>
-                        <input list="time_values" name="session_end" value="{{ date_format(date_create($report->session_end), 'g:ia') }}">
+                        <input list="time_values" name="session_end" value="{{ date_format(date_create($report->session_end), 'g:ia') }}" required>
                         <br></br>
                         <label>What we worked on this session:</label>
                         <textarea class="ui fluid stretched" name="topic">{{ $report->topic }}</textarea>
